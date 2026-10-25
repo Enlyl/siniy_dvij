@@ -78,6 +78,50 @@ export function SinApp() {
     document.documentElement.dataset.spin = spinMode.value;
   }, [spinMode.value]);
 
+  /* Чтение ?movie=id или #movie=id из URL при открытии страницы */
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    try {
+      const params = new URLSearchParams(window.location.search);
+      const slug =
+        params.get("movie") ||
+        (window.location.hash.startsWith("#movie=")
+          ? window.location.hash.slice(7)
+          : null);
+      if (slug) {
+        const found = MOVIES.find((m) => m.id === slug);
+        if (found) {
+          setOpenMovie(found);
+        }
+      }
+    } catch {
+      // ignore
+    }
+  }, []);
+
+  const changeOpenMovie = useCallback((movie: Movie | null) => {
+    setOpenMovie(movie);
+    if (typeof window === "undefined") return;
+    try {
+      const url = new URL(window.location.href);
+      if (movie) {
+        url.searchParams.set("movie", movie.id);
+      } else {
+        url.searchParams.delete("movie");
+        if (url.hash.startsWith("#movie=")) {
+          url.hash = "";
+        }
+      }
+      const nextPath =
+        url.pathname +
+        (url.search ? url.search : "") +
+        (url.hash ? url.hash : "");
+      window.history.replaceState(null, "", nextPath);
+    } catch {
+      // ignore
+    }
+  }, []);
+
   /* Данные уже prebaked в movies.ts — дополнительный fetch не нужен */
   const movies = useMemo<Movie[]>(() => MOVIES, []);
 
@@ -122,21 +166,21 @@ export function SinApp() {
     if (pool.length === 0 || spinning) return;
     const winner = pool[Math.floor(Math.random() * pool.length)];
     nonceRef.current += 1;
-    setOpenMovie(null);
+    changeOpenMovie(null);
     setSpinning(true);
     setSpin({ winner, pool: [...pool], nonce: nonceRef.current });
-  }, [pool, spinning]);
+  }, [pool, spinning, changeOpenMovie]);
 
   const handleSettled = useCallback(() => {
     setSpinning(false);
     if (!spin) return;
     const winner = spin.winner;
-    setOpenMovie(winner);
+    changeOpenMovie(winner);
     const at = new Date().toISOString();
     lastDropped.setValue({ id: winner.id, at });
     const currentList = history.value ?? [];
     history.setValue([{ id: winner.id, at }, ...currentList].slice(0, 100));
-  }, [spin, lastDropped, history]);
+  }, [spin, lastDropped, history, changeOpenMovie]);
 
   const activeSpin = spin ?? {
     winner: pool[0] ?? movies[0],
@@ -200,7 +244,7 @@ export function SinApp() {
                 nonce={activeSpin.nonce}
                 soundEnabled={soundEnabled}
                 onSettled={handleSettled}
-                onSelectMovie={setOpenMovie}
+                onSelectMovie={changeOpenMovie}
               />
             ) : (
               <div className="rounded-2xl border border-dashed border-line px-4 py-10 text-center text-sm text-muted">
@@ -305,7 +349,7 @@ export function SinApp() {
                 <li key={movie.id} className="rise">
                   <button
                     type="button"
-                    onClick={() => setOpenMovie(movie)}
+                    onClick={() => changeOpenMovie(movie)}
                     className="group block w-full text-left"
                   >
                     <Poster
@@ -347,14 +391,14 @@ export function SinApp() {
         onSound={sound.setValue}
       />
 
-      <MovieModal movie={openMovie} onClose={() => setOpenMovie(null)} />
+      <MovieModal movie={openMovie} onClose={() => changeOpenMovie(null)} />
 
       <HistoryModal
         open={historyOpen}
         onClose={() => setHistoryOpen(false)}
         history={historyList}
         movies={movies}
-        onSelectMovie={setOpenMovie}
+        onSelectMovie={changeOpenMovie}
         onClearHistory={() => history.setValue([])}
       />
     </div>

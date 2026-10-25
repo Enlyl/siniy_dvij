@@ -46,6 +46,37 @@ export function MovieModal({
 }) {
   const panelRef = useRef<HTMLDivElement | null>(null);
   const restoreFocus = useRef<Element | null>(null);
+  const [copied, setCopied] = useState(false);
+
+  useEffect(() => {
+    setCopied(false);
+  }, [movie?.id]);
+
+  const handleShare = async () => {
+    if (!movie || typeof window === "undefined") return;
+    try {
+      const url = new URL(window.location.href);
+      url.searchParams.set("movie", movie.id);
+      const shareUrl = url.toString();
+
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(shareUrl);
+      } else {
+        const textarea = document.createElement("textarea");
+        textarea.value = shareUrl;
+        textarea.style.position = "fixed";
+        textarea.style.left = "-9999px";
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand("copy");
+        document.body.removeChild(textarea);
+      }
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2200);
+    } catch {
+      // ignore
+    }
+  };
 
   useEffect(() => {
     if (!movie) return;
@@ -179,6 +210,29 @@ export function MovieModal({
               )}
             </section>
           </div>
+        </div>
+
+        {/* Нижняя панель действий со ссылкой «Поделиться» */}
+        <div className="flex shrink-0 items-center justify-between gap-3 border-t border-line/70 bg-surface-2/80 px-5 py-3.5 backdrop-blur-md sm:px-6">
+          <button
+            type="button"
+            onClick={handleShare}
+            className={`btn h-11 px-5 text-sm font-semibold transition-all ${
+              copied
+                ? "border-accent bg-accent text-accent-fg shadow-[0_0_20px_rgba(var(--glow)/0.4)]"
+                : "btn-primary"
+            }`}
+          >
+            <span aria-hidden>{copied ? "✓" : "🔗"}</span>
+            <span>{copied ? "Ссылка скопирована!" : "Поделиться фильмом"}</span>
+          </button>
+          <button
+            type="button"
+            onClick={onClose}
+            className="btn btn-ghost h-11 px-4 text-sm text-muted hover:text-fg"
+          >
+            Закрыть
+          </button>
         </div>
       </div>
     </div>
