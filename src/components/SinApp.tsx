@@ -65,6 +65,7 @@ export function SinApp() {
   const [filters, setFilters] = useState<FilterState>({
     genres: [],
   });
+  const [searchQuery, setSearchQuery] = useState("");
 
   const nonceRef = useRef(0);
 
@@ -91,6 +92,17 @@ export function SinApp() {
       }),
     [movies, filters],
   );
+
+  const displayedCatalog = useMemo(() => {
+    const q = searchQuery.trim().toLowerCase();
+    if (!q) return pool;
+    return pool.filter((movie) => {
+      const matchTitle = movie.title.toLowerCase().includes(q);
+      const matchOriginal = movie.originalTitle?.toLowerCase().includes(q);
+      const matchDirector = movie.director?.toLowerCase().includes(q);
+      return matchTitle || matchOriginal || matchDirector;
+    });
+  }, [pool, searchQuery]);
 
   const lastMovie = useMemo(
     () => (lastDropped.value ? movies.find((m) => m.id === lastDropped.value?.id) ?? null : null),
@@ -253,39 +265,70 @@ export function SinApp() {
         resultCount={pool.length}
       />
 
-      <section>
-        <h2 className="font-display mb-3 text-sm font-bold">
-          Список целиком
-          <span className="ml-2 text-xs font-normal text-muted">
-            нажми на постер — откроется карточка
-          </span>
-        </h2>
-        <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-          {pool.map((movie) => {
-            const rating = formatRating(movie.rating);
-            return (
-              <li key={movie.id} className="rise">
-                <button
-                  type="button"
-                  onClick={() => setOpenMovie(movie)}
-                  className="group block w-full text-left"
-                >
-                  <Poster
-                    movie={movie}
-                    className="aspect-[2/3] rounded-2xl border border-line transition-transform duration-200 group-hover:-translate-y-1 group-hover:border-accent/50"
-                  />
-                  <p className="mt-2 line-clamp-2 text-[0.8125rem] leading-snug font-semibold">
-                    {movie.title}
-                  </p>
-                  <p className="mt-0.5 text-xs text-muted">
-                    {movie.year}
-                    {rating ? ` · ★ ${rating.split(" / ")[0]}` : ""}
-                  </p>
-                </button>
-              </li>
-            );
-          })}
-        </ul>
+      <section className="space-y-4">
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <h2 className="font-display text-sm font-bold">
+            Список целиком ({displayedCatalog.length})
+          </h2>
+          <div className="relative w-full sm:w-72">
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="Поиск по названию или режиссёру…"
+              className="w-full rounded-xl border border-line bg-surface px-3 py-2 pl-9 text-sm text-fg placeholder:text-muted transition-colors focus:border-accent focus:outline-none"
+            />
+            <span
+              aria-hidden
+              className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-xs text-muted"
+            >
+              🔍
+            </span>
+            {searchQuery ? (
+              <button
+                type="button"
+                onClick={() => setSearchQuery("")}
+                aria-label="Очистить поиск"
+                className="absolute right-2.5 top-1/2 -translate-y-1/2 rounded-md p-1 text-xs text-muted transition-colors hover:text-fg"
+              >
+                ✕
+              </button>
+            ) : null}
+          </div>
+        </div>
+
+        {displayedCatalog.length > 0 ? (
+          <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+            {displayedCatalog.map((movie) => {
+              const rating = formatRating(movie.rating);
+              return (
+                <li key={movie.id} className="rise">
+                  <button
+                    type="button"
+                    onClick={() => setOpenMovie(movie)}
+                    className="group block w-full text-left"
+                  >
+                    <Poster
+                      movie={movie}
+                      className="aspect-[2/3] rounded-2xl border border-line transition-transform duration-200 group-hover:-translate-y-1 group-hover:border-accent/50"
+                    />
+                    <p className="mt-2 line-clamp-2 text-[0.8125rem] leading-snug font-semibold">
+                      {movie.title}
+                    </p>
+                    <p className="mt-0.5 text-xs text-muted">
+                      {movie.year}
+                      {rating ? ` · ★ ${rating.split(" / ")[0]}` : ""}
+                    </p>
+                  </button>
+                </li>
+              );
+            })}
+          </ul>
+        ) : (
+          <div className="rounded-2xl border border-dashed border-line px-4 py-8 text-center text-sm text-muted">
+            Ничего не найдено по запросу «{searchQuery}».
+          </div>
+        )}
       </section>
 
       <footer className="mt-6 text-center text-xs text-muted">
