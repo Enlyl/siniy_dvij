@@ -78,6 +78,7 @@ export const STORAGE_KEYS = {
   spin: "dm.spin",
   last: "dm.last",
   history: "dm.history",
+  sound: "dm.sound",
 } as const;
 
 export function isThemeId(value: unknown): value is ThemeId {

@@ -4,6 +4,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import type { Movie } from "@/lib/movies";
 import type { SpinMode } from "@/lib/settings";
 import { Poster, PosterArt } from "./Poster";
+import { playRatchet, playWinSound } from "@/lib/sound";
 
 /* ------------------------------- геометрия ------------------------------- */
 
@@ -112,6 +113,8 @@ function Lane({
   duration,
   spinSteps,
   nonce,
+  soundEnabled = true,
+  playWinOnSettle = true,
   onSettled,
   onSelectMovie,
 }: {
@@ -124,6 +127,8 @@ function Lane({
   duration: number;
   spinSteps: number;
   nonce: number;
+  soundEnabled?: boolean;
+  playWinOnSettle?: boolean;
   onSettled: () => void;
   onSelectMovie?: (movie: Movie) => void;
 }) {
@@ -131,6 +136,7 @@ function Lane({
   const trackRef = useRef<HTMLDivElement | null>(null);
   const size = useBoxSize(viewport);
   const settledCallback = useRef(onSettled);
+  const lastTickStepRef = useRef(-1);
 
   useEffect(() => {
     settledCallback.current = onSettled;
@@ -352,6 +358,7 @@ function Lane({
     const startPos = getOffsetForIndex(HEAD_INDEX);
     const targetPos = getOffsetForIndex(stopIndex);
     currentOffsetRef.current = startPos;
+    lastTickStepRef.current = -1;
 
     let startTime = 0;
 
@@ -362,6 +369,12 @@ function Lane({
       const eased = easeRoulette(progress);
       const currentPos = startPos + (targetPos - startPos) * eased;
       currentOffsetRef.current = currentPos;
+
+      const stepIdx = Math.floor(Math.abs(currentPos - startPos) / step);
+      if (stepIdx !== lastTickStepRef.current && progress < 1) {
+        lastTickStepRef.current = stepIdx;
+        playRatchet(Boolean(soundEnabled));
+      }
 
       apply3DTransforms(currentPos, progress >= 1, stopIndex);
 
@@ -377,6 +390,10 @@ function Lane({
         }
 
         setSettledWinnerId(winner.id);
+
+        if (playWinOnSettle) {
+          playWinSound(Boolean(soundEnabled));
+        }
 
         settleTimeoutRef.current = window.setTimeout(() => {
           settledCallback.current();
@@ -478,12 +495,14 @@ function CasinoWheel({
   pool,
   winner,
   nonce,
+  soundEnabled = true,
   onSettled,
   onSelectMovie,
 }: {
   pool: Movie[];
   winner: Movie;
   nonce: number;
+  soundEnabled?: boolean;
   onSettled: () => void;
   onSelectMovie?: (movie: Movie) => void;
 }) {
@@ -494,6 +513,7 @@ function CasinoWheel({
   const animFrameRef = useRef(0);
   const settleTimeoutRef = useRef(0);
   const cycleIntervalRef = useRef(0);
+  const lastSectorRef = useRef(-1);
   const [settled, setSettled] = useState(false);
   const [hubMovie, setHubMovie] = useState<Movie>(winner);
 
@@ -547,6 +567,7 @@ function CasinoWheel({
     const targetAngle = startAngle + spins * 360 + (360 - (startAngle % 360));
     const duration = 4000;
     let startTime = 0;
+    lastSectorRef.current = -1;
 
     const tick = (now: number) => {
       if (!startTime) startTime = now;
@@ -560,6 +581,12 @@ function CasinoWheel({
         wheelRef.current.style.transform = `rotate(${angle}deg)`;
       }
 
+      const sectorIdx = Math.floor(angle / SECTOR_ANGLE);
+      if (sectorIdx !== lastSectorRef.current && progress < 1) {
+        lastSectorRef.current = sectorIdx;
+        playRatchet(Boolean(soundEnabled));
+      }
+
       if (progress < 1) {
         animFrameRef.current = requestAnimationFrame(tick);
       } else {
@@ -567,6 +594,7 @@ function CasinoWheel({
         window.clearInterval(cycleIntervalRef.current);
         setHubMovie(winner);
         setSettled(true);
+        playWinSound(Boolean(soundEnabled));
         settleTimeoutRef.current = window.setTimeout(() => {
           onSettled();
         }, 650);
@@ -685,6 +713,7 @@ export function SpinTrack({
   pool,
   winner,
   nonce,
+  soundEnabled = true,
   onSettled,
   onSelectMovie,
 }: {
@@ -692,6 +721,7 @@ export function SpinTrack({
   pool: Movie[];
   winner: Movie;
   nonce: number;
+  soundEnabled?: boolean;
   onSettled: () => void;
   onSelectMovie?: (movie: Movie) => void;
 }) {
@@ -706,6 +736,7 @@ export function SpinTrack({
         pool={pool}
         winner={winner}
         nonce={nonce}
+        soundEnabled={soundEnabled}
         onSettled={laneSettled}
         onSelectMovie={onSelectMovie}
       />
@@ -729,6 +760,8 @@ export function SpinTrack({
             duration={MAIN_DURATION}
             spinSteps={22}
             nonce={nonce}
+            soundEnabled={soundEnabled}
+            playWinOnSettle={true}
             onSettled={laneSettled}
             onSelectMovie={onSelectMovie}
           />
@@ -756,6 +789,8 @@ export function SpinTrack({
             duration={MAIN_DURATION}
             spinSteps={20}
             nonce={nonce}
+            soundEnabled={soundEnabled}
+            playWinOnSettle={true}
             onSettled={laneSettled}
             onSelectMovie={onSelectMovie}
           />
@@ -786,6 +821,8 @@ export function SpinTrack({
               duration={SLOT_DURATIONS[laneIndex]}
               spinSteps={steps}
               nonce={nonce}
+              soundEnabled={soundEnabled}
+              playWinOnSettle={laneIndex === SLOT_DURATIONS.length - 1}
               onSettled={laneIndex === SLOT_DURATIONS.length - 1 ? laneSettled : noop}
               onSelectMovie={onSelectMovie}
             />

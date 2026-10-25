@@ -51,6 +51,12 @@ export function SinApp() {
   const spinMode = useStoredString(STORAGE_KEYS.spin, DEFAULT_SPIN_MODE, isSpinMode);
   const lastDropped = useStoredJson<LastDropped>(STORAGE_KEYS.last, null, isLastDropped);
   const history = useStoredJson<HistoryItem[]>(STORAGE_KEYS.history, [], isHistoryList);
+  const sound = useStoredJson<boolean>(
+    STORAGE_KEYS.sound,
+    true,
+    (v): v is boolean => typeof v === "boolean",
+  );
+  const soundEnabled = sound.value ?? true;
 
   const [settingsOpen, setSettingsOpen] = useState(false);
   const [historyOpen, setHistoryOpen] = useState(false);
@@ -141,15 +147,30 @@ export function SinApp() {
             Список фильмов под синьку
           </h1>
         </div>
-        <button
-          type="button"
-          onClick={() => setSettingsOpen(true)}
-          className="btn btn-ghost h-11 shrink-0 px-4 text-sm"
-        >
-          <span aria-hidden>⚙️</span>
-          <span className="hidden sm:inline">Настройки</span>
-          <span className="sm:hidden">Настройки</span>
-        </button>
+        <div className="flex items-center gap-2">
+          <button
+            type="button"
+            onClick={() => sound.setValue(!soundEnabled)}
+            aria-label={soundEnabled ? "Выключить звук" : "Включить звук"}
+            title={
+              soundEnabled
+                ? "Звук включен (нажми, чтобы выключить)"
+                : "Звук выключен (нажми, чтобы включить)"
+            }
+            className="btn btn-ghost h-11 w-11 shrink-0 p-0 text-base"
+          >
+            {soundEnabled ? "🔊" : "🔇"}
+          </button>
+          <button
+            type="button"
+            onClick={() => setSettingsOpen(true)}
+            className="btn btn-ghost h-11 shrink-0 px-4 text-sm"
+          >
+            <span aria-hidden>⚙️</span>
+            <span className="hidden sm:inline">Настройки</span>
+            <span className="sm:hidden">Настройки</span>
+          </button>
+        </div>
       </header>
 
       <section className="panel relative overflow-hidden p-4 sm:p-6">
@@ -176,6 +197,7 @@ export function SinApp() {
                 pool={activeSpin.pool}
                 winner={activeSpin.winner}
                 nonce={activeSpin.nonce}
+                soundEnabled={soundEnabled}
                 onSettled={handleSettled}
                 onSelectMovie={setOpenMovie}
               />
@@ -290,6 +312,8 @@ export function SinApp() {
         onTheme={theme.setValue}
         spin={spinMode.value}
         onSpin={changeSpinMode}
+        sound={soundEnabled}
+        onSound={sound.setValue}
       />
 
       <MovieModal movie={openMovie} onClose={() => setOpenMovie(null)} />
