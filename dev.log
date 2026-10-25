@@ -17748,3 +17748,1233 @@ https://react.dev/link/hydration-mismatch
 [browser] Image with src "https://image.tmdb.org/t/p/w500/qvbfoyW2zaI15c0quUfF6CRGH4H.jpg" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
 Read more: https://nextjs.org/docs/app/api-reference/components/image#loading
   Turbopack has seen frequent file updates and is waiting for the filesystem to settle (0.5s elapsed so far; last modified: "\\\\?\\D:\\vibe_app\\drunk_movies_list\\node_modules\\next\\dist\\esm\\api").
+⚠ Found a change in next.config.ts. Restarting the server to apply the changes...
+▲ Next.js 16.4.3 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://192.168.0.215:3000
+- Environments: .env
+✓ Ready in 653ms
+✓ Running next.config.ts took 77ms
+
+ GET / 200 in 528ms (next.js: 270ms, application-code: 258ms)
+ POST /api/movies 200 in 1678ms (next.js: 101ms, application-code: 1577ms)
+ POST /api/movies 200 in 1550ms (next.js: 1.8ms, application-code: 1548ms)
+✓ Compiled in 64ms
+✓ Compiled in 36ms
+ GET / 200 in 34ms (next.js: 4ms, application-code: 30ms)
+✓ Compiled in 54ms
+[browser] A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <HotReload globalError={[...]} webSocket={WebSocket} staticIndicatorState={{pathname:null, ...}}>
+      <AppDevOverlayErrorBoundary globalError={[...]}>
+        <ReplaySsrOnlyErrors>
+        <DevRootHTTPAccessFallbackBoundary>
+          <HTTPAccessFallbackBoundary notFound={<NotAllowedRootHTTPFallbackError>}>
+            <HTTPAccessFallbackErrorBoundary pathname="/" notFound={<NotAllowedRootHTTPFallbackError>} ...>
+              <RedirectBoundary>
+                <RedirectErrorBoundary router={{...}}>
+                  <Head headRenderTree={{...}}>
+                    <__next_viewport_boundary__>
+                    <MetadataWrapper>
+                      <__next_metadata_boundary__>
+                        <div
+                          hidden={true}
+-                         bis_skin_checked="1"
+                        >
+                    ...
+                  <__next_root_layout_boundary__>
+                    <SegmentViewNode type="layout" pagePath="layout.tsx">
+                      <SegmentTrieNode>
+                      <link>
+                      <script>
+                      <RootLayout>
+                        <html lang="ru" data-theme="bar" data-spin="horizontal" className="unbounded_..." ...>
+                          <head>
+                          <body
+                            className="min-h-full"
+-                           bis_register="W3sibWFzdGVyIjp0cnVlLCJleHRlbnNpb25JZCI6ImVwcGlvY2VtaG1ubGJoanBsY2drb2ZjaWll..."
+-                           cz-shortcut-listen="true"
+                          >
+                            ...
+                              <SegmentViewNode type="page" pagePath="page.tsx">
+                                <SegmentTrieNode>
+                                <Home>
+                                  <SinApp>
+                                    <div
+                                      className="mx-auto flex min-h-dvh w-full max-w-6xl flex-col gap-5 px-4 pt-5 pb-1..."
+-                                     bis_skin_checked="1"
+                                    >
+                                      <header className="flex items...">
+                                        <div
+                                          className="min-w-0"
+-                                         bis_skin_checked="1"
+                                        >
+                                        ...
+                                      <section className="panel rela...">
+                                        <div
+                                          aria-hidden={true}
+                                          className="pointer-events-none absolute -top-24 -right-16 h-56 w-56 rounded-..."
+                                          style={{backgroundColor:"rgb(var(--..."}}
+-                                         bis_skin_checked="1"
+                                        >
+                                        <div
+                                          className="relative"
+-                                         bis_skin_checked="1"
+                                        >
+                                          <p>
+                                          <p>
+                                          <div
+                                            className="mt-4"
+-                                           bis_skin_checked="1"
+                                          >
+                                            <SpinTrack mode="horizontal" pool={[...]} winner={{id:"pulp-f...", ...}} ...>
+                                              <div
+                                                className="relative mx-auto w-full max-w-3xl"
+-                                               bis_skin_checked="1"
+                                              >
+                                                <div
+                                                  className="theme-track-frame relative overflow-hidden rounded-2xl bo..."
+                                                  style={{height:266,padding:"34px 12px"}}
+-                                                 bis_skin_checked="1"
+                                                >
+                                                  <Lane axis="x" pool={[...]} winner={{id:"pulp-f...", ...}} itemW={132} ...>
+                                                    <div
+                                                      ref={{current:null}}
+                                                      onPointerDown={function handlePointerDown}
+                                                      onPointerMove={function handlePointerMove}
+                                                      onPointerUp={function handlePointerUp}
+                                                      onPointerCancel={function handlePointerUp}
+                                                      className="relative h-full w-full select-none"
+                                                      style={{perspective:1200,perspectiveOrigin:"50% 50%",cursor:"grab", ...}}
+-                                                     bis_skin_checked="1"
+                                                    >
+                                                      <div
+                                                        ref={{current:null}}
+                                                        className="reel-track flex h-full w-full items-center"
+                                                        style={{flexDirection:"row",gap:"14px",transformStyle:"preserve-3d"}}
+-                                                       bis_skin_checked="1"
+                                                      >
+                                                        <div
+                                                          data-movie-id="dungeons-and-dragons-honor-among-thieves"
+                                                          onClick={function onClick}
+                                                          title="Открыть «Подземелья и драконы: Честь среди воров»"
+                                                          className={"strip-item-shadow relative flex-none cursor-poi..."}
+                                                          style={{width:132,height:198,transformOrigin:"center center",willChange:"..."}}
+-                                                         bis_skin_checked="1"
+                                                        >
+                                                          <div
+                                                            className="pointer-events-none h-full w-full overflow-hidd..."
+-                                                           bis_skin_checked="1"
+                                                          >
+                                                            <Poster movie={{id:"dungeo...", ...}} ...>
+                                                              <div
+                                                                className="relative overflow-hidden bg-surface-2 h-ful..."
+-                                                               bis_skin_checked="1"
+                                                              >
+                                                        <div
+                                                          data-movie-id="the-other-guys"
+                                                          onClick={function onClick}
+                                                          title="Открыть «Копы в глубоком запасе»"
+                                                          className={"strip-item-shadow relative flex-none cursor-poi..."}
+                                                          style={{width:132,height:198,transformOrigin:"center center",willChange:"..."}}
+-                                                         bis_skin_checked="1"
+                                                        >
+                                                          <div
+                                                            className="pointer-events-none h-full w-full overflow-hidd..."
+-                                                           bis_skin_checked="1"
+                                                          >
+                                                            <Poster movie={{id:"the-ot...", ...}} ...>
+                                                              <div
+                                                                className="relative overflow-hidden bg-surface-2 h-ful..."
+-                                                               bis_skin_checked="1"
+                                                              >
+                                                        <div
+                                                          data-movie-id="21-jump-street"
+                                                          onClick={function onClick}
+                                                          title="Открыть «Мачо и ботан»"
+                                                          className={"strip-item-shadow relative flex-none cursor-poi..."}
+                                                          style={{width:132,height:198,transformOrigin:"center center",willChange:"..."}}
+-                                                         bis_skin_checked="1"
+                                                        >
+                                                          <div
+                                                            className="pointer-events-none h-full w-full overflow-hidd..."
+-                                                           bis_skin_checked="1"
+                                                          >
+                                                            <Poster movie={{id:"21-jum...", ...}} ...>
+                                                              <div
+                                                                className="relative overflow-hidden bg-surface-2 h-ful..."
+-                                                               bis_skin_checked="1"
+                                                              >
+                                                        <div
+                                                          data-movie-id="22-jump-street"
+                                                          onClick={function onClick}
+                                                          title="Открыть «Мачо и ботан 2»"
+                                                          className={"strip-item-shadow relative flex-none cursor-poi..."}
+                                                          style={{width:132,height:198,transformOrigin:"center center",willChange:"..."}}
+-                                                         bis_skin_checked="1"
+                                                        >
+                                                          <div
+                                                            className="pointer-events-none h-full w-full overflow-hidd..."
+-                                                           bis_skin_checked="1"
+                                                          >
+                                                            <Poster movie={{id:"22-jum...", ...}} ...>
+                                                              <div
+                                                                className="relative overflow-hidden bg-surface-2 h-ful..."
+-                                                               bis_skin_checked="1"
+                                                              >
+                                                        <div
+                                                          data-movie-id="rush-hour"
+                                                          onClick={function onClick}
+                                                          title="Открыть «Час пик»"
+                                                          className={"strip-item-shadow relative flex-none cursor-poi..."}
+                                                          style={{width:132,height:198,transformOrigin:"center center",willChange:"..."}}
+-                                                         bis_skin_checked="1"
+                                                        >
+                                                          <div
+                                                            className="pointer-events-none h-full w-full overflow-hidd..."
+-                                                           bis_skin_checked="1"
+                                                          >
+                                                            <Poster movie={{id:"rush-hour", ...}} ...>
+                                                              <div
+                                                                className="relative overflow-hidden bg-surface-2 h-ful..."
+-                                                               bis_skin_checked="1"
+                                                              >
+                                                        <div
+                                                          data-movie-id="rush-hour-2"
+                                                          onClick={function onClick}
+                                                          title="Открыть «Час пик 2»"
+                                                          className={"strip-item-shadow relative flex-none cursor-poi..."}
+                                                          style={{width:132,height:198,transformOrigin:"center center",willChange:"..."}}
+-                                                         bis_skin_checked="1"
+                                                        >
+                                                          <div
+                                                            className="pointer-events-none h-full w-full overflow-hidd..."
+-                                                           bis_skin_checked="1"
+                                                          >
+                                                            <Poster movie={{id:"rush-h...", ...}} ...>
+                                                              <div
+                                                                className="relative overflow-hidden bg-surface-2 h-ful..."
+-                                                               bis_skin_checked="1"
+                                                              >
+                                                        <div
+                                                          data-movie-id="rush-hour-3"
+                                                          onClick={function onClick}
+                                                          title="Открыть «Час пик 3»"
+                                                          className={"strip-item-shadow relative flex-none cursor-poi..."}
+                                                          style={{width:132,height:198,transformOrigin:"center center",willChange:"..."}}
+-                                                         bis_skin_checked="1"
+                                                        >
+                                                          <div
+                                                            className="pointer-events-none h-full w-full overflow-hidd..."
+-                                                           bis_skin_checked="1"
+                                                          >
+                                                            <Poster movie={{id:"rush-h...", ...}} ...>
+                                                              <div
+                                                                className="relative overflow-hidden bg-surface-2 h-ful..."
+-                                                               bis_skin_checked="1"
+                                                              >
+                                                        <div
+                                                          data-movie-id="the-nice-guys"
+                                                          onClick={function onClick}
+                                                          title="Открыть «Славные парни (2016)»"
+                                                          className={"strip-item-shadow relative flex-none cursor-poi..."}
+                                                          style={{width:132,height:198,transformOrigin:"center center",willChange:"..."}}
+-                                                         bis_skin_checked="1"
+                                                        >
+                                                          <div
+                                                            className="pointer-events-none h-full w-full overflow-hidd..."
+-                                                           bis_skin_checked="1"
+                                                          >
+                                                            <Poster movie={{id:"the-ni...", ...}} ...>
+                                                              <div
+                                                                className="relative overflow-hidden bg-surface-2 h-ful..."
+-                                                               bis_skin_checked="1"
+                                                              >
+                                                        <div
+                                                          data-movie-id="pulp-fiction"
+                                                          onClick={function onClick}
+                                                          title="Открыть «Криминальное чтиво»"
+                                                          className={"strip-item-shadow relative flex-none cursor-poi..."}
+                                                          style={{width:132,height:198,transformOrigin:"center center",willChange:"..."}}
+-                                                         bis_skin_checked="1"
+                                                        >
+                                                          <div
+                                                            className="pointer-events-none h-full w-full overflow-hidd..."
+-                                                           bis_skin_checked="1"
+                                                          >
+                                                            <Poster movie={{id:"pulp-f...", ...}} ...>
+                                                              <div
+                                                                className="relative overflow-hidden bg-surface-2 h-ful..."
+-                                                               bis_skin_checked="1"
+                                                              >
+                                                        <div
+                                                          data-movie-id="the-big-lebowski"
+                                                          onClick={function onClick}
+                                                          title="Открыть «Большой Лебовски»"
+                                                          className={"strip-item-shadow relative flex-none cursor-poi..."}
+                                                          style={{width:132,height:198,transformOrigin:"center center",willChange:"..."}}
+-                                                         bis_skin_checked="1"
+                                                        >
+                                                          <div
+                                                            className="pointer-events-none h-full w-full overflow-hidd..."
+-                                                           bis_skin_checked="1"
+                                                          >
+                                                            <Poster movie={{id:"the-bi...", ...}} ...>
+                                                              <div
+                                                                className="relative overflow-hidden bg-surface-2 h-ful..."
+-                                                               bis_skin_checked="1"
+                                                              >
+                                                        <div
+                                                          data-movie-id="lock-stock"
+                                                          onClick={function onClick}
+                                                          title="Открыть «Карты, деньги, два ствола»"
+                                                          className={"strip-item-shadow relative flex-none cursor-poi..."}
+                                                          style={{width:132,height:198,transformOrigin:"center center",willChange:"..."}}
+-                                                         bis_skin_checked="1"
+                                                        >
+                                                          <div
+                                                            className="pointer-events-none h-full w-full overflow-hidd..."
+-                                                           bis_skin_checked="1"
+                                                          >
+                                                            <Poster movie={{id:"lock-s...", ...}} ...>
+                                                              <div
+                                                                className="relative overflow-hidden bg-surface-2 h-ful..."
+-                                                               bis_skin_checked="1"
+                                                              >
+                                                        <div
+                                                          data-movie-id="snatch"
+                                                          onClick={function onClick}
+                                                          title="Открыть «Большой куш»"
+                                                          className={"strip-item-shadow relative flex-none cursor-poi..."}
+                                                          style={{width:132,height:198,transformOrigin:"center center",willChange:"..."}}
+-                                                         bis_skin_checked="1"
+                                                        >
+                                                          <div
+                                                            className="pointer-events-none h-full w-full overflow-hidd..."
+-                                                           bis_skin_checked="1"
+                                                          >
+                                                            <Poster movie={{id:"snatch", ...}} className="h-full w-full">
+                                                              <div
+                                                                className="relative overflow-hidden bg-surface-2 h-ful..."
+-                                                               bis_skin_checked="1"
+                                                              >
+                                                        <div
+                                                          data-movie-id="the-gentlemen"
+                                                          onClick={function onClick}
+                                                          title="Открыть «Джентльмены»"
+                                                          className={"strip-item-shadow relative flex-none cursor-poi..."}
+                                                          style={{width:132,height:198,transformOrigin:"center center",willChange:"..."}}
+-                                                         bis_skin_checked="1"
+                                                        >
+                                                          <div
+                                                            className="pointer-events-none h-full w-full overflow-hidd..."
+-                                                           bis_skin_checked="1"
+                                                          >
+                                                            <Poster movie={{id:"the-ge...", ...}} ...>
+                                                              <div
+                                                                className="relative overflow-hidden bg-surface-2 h-ful..."
+-                                                               bis_skin_checked="1"
+                                                              >
+                                                        <div
+                                                          data-movie-id="reservoir-dogs"
+                                                          onClick={function onClick}
+                                                          title="Открыть «Бешеные псы»"
+                                                          className={"strip-item-shadow relative flex-none cursor-poi..."}
+                                                          style={{width:132,height:198,transformOrigin:"center center",willChange:"..."}}
+-                                                         bis_skin_checked="1"
+                                                        >
+                                                          <div
+                                                            className="pointer-events-none h-full w-full overflow-hidd..."
+-                                                           bis_skin_checked="1"
+                                                          >
+                                                            <Poster movie={{id:"reserv...", ...}} ...>
+                                                              <div
+                                                                className="relative overflow-hidden bg-surface-2 h-ful..."
+-                                                               bis_skin_checked="1"
+                                                              >
+                                                        <div
+                                                          data-movie-id="die-hard"
+                                                          onClick={function onClick}
+                                                          title="Открыть «Крепкий орешек»"
+                                                          className={"strip-item-shadow relative flex-none cursor-poi..."}
+                                                          style={{width:132,height:198,transformOrigin:"center center",willChange:"..."}}
+-                                                         bis_skin_checked="1"
+                                                        >
+                                                          <div
+                                                            className="pointer-events-none h-full w-full overflow-hidd..."
+-                                                           bis_skin_checked="1"
+                                                          >
+                                                            <Poster movie={{id:"die-hard", ...}} ...>
+                                                              <div
+                                                                className="relative overflow-hidden bg-surface-2 h-ful..."
+-                                                               bis_skin_checked="1"
+                                                              >
+                                                        <div
+                                                          data-movie-id="die-hard-2"
+                                                          onClick={function onClick}
+                                                          title="Открыть «Крепкий орешек 2»"
+                                                          className={"strip-item-shadow relative flex-none cursor-poi..."}
+                                                          style={{width:132,height:198,transformOrigin:"center center",willChange:"..."}}
+-                                                         bis_skin_checked="1"
+                                                        >
+                                                          <div
+                                                            className="pointer-events-none h-full w-full overflow-hidd..."
+-                                                           bis_skin_checked="1"
+                                                          >
+                                                            <Poster movie={{id:"die-ha...", ...}} ...>
+                                                              <div
+                                                                className="relative overflow-hidden bg-surface-2 h-ful..."
+-                                                               bis_skin_checked="1"
+                                                              >
+                                                        <div
+                                                          data-movie-id="die-hard-with-a-vengeance"
+                                                          onClick={function onClick}
+                                                          title="Открыть «Крепкий орешек 3: Возмездие»"
+                                                          className={"strip-item-shadow relative flex-none cursor-poi..."}
+                                                          style={{width:132,height:198,transformOrigin:"center center",willChange:"..."}}
+-                                                         bis_skin_checked="1"
+                                                        >
+                                                          <div
+                                                            className="pointer-events-none h-full w-full overflow-hidd..."
+-                                                           bis_skin_checked="1"
+                                                          >
+                                                            <Poster movie={{id:"die-ha...", ...}} ...>
+                                                              <div
+                                                                className="relative overflow-hidden bg-surface-2 h-ful..."
+-                                                               bis_skin_checked="1"
+                                                              >
+                                                  <div
+                                                    className="fade-left pointer-events-none absolute inset-y-0 left-0..."
+-                                                   bis_skin_checked="1"
+                                                  >
+                                                  <div
+                                                    className="fade-right pointer-events-none absolute inset-y-0 right..."
+-                                                   bis_skin_checked="1"
+                                                  >
+                                          <div
+                                            className="mt-5 flex flex-col items-center gap-3"
+-                                           bis_skin_checked="1"
+                                          >
+                                      <Filters value={{genres:[...]}} onChange={function bound dispatchSetState} ...>
+                                        <section className="panel p-4">
+                                          <div
+                                            className="flex items-center justify-between gap-3"
+-                                           bis_skin_checked="1"
+                                          >
+                                            <div
+                                              className="flex items-center gap-2"
+-                                             bis_skin_checked="1"
+                                            >
+                                            <div
+                                              className="flex items-center gap-2"
+-                                             bis_skin_checked="1"
+                                            >
+                                          <div
+                                            className="hidden sm:block"
+-                                           bis_skin_checked="1"
+                                          >
+                                            <div
+                                              className="mt-4"
+-                                             bis_skin_checked="1"
+                                            >
+                                              <p>
+                                              <div
+                                                className="flex flex-wrap gap-1.5"
+-                                               bis_skin_checked="1"
+                                              >
+                                      <section>
+                                        <h2>
+                                        <ul className="grid grid-...">
+                                          <li className="rise">
+                                            <button type="button" onClick={function onClick} className="group bloc...">
+                                              <Poster movie={{id:"pulp-f...", ...}} sizes="(max-width..." ...>
+                                                <div
+                                                  className="relative overflow-hidden bg-surface-2 aspect-[2/3] rounde..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                              ...
+                                          <li className="rise">
+                                            <button type="button" onClick={function onClick} className="group bloc...">
+                                              <Poster movie={{id:"the-bi...", ...}} sizes="(max-width..." ...>
+                                                <div
+                                                  className="relative overflow-hidden bg-surface-2 aspect-[2/3] rounde..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                              ...
+                                          <li className="rise">
+                                            <button type="button" onClick={function onClick} className="group bloc...">
+                                              <Poster movie={{id:"lock-s...", ...}} sizes="(max-width..." ...>
+                                                <div
+                                                  className="relative overflow-hidden bg-surface-2 aspect-[2/3] rounde..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                              ...
+                                          <li className="rise">
+                                            <button type="button" onClick={function onClick} className="group bloc...">
+                                              <Poster movie={{id:"snatch", ...}} sizes="(max-width..." ...>
+                                                <div
+                                                  className="relative overflow-hidden bg-surface-2 aspect-[2/3] rounde..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                              ...
+                                          <li className="rise">
+                                            <button type="button" onClick={function onClick} className="group bloc...">
+                                              <Poster movie={{id:"the-ge...", ...}} sizes="(max-width..." ...>
+                                                <div
+                                                  className="relative overflow-hidden bg-surface-2 aspect-[2/3] rounde..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                              ...
+                                          <li className="rise">
+                                            <button type="button" onClick={function onClick} className="group bloc...">
+                                              <Poster movie={{id:"reserv...", ...}} sizes="(max-width..." ...>
+                                                <div
+                                                  className="relative overflow-hidden bg-surface-2 aspect-[2/3] rounde..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                              ...
+                                          <li className="rise">
+                                            <button type="button" onClick={function onClick} className="group bloc...">
+                                              <Poster movie={{id:"die-hard", ...}} sizes="(max-width..." ...>
+                                                <div
+                                                  className="relative overflow-hidden bg-surface-2 aspect-[2/3] rounde..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                              ...
+                                          <li className="rise">
+                                            <button type="button" onClick={function onClick} className="group bloc...">
+                                              <Poster movie={{id:"die-ha...", ...}} sizes="(max-width..." ...>
+                                                <div
+                                                  className="relative overflow-hidden bg-surface-2 aspect-[2/3] rounde..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                              ...
+                                          <li className="rise">
+                                            <button type="button" onClick={function onClick} className="group bloc...">
+                                              <Poster movie={{id:"die-ha...", ...}} sizes="(max-width..." ...>
+                                                <div
+                                                  className="relative overflow-hidden bg-surface-2 aspect-[2/3] rounde..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                              ...
+                                          <li className="rise">
+                                            <button type="button" onClick={function onClick} className="group bloc...">
+                                              <Poster movie={{id:"taxi", ...}} sizes="(max-width..." ...>
+                                                <div
+                                                  className="relative overflow-hidden bg-surface-2 aspect-[2/3] rounde..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                              ...
+                                          <li className="rise">
+                                            <button type="button" onClick={function onClick} className="group bloc...">
+                                              <Poster movie={{id:"the-fi...", ...}} sizes="(max-width..." ...>
+                                                <div
+                                                  className="relative overflow-hidden bg-surface-2 aspect-[2/3] rounde..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                              ...
+                                          <li className="rise">
+                                            <button type="button" onClick={function onClick} className="group bloc...">
+                                              <Poster movie={{id:"leon", ...}} sizes="(max-width..." ...>
+                                                <div
+                                                  className="relative overflow-hidden bg-surface-2 aspect-[2/3] rounde..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                              ...
+                                          <li className="rise">
+                                            <button type="button" onClick={function onClick} className="group bloc...">
+                                              <Poster movie={{id:"the-wo...", ...}} sizes="(max-width..." ...>
+                                                <div
+                                                  className="relative overflow-hidden bg-surface-2 aspect-[2/3] rounde..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                              ...
+                                          <li className="rise">
+                                            <button type="button" onClick={function onClick} className="group bloc...">
+                                              <Poster movie={{id:"the-de...", ...}} sizes="(max-width..." ...>
+                                                <div
+                                                  className="relative overflow-hidden bg-surface-2 aspect-[2/3] rounde..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                              ...
+                                          <li className="rise">
+                                            <button type="button" onClick={function onClick} className="group bloc...">
+                                              <Poster movie={{id:"once-u...", ...}} sizes="(max-width..." ...>
+                                                <div
+                                                  className="relative overflow-hidden bg-surface-2 aspect-[2/3] rounde..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                              ...
+                                          <li className="rise">
+                                            <button type="button" onClick={function onClick} className="group bloc...">
+                                              <Poster movie={{id:"inglou...", ...}} sizes="(max-width..." ...>
+                                                <div
+                                                  className="relative overflow-hidden bg-surface-2 aspect-[2/3] rounde..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                              ...
+                                          <li className="rise">
+                                            <button type="button" onClick={function onClick} className="group bloc...">
+                                              <Poster movie={{id:"inception", ...}} sizes="(max-width..." ...>
+                                                <div
+                                                  className="relative overflow-hidden bg-surface-2 aspect-[2/3] rounde..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                              ...
+                                          <li className="rise">
+                                            <button type="button" onClick={function onClick} className="group bloc...">
+                                              <Poster movie={{id:"fight-...", ...}} sizes="(max-width..." ...>
+                                                <div
+                                                  className="relative overflow-hidden bg-surface-2 aspect-[2/3] rounde..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                              ...
+                                          <li className="rise">
+                                            <button type="button" onClick={function onClick} className="group bloc...">
+                                              <Poster movie={{id:"se7en", ...}} sizes="(max-width..." ...>
+                                                <div
+                                                  className="relative overflow-hidden bg-surface-2 aspect-[2/3] rounde..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                              ...
+                                          <li className="rise">
+                                            <button type="button" onClick={function onClick} className="group bloc...">
+                                              <Poster movie={{id:"the-ma...", ...}} sizes="(max-width..." ...>
+                                                <div
+                                                  className="relative overflow-hidden bg-surface-2 aspect-[2/3] rounde..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                              ...
+                                          <li className="rise">
+                                            <button type="button" onClick={function onClick} className="group bloc...">
+                                              <Poster movie={{id:"termin...", ...}} sizes="(max-width..." ...>
+                                                <div
+                                                  className="relative overflow-hidden bg-surface-2 aspect-[2/3] rounde..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                              ...
+                                          <li className="rise">
+                                            <button type="button" onClick={function onClick} className="group bloc...">
+                                              <Poster movie={{id:"alien", ...}} sizes="(max-width..." ...>
+                                                <div
+                                                  className="relative overflow-hidden bg-surface-2 aspect-[2/3] rounde..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                              ...
+                                          <li className="rise">
+                                            <button type="button" onClick={function onClick} className="group bloc...">
+                                              <Poster movie={{id:"blade-...", ...}} sizes="(max-width..." ...>
+                                                <div
+                                                  className="relative overflow-hidden bg-surface-2 aspect-[2/3] rounde..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                              ...
+                                          <li className="rise">
+                                            <button type="button" onClick={function onClick} className="group bloc...">
+                                              <Poster movie={{id:"the-ma...", ...}} sizes="(max-width..." ...>
+                                                <div
+                                                  className="relative overflow-hidden bg-surface-2 aspect-[2/3] rounde..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                              ...
+                                          <li className="rise">
+                                            <button type="button" onClick={function onClick} className="group bloc...">
+                                              <Poster movie={{id:"grand-...", ...}} sizes="(max-width..." ...>
+                                                <div
+                                                  className="relative overflow-hidden bg-surface-2 aspect-[2/3] rounde..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                              ...
+                                          <li className="rise">
+                                            <button type="button" onClick={function onClick} className="group bloc...">
+                                              <Poster movie={{id:"the-ha...", ...}} sizes="(max-width..." ...>
+                                                <div
+                                                  className="relative overflow-hidden bg-surface-2 aspect-[2/3] rounde..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                              ...
+                                          <li className="rise">
+                                            <button type="button" onClick={function onClick} className="group bloc...">
+                                              <Poster movie={{id:"goodfe...", ...}} sizes="(max-width..." ...>
+                                                <div
+                                                  className="relative overflow-hidden bg-surface-2 aspect-[2/3] rounde..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                              ...
+                                          <li className="rise">
+                                            <button type="button" onClick={function onClick} className="group bloc...">
+                                              <Poster movie={{id:"scarface", ...}} sizes="(max-width..." ...>
+                                                <div
+                                                  className="relative overflow-hidden bg-surface-2 aspect-[2/3] rounde..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                              ...
+                                          <li className="rise">
+                                            <button type="button" onClick={function onClick} className="group bloc...">
+                                              <Poster movie={{id:"full-m...", ...}} sizes="(max-width..." ...>
+                                                <div
+                                                  className="relative overflow-hidden bg-surface-2 aspect-[2/3] rounde..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                              ...
+                                          <li className="rise">
+                                            <button type="button" onClick={function onClick} className="group bloc...">
+                                              <Poster movie={{id:"catch-...", ...}} sizes="(max-width..." ...>
+                                                <div
+                                                  className="relative overflow-hidden bg-surface-2 aspect-[2/3] rounde..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                              ...
+                                          <li className="rise">
+                                            <button type="button" onClick={function onClick} className="group bloc...">
+                                              <Poster movie={{id:"the-go...", ...}} sizes="(max-width..." ...>
+                                                <div
+                                                  className="relative overflow-hidden bg-surface-2 aspect-[2/3] rounde..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                              ...
+                                          <li className="rise">
+                                            <button type="button" onClick={function onClick} className="group bloc...">
+                                              <Poster movie={{id:"good-w...", ...}} sizes="(max-width..." ...>
+                                                <div
+                                                  className="relative overflow-hidden bg-surface-2 aspect-[2/3] rounde..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                              ...
+                                          <li className="rise">
+                                            <button type="button" onClick={function onClick} className="group bloc...">
+                                              <Poster movie={{id:"the-mask", ...}} sizes="(max-width..." ...>
+                                                <div
+                                                  className="relative overflow-hidden bg-surface-2 aspect-[2/3] rounde..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                              ...
+                                          <li className="rise">
+                                            <button type="button" onClick={function onClick} className="group bloc...">
+                                              <Poster movie={{id:"jaws", ...}} sizes="(max-width..." ...>
+                                                <div
+                                                  className="relative overflow-hidden bg-surface-2 aspect-[2/3] rounde..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                              ...
+                                          <li className="rise">
+                                            <button type="button" onClick={function onClick} className="group bloc...">
+                                              <Poster movie={{id:"the-fa...", ...}} sizes="(max-width..." ...>
+                                                <div
+                                                  className="relative overflow-hidden bg-surface-2 aspect-[2/3] rounde..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                              ...
+                                          <li className="rise">
+                                            <button type="button" onClick={function onClick} className="group bloc...">
+                                              <Poster movie={{id:"2-fast...", ...}} sizes="(max-width..." ...>
+                                                <div
+                                                  className="relative overflow-hidden bg-surface-2 aspect-[2/3] rounde..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                              ...
+                                          <li className="rise">
+                                            <button type="button" onClick={function onClick} className="group bloc...">
+                                              <Poster movie={{id:"fast-a...", ...}} sizes="(max-width..." ...>
+                                                <div
+                                                  className="relative overflow-hidden bg-surface-2 aspect-[2/3] rounde..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                              ...
+                                          <li className="rise">
+                                            <button type="button" onClick={function onClick} className="group bloc...">
+                                              <Poster movie={{id:"fast-a...", ...}} sizes="(max-width..." ...>
+                                                <div
+                                                  className="relative overflow-hidden bg-surface-2 aspect-[2/3] rounde..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                              ...
+                                          <li className="rise">
+                                            <button type="button" onClick={function onClick} className="group bloc...">
+                                              <Poster movie={{id:"fast-five", ...}} sizes="(max-width..." ...>
+                                                <div
+                                                  className="relative overflow-hidden bg-surface-2 aspect-[2/3] rounde..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                              ...
+                                          <li className="rise">
+                                            <button type="button" onClick={function onClick} className="group bloc...">
+                                              <Poster movie={{id:"fast-a...", ...}} sizes="(max-width..." ...>
+                                                <div
+                                                  className="relative overflow-hidden bg-surface-2 aspect-[2/3] rounde..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                              ...
+                                          <li className="rise">
+                                            <button type="button" onClick={function onClick} className="group bloc...">
+                                              <Poster movie={{id:"furious-7", ...}} sizes="(max-width..." ...>
+                                                <div
+                                                  className="relative overflow-hidden bg-surface-2 aspect-[2/3] rounde..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                              ...
+                                          <li className="rise">
+                                            <button type="button" onClick={function onClick} className="group bloc...">
+                                              <Poster movie={{id:"the-fa...", ...}} sizes="(max-width..." ...>
+                                                <div
+                                                  className="relative overflow-hidden bg-surface-2 aspect-[2/3] rounde..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                              ...
+                                          <li className="rise">
+                                            <button type="button" onClick={function onClick} className="group bloc...">
+                                              <Poster movie={{id:"f9", ...}} sizes="(max-width..." ...>
+                                                <div
+                                                  className="relative overflow-hidden bg-surface-2 aspect-[2/3] rounde..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                              ...
+                                          <li className="rise">
+                                            <button type="button" onClick={function onClick} className="group bloc...">
+                                              <Poster movie={{id:"fast-x", ...}} sizes="(max-width..." ...>
+                                                <div
+                                                  className="relative overflow-hidden bg-surface-2 aspect-[2/3] rounde..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                              ...
+                                          <li className="rise">
+                                            <button type="button" onClick={function onClick} className="group bloc...">
+                                              <Poster movie={{id:"fast-a...", ...}} sizes="(max-width..." ...>
+                                                <div
+                                                  className="relative overflow-hidden bg-surface-2 aspect-[2/3] rounde..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                              ...
+                                          <li className="rise">
+                                            <button type="button" onClick={function onClick} className="group bloc...">
+                                              <Poster movie={{id:"naked-gun", ...}} sizes="(max-width..." ...>
+                                                <div
+                                                  className="relative overflow-hidden bg-surface-2 aspect-[2/3] rounde..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                              ...
+                                          <li className="rise">
+                                            <button type="button" onClick={function onClick} className="group bloc...">
+                                              <Poster movie={{id:"naked-...", ...}} sizes="(max-width..." ...>
+                                                <div
+                                                  className="relative overflow-hidden bg-surface-2 aspect-[2/3] rounde..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                              ...
+                                          <li className="rise">
+                                            <button type="button" onClick={function onClick} className="group bloc...">
+                                              <Poster movie={{id:"naked-...", ...}} sizes="(max-width..." ...>
+                                                <div
+                                                  className="relative overflow-hidden bg-surface-2 aspect-[2/3] rounde..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                              ...
+                                          <li className="rise">
+                                            <button type="button" onClick={function onClick} className="group bloc...">
+                                              <Poster movie={{id:"scary-...", ...}} sizes="(max-width..." ...>
+                                                <div
+                                                  className="relative overflow-hidden bg-surface-2 aspect-[2/3] rounde..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                              ...
+                                          <li className="rise">
+                                            <button type="button" onClick={function onClick} className="group bloc...">
+                                              <Poster movie={{id:"scary-...", ...}} sizes="(max-width..." ...>
+                                                <div
+                                                  className="relative overflow-hidden bg-surface-2 aspect-[2/3] rounde..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                              ...
+                                          <li className="rise">
+                                            <button type="button" onClick={function onClick} className="group bloc...">
+                                              <Poster movie={{id:"scary-...", ...}} sizes="(max-width..." ...>
+                                                <div
+                                                  className="relative overflow-hidden bg-surface-2 aspect-[2/3] rounde..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                              ...
+                                          <li className="rise">
+                                            <button type="button" onClick={function onClick} className="group bloc...">
+                                              <Poster movie={{id:"hot-shots", ...}} sizes="(max-width..." ...>
+                                                <div
+                                                  className="relative overflow-hidden bg-surface-2 aspect-[2/3] rounde..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                              ...
+                                          <li className="rise">
+                                            <button type="button" onClick={function onClick} className="group bloc...">
+                                              <Poster movie={{id:"hot-sh...", ...}} sizes="(max-width..." ...>
+                                                <div
+                                                  className="relative overflow-hidden bg-surface-2 aspect-[2/3] rounde..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                              ...
+                                          <li className="rise">
+                                            <button type="button" onClick={function onClick} className="group bloc...">
+                                              <Poster movie={{id:"tropic...", ...}} sizes="(max-width..." ...>
+                                                <div
+                                                  className="relative overflow-hidden bg-surface-2 aspect-[2/3] rounde..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                              ...
+                                          <li className="rise">
+                                            <button type="button" onClick={function onClick} className="group bloc...">
+                                              <Poster movie={{id:"hot-fuzz", ...}} sizes="(max-width..." ...>
+                                                <div
+                                                  className="relative overflow-hidden bg-surface-2 aspect-[2/3] rounde..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                              ...
+                                          <li className="rise">
+                                            <button type="button" onClick={function onClick} className="group bloc...">
+                                              <Poster movie={{id:"from-d...", ...}} sizes="(max-width..." ...>
+                                                <div
+                                                  className="relative overflow-hidden bg-surface-2 aspect-[2/3] rounde..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                              ...
+                                          <li className="rise">
+                                            <button type="button" onClick={function onClick} className="group bloc...">
+                                              <Poster movie={{id:"the-ha...", ...}} sizes="(max-width..." ...>
+                                                <div
+                                                  className="relative overflow-hidden bg-surface-2 aspect-[2/3] rounde..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                              ...
+                                          <li className="rise">
+                                            <button type="button" onClick={function onClick} className="group bloc...">
+                                              <Poster movie={{id:"the-ha...", ...}} sizes="(max-width..." ...>
+                                                <div
+                                                  className="relative overflow-hidden bg-surface-2 aspect-[2/3] rounde..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                              ...
+                                          <li className="rise">
+                                            <button type="button" onClick={function onClick} className="group bloc...">
+                                              <Poster movie={{id:"the-ha...", ...}} sizes="(max-width..." ...>
+                                                <div
+                                                  className="relative overflow-hidden bg-surface-2 aspect-[2/3] rounde..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                              ...
+                                          <li className="rise">
+                                            <button type="button" onClick={function onClick} className="group bloc...">
+                                              <Poster movie={{id:"in-bruges", ...}} sizes="(max-width..." ...>
+                                                <div
+                                                  className="relative overflow-hidden bg-surface-2 aspect-[2/3] rounde..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                              ...
+                                          <li className="rise">
+                                            <button type="button" onClick={function onClick} className="group bloc...">
+                                              <Poster movie={{id:"valerian", ...}} sizes="(max-width..." ...>
+                                                <div
+                                                  className="relative overflow-hidden bg-surface-2 aspect-[2/3] rounde..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                              ...
+                                          <li className="rise">
+                                            <button type="button" onClick={function onClick} className="group bloc...">
+                                              <Poster movie={{id:"robocop", ...}} sizes="(max-width..." ...>
+                                                <div
+                                                  className="relative overflow-hidden bg-surface-2 aspect-[2/3] rounde..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                              ...
+                                          <li className="rise">
+                                            <button type="button" onClick={function onClick} className="group bloc...">
+                                              <Poster movie={{id:"escape...", ...}} sizes="(max-width..." ...>
+                                                <div
+                                                  className="relative overflow-hidden bg-surface-2 aspect-[2/3] rounde..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                              ...
+                                          <li className="rise">
+                                            <button type="button" onClick={function onClick} className="group bloc...">
+                                              <Poster movie={{id:"the-thing", ...}} sizes="(max-width..." ...>
+                                                <div
+                                                  className="relative overflow-hidden bg-surface-2 aspect-[2/3] rounde..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                              ...
+                                          <li className="rise">
+                                            <button type="button" onClick={function onClick} className="group bloc...">
+                                              <Poster movie={{id:"avatar", ...}} sizes="(max-width..." ...>
+                                                <div
+                                                  className="relative overflow-hidden bg-surface-2 aspect-[2/3] rounde..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                              ...
+                                          <li className="rise">
+                                            <button type="button" onClick={function onClick} className="group bloc...">
+                                              <Poster movie={{id:"superbad", ...}} sizes="(max-width..." ...>
+                                                <div
+                                                  className="relative overflow-hidden bg-surface-2 aspect-[2/3] rounde..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                              ...
+                                          <li className="rise">
+                                            <button type="button" onClick={function onClick} className="group bloc...">
+                                              <Poster movie={{id:"americ...", ...}} sizes="(max-width..." ...>
+                                                <div
+                                                  className="relative overflow-hidden bg-surface-2 aspect-[2/3] rounde..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                              ...
+                                          <li className="rise">
+                                            <button type="button" onClick={function onClick} className="group bloc...">
+                                              <Poster movie={{id:"americ...", ...}} sizes="(max-width..." ...>
+                                                <div
+                                                  className="relative overflow-hidden bg-surface-2 aspect-[2/3] rounde..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                              ...
+                                          <li className="rise">
+                                            <button type="button" onClick={function onClick} className="group bloc...">
+                                              <Poster movie={{id:"americ...", ...}} sizes="(max-width..." ...>
+                                                <div
+                                                  className="relative overflow-hidden bg-surface-2 aspect-[2/3] rounde..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                              ...
+                                          <li className="rise">
+                                            <button type="button" onClick={function onClick} className="group bloc...">
+                                              <Poster movie={{id:"americ...", ...}} sizes="(max-width..." ...>
+                                                <div
+                                                  className="relative overflow-hidden bg-surface-2 aspect-[2/3] rounde..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                              ...
+                                          <li className="rise">
+                                            <button type="button" onClick={function onClick} className="group bloc...">
+                                              <Poster movie={{id:"knives...", ...}} sizes="(max-width..." ...>
+                                                <div
+                                                  className="relative overflow-hidden bg-surface-2 aspect-[2/3] rounde..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                              ...
+                                          <li className="rise">
+                                            <button type="button" onClick={function onClick} className="group bloc...">
+                                              <Poster movie={{id:"deadpo...", ...}} sizes="(max-width..." ...>
+                                                <div
+                                                  className="relative overflow-hidden bg-surface-2 aspect-[2/3] rounde..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                              ...
+                                          <li className="rise">
+                                            <button type="button" onClick={function onClick} className="group bloc...">
+                                              <Poster movie={{id:"shaun-...", ...}} sizes="(max-width..." ...>
+                                                <div
+                                                  className="relative overflow-hidden bg-surface-2 aspect-[2/3] rounde..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                              ...
+                                          <li className="rise">
+                                            <button type="button" onClick={function onClick} className="group bloc...">
+                                              <Poster movie={{id:"what-w...", ...}} sizes="(max-width..." ...>
+                                                <div
+                                                  className="relative overflow-hidden bg-surface-2 aspect-[2/3] rounde..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                              ...
+                                          <li className="rise">
+                                            <button type="button" onClick={function onClick} className="group bloc...">
+                                              <Poster movie={{id:"men-in...", ...}} sizes="(max-width..." ...>
+                                                <div
+                                                  className="relative overflow-hidden bg-surface-2 aspect-[2/3] rounde..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                              ...
+                                          <li className="rise">
+                                            <button type="button" onClick={function onClick} className="group bloc...">
+                                              <Poster movie={{id:"men-in...", ...}} sizes="(max-width..." ...>
+                                                <div
+                                                  className="relative overflow-hidden bg-surface-2 aspect-[2/3] rounde..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                              ...
+                                          <li className="rise">
+                                            <button type="button" onClick={function onClick} className="group bloc...">
+                                              <Poster movie={{id:"men-in...", ...}} sizes="(max-width..." ...>
+                                                <div
+                                                  className="relative overflow-hidden bg-surface-2 aspect-[2/3] rounde..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                              ...
+                                          <li className="rise">
+                                            <button type="button" onClick={function onClick} className="group bloc...">
+                                              <Poster movie={{id:"john-wick", ...}} sizes="(max-width..." ...>
+                                                <div
+                                                  className="relative overflow-hidden bg-surface-2 aspect-[2/3] rounde..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                              ...
+                                          <li className="rise">
+                                            <button type="button" onClick={function onClick} className="group bloc...">
+                                              <Poster movie={{id:"showdo...", ...}} sizes="(max-width..." ...>
+                                                <div
+                                                  className="relative overflow-hidden bg-surface-2 aspect-[2/3] rounde..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                              ...
+                                          <li className="rise">
+                                            <button type="button" onClick={function onClick} className="group bloc...">
+                                              <Poster movie={{id:"speed", ...}} sizes="(max-width..." ...>
+                                                <div
+                                                  className="relative overflow-hidden bg-surface-2 aspect-[2/3] rounde..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                              ...
+                                          <li className="rise">
+                                            <button type="button" onClick={function onClick} className="group bloc...">
+                                              <Poster movie={{id:"guardi...", ...}} sizes="(max-width..." ...>
+                                                <div
+                                                  className="relative overflow-hidden bg-surface-2 aspect-[2/3] rounde..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                              ...
+                                          <li className="rise">
+                                            <button type="button" onClick={function onClick} className="group bloc...">
+                                              <Poster movie={{id:"tucker...", ...}} sizes="(max-width..." ...>
+                                                <div
+                                                  className="relative overflow-hidden bg-surface-2 aspect-[2/3] rounde..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                              ...
+                                          <li className="rise">
+                                            <button type="button" onClick={function onClick} className="group bloc...">
+                                              <Poster movie={{id:"dungeo...", ...}} sizes="(max-width..." ...>
+                                                <div
+                                                  className="relative overflow-hidden bg-surface-2 aspect-[2/3] rounde..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                              ...
+                                          <li className="rise">
+                                            <button type="button" onClick={function onClick} className="group bloc...">
+                                              <Poster movie={{id:"the-ot...", ...}} sizes="(max-width..." ...>
+                                                <div
+                                                  className="relative overflow-hidden bg-surface-2 aspect-[2/3] rounde..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                              ...
+                                          <li className="rise">
+                                            <button type="button" onClick={function onClick} className="group bloc...">
+                                              <Poster movie={{id:"21-jum...", ...}} sizes="(max-width..." ...>
+                                                <div
+                                                  className="relative overflow-hidden bg-surface-2 aspect-[2/3] rounde..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                              ...
+                                          <li className="rise">
+                                            <button type="button" onClick={function onClick} className="group bloc...">
+                                              <Poster movie={{id:"22-jum...", ...}} sizes="(max-width..." ...>
+                                                <div
+                                                  className="relative overflow-hidden bg-surface-2 aspect-[2/3] rounde..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                              ...
+                                          <li className="rise">
+                                            <button type="button" onClick={function onClick} className="group bloc...">
+                                              <Poster movie={{id:"rush-hour", ...}} sizes="(max-width..." ...>
+                                                <div
+                                                  className="relative overflow-hidden bg-surface-2 aspect-[2/3] rounde..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                              ...
+                                          <li className="rise">
+                                            <button type="button" onClick={function onClick} className="group bloc...">
+                                              <Poster movie={{id:"rush-h...", ...}} sizes="(max-width..." ...>
+                                                <div
+                                                  className="relative overflow-hidden bg-surface-2 aspect-[2/3] rounde..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                              ...
+                                          <li className="rise">
+                                            <button type="button" onClick={function onClick} className="group bloc...">
+                                              <Poster movie={{id:"rush-h...", ...}} sizes="(max-width..." ...>
+                                                <div
+                                                  className="relative overflow-hidden bg-surface-2 aspect-[2/3] rounde..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                              ...
+                                          <li className="rise">
+                                            <button type="button" onClick={function onClick} className="group bloc...">
+                                              <Poster movie={{id:"the-ni...", ...}} sizes="(max-width..." ...>
+                                                <div
+                                                  className="relative overflow-hidden bg-surface-2 aspect-[2/3] rounde..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                              ...
+                                      ...
+                              ...
+                  ...
+ 
+[browser] Uncaught ReferenceError: details is not defined
+    at SinApp (src/components/SinApp.tsx:97:6)
+    at S.scheduleRefresh (chrome-extension://fmkadmapgofadopljbjfkapdkoienihi/build/installHook.js:1:79881)
+    at Set.forEach (<anonymous>)
+    at Home (src\app\page.tsx:4:10)
+   95 |   const enrichedCount = useMemo(
+   96 |     () => Object.keys(details).length,
+>  97 |     [details],
+      |      ^
+   98 |   );
+   99 |
+  100 |   const changeSpinMode = useCallback(
+⨯ ReferenceError: details is not defined
+    at SinApp (src\components\SinApp.tsx:97:6)
+   95 |   const enrichedCount = useMemo(
+   96 |     () => Object.keys(details).length,
+>  97 |     [details],
+      |      ^
+   98 |   );
+   99 |
+  100 |   const changeSpinMode = useCallback( {
+  digest: '2033271597'
+}
+ GET / 500 in 67ms (next.js: 2ms, application-code: 64ms)
+[browser] Encountered a script tag while rendering React component. Scripts inside React components are never executed when rendering on the client. Consider using template tag instead (https://developer.mozilla.org/en-US/docs/Web/HTML/Element/template). 
+[browser] Uncaught ReferenceError: details is not defined
+    at SinApp (src/components/SinApp.tsx:97:6)
+    at Home (src\app\page.tsx:4:10)
+   95 |   const enrichedCount = useMemo(
+   96 |     () => Object.keys(details).length,
+>  97 |     [details],
+      |      ^
+   98 |   );
+   99 |
+  100 |   const changeSpinMode = useCallback(
+⨯ ReferenceError: details is not defined
+    at SinApp (src\components\SinApp.tsx:97:6)
+   95 |   const enrichedCount = useMemo(
+   96 |     () => Object.keys(details).length,
+>  97 |     [details],
+      |      ^
+   98 |   );
+   99 |
+  100 |   const changeSpinMode = useCallback( {
+  digest: '2033271597'
+}
+ GET / 500 in 49ms (next.js: 3ms, application-code: 46ms)
+[browser] Encountered a script tag while rendering React component. Scripts inside React components are never executed when rendering on the client. Consider using template tag instead (https://developer.mozilla.org/en-US/docs/Web/HTML/Element/template). 
+[browser] Uncaught ReferenceError: details is not defined
+    at SinApp (src/components/SinApp.tsx:97:6)
+    at Home (src\app\page.tsx:4:10)
+   95 |   const enrichedCount = useMemo(
+   96 |     () => Object.keys(details).length,
+>  97 |     [details],
+      |      ^
+   98 |   );
+   99 |
+  100 |   const changeSpinMode = useCallback(

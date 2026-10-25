@@ -109,7 +109,6 @@ export function MovieModal({
           <div className="flex flex-col gap-5 p-5 sm:flex-row sm:p-6">
             <Poster
               movie={movie}
-              sizes="(max-width: 640px) 46vw, 220px"
               className="aspect-[2/3] w-32 shrink-0 rounded-2xl sm:w-44"
             />
 

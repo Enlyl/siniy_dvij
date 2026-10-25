@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { formatDateTime, formatRating } from "@/lib/format";
-import { MOVIES, type Movie, type MovieDetails } from "@/lib/movies";
+import { MOVIES, type Movie } from "@/lib/movies";
 import {
   DEFAULT_SPIN_MODE,
   DEFAULT_THEME,
@@ -52,8 +52,6 @@ export function SinApp() {
   const lastDropped = useStoredJson<LastDropped>(STORAGE_KEYS.last, null, isLastDropped);
   const history = useStoredJson<HistoryItem[]>(STORAGE_KEYS.history, [], isHistoryList);
 
-  const [details, setDetails] = useState<Record<string, MovieDetails>>({});
-  const [tmdbConfigured, setTmdbConfigured] = useState(false);
   const [settingsOpen, setSettingsOpen] = useState(false);
   const [historyOpen, setHistoryOpen] = useState(false);
   const [openMovie, setOpenMovie] = useState<Movie | null>(null);
@@ -74,39 +72,8 @@ export function SinApp() {
     document.documentElement.dataset.spin = spinMode.value;
   }, [spinMode.value]);
 
-  /* однократное обогащение карточек через TMDB (если есть ключ) */
-  useEffect(() => {
-    let cancelled = false;
-    void (async () => {
-      try {
-        const response = await fetch("/api/movies", {
-          method: "POST",
-          headers: { "content-type": "application/json" },
-          body: JSON.stringify({ ids: MOVIES.map((movie) => movie.id) }),
-        });
-        if (!response.ok) return;
-        const data: { configured?: boolean; details?: Record<string, MovieDetails> } =
-          await response.json();
-        if (cancelled) return;
-        setTmdbConfigured(data.configured === true);
-        setDetails(data.details ?? {});
-      } catch {
-        /* без сети просто живём на локальных данных */
-      }
-    })();
-    return () => {
-      cancelled = true;
-    };
-  }, []);
-
-  const movies = useMemo<Movie[]>(
-    () =>
-      MOVIES.map((movie) => {
-        const extra = details[movie.id];
-        return extra ? { ...movie, ...extra } : movie;
-      }),
-    [details],
-  );
+  /* Данные уже prebaked в movies.ts — дополнительный fetch не нужен */
+  const movies = useMemo<Movie[]>(() => MOVIES, []);
 
   const pool = useMemo(
     () =>
@@ -123,11 +90,6 @@ export function SinApp() {
   const lastMovie = useMemo(
     () => (lastDropped.value ? movies.find((m) => m.id === lastDropped.value?.id) ?? null : null),
     [movies, lastDropped.value],
-  );
-
-  const enrichedCount = useMemo(
-    () => Object.keys(details).length,
-    [details],
   );
 
   const changeSpinMode = useCallback(
@@ -300,7 +262,6 @@ export function SinApp() {
                 >
                   <Poster
                     movie={movie}
-                    sizes="(max-width: 640px) 44vw, (max-width: 1024px) 30vw, 200px"
                     className="aspect-[2/3] rounded-2xl border border-line transition-transform duration-200 group-hover:-translate-y-1 group-hover:border-accent/50"
                   />
                   <p className="mt-2 line-clamp-2 text-[0.8125rem] leading-snug font-semibold">
@@ -329,9 +290,6 @@ export function SinApp() {
         onTheme={theme.setValue}
         spin={spinMode.value}
         onSpin={changeSpinMode}
-        tmdbConfigured={tmdbConfigured}
-        enrichedCount={enrichedCount}
-        totalCount={movies.length}
       />
 
       <MovieModal movie={openMovie} onClose={() => setOpenMovie(null)} />

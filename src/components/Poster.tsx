@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { useState } from "react";
 import { posterUrl, type Movie } from "@/lib/movies";
 
@@ -50,12 +49,10 @@ export function PosterArt({ movie }: { movie: Movie }) {
 
 export function Poster({
   movie,
-  sizes = "(max-width: 640px) 42vw, 200px",
   priority = false,
   className = "",
 }: {
   movie: Movie;
-  sizes?: string;
   priority?: boolean;
   className?: string;
 }) {
@@ -65,13 +62,11 @@ export function Poster({
   return (
     <div className={`relative overflow-hidden bg-surface-2 ${className}`}>
       {url && !broken ? (
-        <Image
+        <img
           src={url}
           alt={`Постер фильма «${movie.title}»`}
-          fill
-          sizes={sizes}
-          priority={priority}
-          className="object-cover"
+          loading={priority ? "eager" : "lazy"}
+          className="absolute inset-0 h-full w-full object-cover"
           onError={() => setBroken(true)}
         />
       ) : (

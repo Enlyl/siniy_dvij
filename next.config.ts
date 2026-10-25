@@ -1,9 +1,13 @@
 import type { NextConfig } from "next";
 
+const isGhPages = process.env.GITHUB_PAGES === "true";
+
 const nextConfig: NextConfig = {
-  cacheComponents: true,
-  partialPrefetching: true,
+  output: "export",
+  basePath: isGhPages ? "/siniy_dvij" : "",
+  assetPrefix: isGhPages ? "/siniy_dvij/" : undefined,
   images: {
+    unoptimized: true,
     remotePatterns: [
       {
         protocol: "https",

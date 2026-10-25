@@ -10,9 +10,6 @@ export function SettingsPanel({
   onTheme,
   spin,
   onSpin,
-  tmdbConfigured,
-  enrichedCount,
-  totalCount,
 }: {
   open: boolean;
   onClose: () => void;
@@ -20,9 +17,6 @@ export function SettingsPanel({
   onTheme: (id: ThemeId) => void;
   spin: SpinMode;
   onSpin: (id: SpinMode) => void;
-  tmdbConfigured: boolean;
-  enrichedCount: number;
-  totalCount: number;
 }) {
   useEffect(() => {
     if (!open) return;
@@ -118,26 +112,6 @@ export function SettingsPanel({
               </button>
             ))}
           </div>
-        </section>
-
-        <section className="mt-6 rounded-2xl border border-line bg-surface-2 p-3 text-xs text-muted">
-          <p className="font-semibold text-fg">Данные о фильмах</p>
-          <p className="mt-1">
-            {tmdbConfigured ? (
-              <>
-                TMDB подключён: {enrichedCount} из {totalCount} карточек обогащены
-                описанием, сюжетом, бюджетом и трейлером.
-              </>
-            ) : (
-              <>
-                Ключ TMDB не задан, поэтому показываем только то, что есть в списке, а
-                пустые поля честно прячем за заглушкой. Добавьте{" "}
-                <code className="rounded bg-bg-soft px-1">TMDB_API_KEY</code> в{" "}
-                <code className="rounded bg-bg-soft px-1">.env.local</code> — и карточки
-                наполнятся.
-              </>
-            )}
-          </p>
         </section>
       </aside>
     </div>
