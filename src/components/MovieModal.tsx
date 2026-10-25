@@ -212,26 +212,17 @@ export function MovieModal({
           </div>
         </div>
 
-        {/* Нижняя панель действий со ссылкой «Поделиться» */}
-        <div className="flex shrink-0 items-center justify-between gap-3 border-t border-line/70 bg-surface-2/80 px-5 py-3.5 backdrop-blur-md sm:px-6">
+        {/* Нижняя панель со ссылкой «Поделиться» */}
+        <div className="flex shrink-0 items-center justify-center border-t border-line/60 bg-surface-2/40 px-5 py-3 sm:px-6">
           <button
             type="button"
             onClick={handleShare}
-            className={`btn h-11 px-5 text-sm font-semibold transition-all ${
-              copied
-                ? "border-accent bg-accent text-accent-fg shadow-[0_0_20px_rgba(var(--glow)/0.4)]"
-                : "btn-primary"
+            className={`btn btn-ghost h-9 px-4 text-xs font-medium transition-colors ${
+              copied ? "text-accent font-semibold" : "text-muted hover:text-fg"
             }`}
           >
             <span aria-hidden>{copied ? "✓" : "🔗"}</span>
-            <span>{copied ? "Ссылка скопирована!" : "Поделиться фильмом"}</span>
-          </button>
-          <button
-            type="button"
-            onClick={onClose}
-            className="btn btn-ghost h-11 px-4 text-sm text-muted hover:text-fg"
-          >
-            Закрыть
+            <span>{copied ? "Ссылка скопирована" : "Поделиться фильмом"}</span>
           </button>
         </div>
       </div>
