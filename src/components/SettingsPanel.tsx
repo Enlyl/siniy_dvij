@@ -12,6 +12,8 @@ export function SettingsPanel({
   onSpin,
   sound,
   onSound,
+  noRepeat,
+  onNoRepeat,
 }: {
   open: boolean;
   onClose: () => void;
@@ -21,6 +23,8 @@ export function SettingsPanel({
   onSpin: (id: SpinMode) => void;
   sound: boolean;
   onSound: (enabled: boolean) => void;
+  noRepeat: boolean;
+  onNoRepeat: (enabled: boolean) => void;
 }) {
   useEffect(() => {
     if (!open) return;
@@ -115,6 +119,43 @@ export function SettingsPanel({
                 ) : null}
               </button>
             ))}
+          </div>
+        </section>
+
+        <section className="mt-6">
+          <h3 className="font-display text-xs tracking-[0.16em] text-muted uppercase">
+            Выбор фильмов
+          </h3>
+          <div className="mt-3">
+            <button
+              type="button"
+              onClick={() => onNoRepeat(!noRepeat)}
+              aria-pressed={noRepeat}
+              className="flex w-full items-center justify-between rounded-2xl border border-line bg-surface-2 p-3 text-left transition-colors hover:border-accent/60"
+            >
+              <div className="flex items-center gap-3">
+                <span className="text-xl">🔄</span>
+                <div>
+                  <span className="block text-sm font-semibold">
+                    {noRepeat ? "Без повторов: включено" : "Без повторов: выключено"}
+                  </span>
+                  <span className="block text-xs text-muted">
+                    Не крутить фильмы, которые уже выпадали
+                  </span>
+                </div>
+              </div>
+              <div
+                className={`relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out ${
+                  noRepeat ? "bg-accent" : "bg-line"
+                }`}
+              >
+                <span
+                  className={`pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out ${
+                    noRepeat ? "translate-x-5" : "translate-x-0"
+                  }`}
+                />
+              </div>
+            </button>
           </div>
         </section>
 

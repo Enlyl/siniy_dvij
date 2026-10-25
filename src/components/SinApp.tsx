@@ -56,6 +56,12 @@ export function SinApp() {
     (v): v is boolean => typeof v === "boolean",
   );
   const soundEnabled = sound.value ?? true;
+  const noRepeat = useStoredJson<boolean>(
+    STORAGE_KEYS.noRepeat,
+    false,
+    (v): v is boolean => typeof v === "boolean",
+  );
+  const noRepeatEnabled = noRepeat.value ?? false;
 
   const [settingsOpen, setSettingsOpen] = useState(false);
   const [historyOpen, setHistoryOpen] = useState(false);
@@ -125,7 +131,13 @@ export function SinApp() {
   /* Данные уже prebaked в movies.ts — дополнительный fetch не нужен */
   const movies = useMemo<Movie[]>(() => MOVIES, []);
 
-  const pool = useMemo(
+  const historyList = history.value ?? [];
+  const droppedIds = useMemo(
+    () => new Set(historyList.map((item) => item.id)),
+    [historyList],
+  );
+
+  const rawPool = useMemo(
     () =>
       movies.filter((movie) => {
         if (filters.genres.length > 0) {
@@ -137,16 +149,22 @@ export function SinApp() {
     [movies, filters],
   );
 
+  const pool = useMemo(() => {
+    if (!noRepeatEnabled) return rawPool;
+    const available = rawPool.filter((movie) => !droppedIds.has(movie.id));
+    return available;
+  }, [rawPool, noRepeatEnabled, droppedIds]);
+
   const displayedCatalog = useMemo(() => {
     const q = searchQuery.trim().toLowerCase();
-    if (!q) return pool;
-    return pool.filter((movie) => {
+    if (!q) return rawPool;
+    return rawPool.filter((movie) => {
       const matchTitle = movie.title.toLowerCase().includes(q);
       const matchOriginal = movie.originalTitle?.toLowerCase().includes(q);
       const matchDirector = movie.director?.toLowerCase().includes(q);
       return matchTitle || matchOriginal || matchDirector;
     });
-  }, [pool, searchQuery]);
+  }, [rawPool, searchQuery]);
 
   const lastMovie = useMemo(
     () => (lastDropped.value ? movies.find((m) => m.id === lastDropped.value?.id) ?? null : null),
@@ -189,7 +207,6 @@ export function SinApp() {
   };
 
   // Предыдущий выпавший фильм: history[1] (history[0] - текущий)
-  const historyList = history.value ?? [];
   const previousEntry = historyList.length >= 2 ? historyList[1] : null;
   const previousMovie = previousEntry ? movies.find((m) => m.id === previousEntry.id) : null;
   const currentOrLastMovie = historyList.length > 0 ? movies.find((m) => m.id === historyList[0].id) : null;
@@ -246,6 +263,31 @@ export function SinApp() {
                 onSettled={handleSettled}
                 onSelectMovie={changeOpenMovie}
               />
+            ) : noRepeatEnabled && rawPool.length > 0 ? (
+              <div className="rounded-2xl border border-dashed border-accent/40 bg-accent/5 px-4 py-8 text-center text-sm">
+                <p className="font-semibold text-fg">
+                  🎉 Все фильмы этой категории ({rawPool.length}) уже выпадали!
+                </p>
+                <p className="mt-1 text-xs text-muted">
+                  Сбрось историю просмотров или выключи режим «Без повторов».
+                </p>
+                <div className="mt-4 flex flex-wrap items-center justify-center gap-2">
+                  <button
+                    type="button"
+                    onClick={() => history.setValue([])}
+                    className="btn btn-primary h-9 px-4 text-xs font-semibold"
+                  >
+                    Сбросить историю
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => noRepeat.setValue(false)}
+                    className="btn btn-ghost h-9 px-4 text-xs"
+                  >
+                    Выключить «Без повторов»
+                  </button>
+                </div>
+              </div>
             ) : (
               <div className="rounded-2xl border border-dashed border-line px-4 py-10 text-center text-sm text-muted">
                 Под такие фильтры ничего не подходит. Сбрось фильтры — и снова в бой.
@@ -261,6 +303,29 @@ export function SinApp() {
               className="btn btn-primary h-14 w-full max-w-xs text-base disabled:cursor-not-allowed disabled:opacity-60"
             >
               {spinning ? "Крутится…" : "Крутить"}
+            </button>
+
+            {/* Быстрый тумблер «Без повторов» */}
+            <button
+              type="button"
+              onClick={() => noRepeat.setValue(!noRepeatEnabled)}
+              aria-pressed={noRepeatEnabled}
+              title={
+                noRepeatEnabled
+                  ? "Режим «Без повторов» включён: уже выпавшие фильмы исключены из рулетки"
+                  : "Нажми, чтобы не повторять фильмы из истории"
+              }
+              className={`chip text-xs transition-colors ${
+                noRepeatEnabled
+                  ? "border-accent bg-accent/15 text-accent font-semibold"
+                  : "text-muted hover:text-fg"
+              }`}
+            >
+              <span aria-hidden>{noRepeatEnabled ? "🔄" : "🔁"}</span>
+              <span>Без повторов</span>
+              <span className="opacity-80">
+                · {noRepeatEnabled ? `${pool.length} ост.` : "выкл"}
+              </span>
             </button>
             {previousMovie && previousEntry ? (
               <button
@@ -389,6 +454,8 @@ export function SinApp() {
         onSpin={changeSpinMode}
         sound={soundEnabled}
         onSound={sound.setValue}
+        noRepeat={noRepeatEnabled}
+        onNoRepeat={noRepeat.setValue}
       />
 
       <MovieModal movie={openMovie} onClose={() => changeOpenMovie(null)} />

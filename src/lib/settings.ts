@@ -79,6 +79,7 @@ export const STORAGE_KEYS = {
   last: "dm.last",
   history: "dm.history",
   sound: "dm.sound",
+  noRepeat: "dm.noRepeat",
 } as const;
 
 export function isThemeId(value: unknown): value is ThemeId {
