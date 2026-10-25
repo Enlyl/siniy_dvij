@@ -618,8 +618,8 @@ function CasinoWheel({
         <div className="-mt-1 h-0 w-0 border-x-[11px] border-x-transparent border-t-[22px] border-t-amber-400" />
       </div>
 
-      {/* Внешний обод колеса с тематической рамкой */}
-      <div className="theme-track-frame relative flex h-[340px] w-[340px] sm:h-[390px] sm:w-[390px] items-center justify-center rounded-full border-4 border-amber-600/80 p-2 shadow-[0_20px_50px_rgba(0,0,0,0.9)]">
+      {/* Внешний обод колеса рулетки */}
+      <div className="relative flex h-[340px] w-[340px] sm:h-[390px] sm:w-[390px] items-center justify-center rounded-full border-4 border-amber-600/80 p-2 shadow-[0_20px_50px_rgba(0,0,0,0.9)]">
         {/* Вращающийся диск рулетки */}
         <svg
           ref={wheelRef}

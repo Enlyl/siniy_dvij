@@ -1,14 +1,13 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { formatDateTime, formatRating } from "@/lib/format";
+import { formatRating } from "@/lib/format";
 import { MOVIES, type Movie } from "@/lib/movies";
 import {
   DEFAULT_SPIN_MODE,
   DEFAULT_THEME,
   isSpinMode,
   isThemeId,
-  SPIN_MODES,
   STORAGE_KEYS,
   type SpinMode,
 } from "@/lib/settings";
@@ -180,17 +179,7 @@ export function SinApp() {
           style={{ backgroundColor: "rgb(var(--glow) / 0.2)" }}
         />
         <div className="relative">
-          <p className="text-sm text-muted">
-            Не можешь выбрать? Нажми и не спорь с судьбой.
-          </p>
-          <p className="mt-1 text-xs text-muted">
-            Режим:{" "}
-            <span className="text-fg">
-              {SPIN_MODES.find((mode) => mode.id === spinMode.value)?.name}
-            </span>
-          </p>
-
-          <div className="mt-4">
+          <div>
             {pool.length > 0 ? (
               <SpinTrack
                 mode={spinMode.value}
@@ -230,7 +219,6 @@ export function SinApp() {
                     {previousMovie.title}
                   </strong>
                 </span>
-                <span>· {formatDateTime(previousEntry.at)}</span>
                 <span className="rounded-md bg-surface-2 px-1.5 py-0.5 text-[0.6875rem] font-bold text-accent transition-colors group-hover:bg-accent group-hover:text-accent-fg">
                   История ({historyList.length})
                 </span>

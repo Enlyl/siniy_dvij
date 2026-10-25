@@ -313,6 +313,11 @@ body {
   z-index: 5;
 }
 
+.theme-track-frame.rounded-full::before,
+.theme-track-frame.rounded-full::after {
+  display: none !important;
+}
+
 /* --- ТЕМА: НЕОН (Киберпанк, визор, сетка 80-х, неоновые трубки) --- */
 [data-theme="neon"] body {
   background-image:
