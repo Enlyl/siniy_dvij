@@ -17747,3 +17747,4 @@ https://react.dev/link/hydration-mismatch
  POST /api/movies 200 in 11ms (next.js: 1.6ms, application-code: 9ms)
 [browser] Image with src "https://image.tmdb.org/t/p/w500/qvbfoyW2zaI15c0quUfF6CRGH4H.jpg" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
 Read more: https://nextjs.org/docs/app/api-reference/components/image#loading
+  Turbopack has seen frequent file updates and is waiting for the filesystem to settle (0.5s elapsed so far; last modified: "\\\\?\\D:\\vibe_app\\drunk_movies_list\\node_modules\\next\\dist\\esm\\api").
