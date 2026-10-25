@@ -1,0 +1,398 @@
+@import "tailwindcss";
+
+/* ------------------------------------------------------------------ */
+/* Темы: каждая тема — это набор CSS-переменных на <html data-theme>.  */
+/* ------------------------------------------------------------------ */
+
+:root,
+[data-theme="bar"] {
+  --bg: #09120c;
+  --bg-soft: #0e1a12;
+  --surface: #14241b;
+  --surface-2: #1b3024;
+  --line: #294735;
+  --fg: #eef7f1;
+  --muted: #85a892;
+  --accent: #10b981;
+  --accent-fg: #022013;
+  --accent-2: #34d399;
+  --glow: 16 185 129;
+}
+
+[data-theme="neon"] {
+  --bg: #0a0713;
+  --bg-soft: #0f0a1c;
+  --surface: #150d26;
+  --surface-2: #1e1333;
+  --line: #33214f;
+  --fg: #efeaff;
+  --muted: #9c90c4;
+  --accent: #b14bff;
+  --accent-fg: #14031f;
+  --accent-2: #22d3ee;
+  --glow: 177 75 255;
+}
+
+[data-theme="cinema"] {
+  --bg: #0d0708;
+  --bg-soft: #130a0b;
+  --surface: #1c0f11;
+  --surface-2: #271518;
+  --line: #3a2120;
+  --fg: #fdeee6;
+  --muted: #bd9686;
+  --accent: #e0b04a;
+  --accent-fg: #251a03;
+  --accent-2: #c1272d;
+  --glow: 224 176 74;
+}
+
+[data-theme="noir"] {
+  --bg: #0b0e12;
+  --bg-soft: #0f1318;
+  --surface: #151b22;
+  --surface-2: #1d2530;
+  --line: #2a3441;
+  --fg: #e9eff6;
+  --muted: #94a3b3;
+  --accent: #8ab4f8;
+  --accent-fg: #061120;
+  --accent-2: #d5dde8;
+  --glow: 138 180 248;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-bg-soft: var(--bg-soft);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-line: var(--line);
+  --color-fg: var(--fg);
+  --color-muted: var(--muted);
+  --color-accent: var(--accent);
+  --color-accent-fg: var(--accent-fg);
+  --color-accent-2: var(--accent-2);
+
+  --font-display: var(--font-display-src), "Segoe UI", system-ui, sans-serif;
+  --font-body: var(--font-body-src), "Segoe UI", system-ui, sans-serif;
+}
+
+html {
+  color-scheme: dark;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body);
+  background-image:
+    radial-gradient(
+      1100px 620px at 12% -8%,
+      rgb(var(--glow) / 0.18),
+      transparent 62%
+    ),
+    radial-gradient(
+      900px 520px at 92% 4%,
+      rgb(var(--glow) / 0.09),
+      transparent 60%
+    );
+  background-attachment: fixed;
+}
+
+::selection {
+  background: rgb(var(--glow) / 0.32);
+}
+
+*:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+/* Скроллбар под тему */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--line) transparent;
+}
+
+@layer components {
+  .panel {
+    background-color: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 1rem;
+  }
+
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    border: 1px solid var(--line);
+    background-color: var(--surface-2);
+    color: var(--muted);
+    border-radius: 999px;
+    padding: 0.375rem 0.75rem;
+    font-size: 0.8125rem;
+    line-height: 1.1;
+    white-space: nowrap;
+    transition:
+      background-color 140ms ease,
+      color 140ms ease,
+      border-color 140ms ease,
+      transform 140ms ease;
+  }
+
+  .chip:hover {
+    color: var(--fg);
+    border-color: rgb(var(--glow) / 0.55);
+  }
+
+  .chip[data-active="true"] {
+    background-color: var(--accent);
+    border-color: var(--accent);
+    color: var(--accent-fg);
+    font-weight: 600;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border-radius: 999px;
+    font-weight: 600;
+    transition:
+      transform 140ms ease,
+      filter 140ms ease,
+      background-color 140ms ease;
+  }
+
+  .btn:active {
+    transform: scale(0.975);
+  }
+
+  .btn-primary {
+    background-color: var(--accent);
+    color: var(--accent-fg);
+    box-shadow: 0 10px 30px -12px rgb(var(--glow) / 0.75);
+  }
+
+  .btn-primary:hover {
+    filter: brightness(1.08);
+  }
+
+  .btn-ghost {
+    background-color: var(--surface-2);
+    color: var(--fg);
+    border: 1px solid var(--line);
+  }
+
+  .btn-ghost:hover {
+    border-color: rgb(var(--glow) / 0.6);
+  }
+
+  /* Заглушка для полей, которых нет: «я сам нихуя не понимаю, брат» */
+  .unknown {
+    color: var(--muted);
+    font-style: italic;
+    opacity: 0.85;
+  }
+}
+
+/* Затемнения по краям, чтобы лента «уезжала в темноту» */
+.fade-left {
+  background-image: linear-gradient(to right, var(--bg), transparent);
+}
+.fade-right {
+  background-image: linear-gradient(to left, var(--bg), transparent);
+}
+.fade-top {
+  background-image: linear-gradient(to bottom, var(--bg), transparent);
+}
+.fade-bottom {
+  background-image: linear-gradient(to top, var(--bg), transparent);
+}
+
+/* Подсветка выпавшего фильма — вместо полоски-указателя */
+.win-glow {
+  box-shadow:
+    0 0 0 2.5px rgb(var(--glow) / 0.95),
+    0 0 36px 8px rgb(var(--glow) / 0.65),
+    0 12px 28px -12px rgb(0 0 0 / 0.95);
+  z-index: 30 !important;
+}
+
+.glow-ring {
+  box-shadow:
+    0 0 0 1px rgb(var(--glow) / 0.35),
+    0 18px 50px -24px rgb(var(--glow) / 0.85);
+}
+
+.strip-item-shadow {
+  box-shadow: 0 10px 24px -14px rgb(0 0 0 / 0.9);
+}
+
+/* Барабаны/ленты рулетки */
+.reel-track {
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reel-track {
+    transition-duration: 600ms !important;
+  }
+}
+
+@keyframes dm-pulse {
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.pulse-soft {
+  animation: dm-pulse 1.6s ease-in-out infinite;
+}
+
+@keyframes dm-rise {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.rise {
+  animation: dm-rise 260ms ease-out both;
+}
+
+@keyframes dm-pop {
+  from {
+    opacity: 0;
+    transform: scale(0.94);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.pop {
+  animation: dm-pop 220ms cubic-bezier(0.2, 0.9, 0.3, 1) both;
+}
+
+/* ================================================================== */
+/* КАРДИНАЛЬНЫЕ ВИЗУАЛЬНЫЕ ОТЛИЧИЯ И ДЕКОРАЦИИ ТЕМ                   */
+/* ================================================================== */
+
+/* --- ТЕМА: БАР (Ирландский паб, темный дуб, латунь, изумрудный хмель) --- */
+[data-theme="bar"] .theme-track-frame {
+  border: 2px solid #294735;
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(16, 185, 129, 0.15) 0%, transparent 70%),
+    linear-gradient(180deg, #13241a 0%, #0c150f 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(52, 211, 153, 0.3),
+    inset 0 0 25px rgba(0, 0, 0, 0.8),
+    0 12px 36px -10px rgba(0, 0, 0, 0.9),
+    0 0 30px -8px rgba(16, 185, 129, 0.3);
+}
+[data-theme="bar"] .theme-track-frame::before {
+  content: "";
+  position: absolute;
+  inset: 5px;
+  border: 1px dashed rgba(52, 211, 153, 0.25);
+  border-radius: 0.9rem;
+  pointer-events: none;
+  z-index: 5;
+}
+
+/* --- ТЕМА: НЕОН (Киберпанк, визор, сетка 80-х, неоновые трубки) --- */
+[data-theme="neon"] body {
+  background-image:
+    linear-gradient(rgba(177, 75, 255, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(34, 211, 238, 0.06) 1px, transparent 1px),
+    radial-gradient(800px 500px at 50% 0%, rgba(177, 75, 255, 0.2), transparent 70%);
+  background-size: 32px 32px, 32px 32px, 100% 100%;
+}
+[data-theme="neon"] .theme-track-frame {
+  border: 1.5px solid #b14bff;
+  background: #0d0818;
+  box-shadow:
+    0 0 24px -2px rgba(177, 75, 255, 0.45),
+    inset 0 0 24px rgba(34, 211, 238, 0.18);
+}
+[data-theme="neon"] .theme-track-frame::before {
+  content: "CYBER//ROULETTE 2.0";
+  position: absolute;
+  top: 8px;
+  right: 16px;
+  font-family: monospace;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: #22d3ee;
+  opacity: 0.85;
+  text-shadow: 0 0 8px #22d3ee;
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* --- ТЕМА: КИНОТЕАТР (Винтажная маркиза, золотой молдинг, бархат) --- */
+[data-theme="cinema"] .theme-track-frame {
+  border: 2px solid #e0b04a;
+  background:
+    radial-gradient(circle at 50% 50%, rgba(193, 39, 45, 0.22) 0%, transparent 80%),
+    linear-gradient(180deg, #1c0a0c 0%, #120506 100%);
+  box-shadow:
+    0 0 0 1px #5a1417,
+    0 0 35px rgba(224, 176, 74, 0.28),
+    inset 0 0 30px rgba(0, 0, 0, 0.9);
+}
+[data-theme="cinema"] .theme-track-frame::before {
+  content: "★ ★ ★ CINEMA PALACE ★ ★ ★";
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 8px;
+  letter-spacing: 0.25em;
+  font-weight: 800;
+  color: #e0b04a;
+  text-shadow: 0 0 8px rgba(224, 176, 74, 0.8);
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* --- ТЕМА: НУАР (Секретное дело, жалюзи, стальной контраст) --- */
+[data-theme="noir"] body {
+  background-image:
+    repeating-linear-gradient(180deg, rgba(255, 255, 255, 0.015) 0px, rgba(255, 255, 255, 0.015) 2px, transparent 2px, transparent 16px);
+}
+[data-theme="noir"] .theme-track-frame {
+  border: 1.5px solid #475569;
+  background: linear-gradient(180deg, #131922 0%, #0a0e14 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    0 16px 36px -12px rgba(0, 0, 0, 0.95);
+  border-radius: 0.5rem !important;
+}
+[data-theme="noir"] .theme-track-frame::before {
+  content: "[ CASE FILE #44-B // CLASSIFIED ]";
+  position: absolute;
+  bottom: 8px;
+  left: 16px;
+  font-family: monospace;
+  font-size: 8px;
+  letter-spacing: 0.18em;
+  color: #94a3b8;
+  opacity: 0.75;
+  pointer-events: none;
+  z-index: 10;
+}
