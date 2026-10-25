@@ -16,13 +16,21 @@ const body = Manrope({
   display: "swap",
 });
 
+const basePath = process.env.GITHUB_PAGES === "true" ? "/siniy_dvij" : "";
+const iconUrl = `${basePath}/icon.svg`;
+const faviconUrl = `${basePath}/favicon.svg`;
+
 export const metadata: Metadata = {
   title: "Список фильмов под синьку",
   description:
     "Личный список фильмов и рулетка, которая выбирает, что смотреть сегодня вечером.",
   icons: {
-    icon: "/icon.svg",
-    shortcut: "/icon.svg",
+    icon: [
+      { url: iconUrl, type: "image/svg+xml" },
+      { url: faviconUrl, type: "image/svg+xml" },
+    ],
+    shortcut: iconUrl,
+    apple: iconUrl,
   },
 };
 
@@ -57,6 +65,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       suppressHydrationWarning
     >
       <head>
+        <link rel="icon" type="image/svg+xml" href={iconUrl} />
+        <link rel="shortcut icon" href={iconUrl} />
+        <link rel="apple-touch-icon" href={iconUrl} />
         <script dangerouslySetInnerHTML={{ __html: themeBootstrap }} />
       </head>
       <body className="min-h-full">{children}</body>
