@@ -53,16 +53,66 @@ const easeRoulette = createCubicBezier(0.16, 0.84, 0.24, 1);
 
 /* ---------------------- Хелперы генерации зацикленной ленты ---------------------- */
 
-function sampleMovies(pool: Movie[], count: number, fallback: Movie, seed = 1): Movie[] {
+function sanitizeStripNoAdjacentDuplicates(
+  strip: Movie[],
+  pool: Movie[],
+  winnerIndex?: number,
+): Movie[] {
+  if (strip.length <= 1 || pool.length <= 1) return strip;
+  const result = [...strip];
+
+  for (let i = 1; i < result.length; i += 1) {
+    if (result[i].id === result[i - 1].id) {
+      if (winnerIndex !== undefined && i === winnerIndex) {
+        // Не трогаем победителя: меняем элемент перед ним
+        const prevPrevId = result[i - 2]?.id;
+        const winnerId = result[i].id;
+        const replacement =
+          pool.find((m) => m.id !== winnerId && m.id !== prevPrevId) ||
+          pool.find((m) => m.id !== winnerId) ||
+          result[i - 1];
+        result[i - 1] = replacement;
+      } else {
+        // Меняем текущий элемент на неповторяющийся
+        const prevId = result[i - 1].id;
+        const nextId = result[i + 1]?.id;
+        const replacement =
+          pool.find((m) => m.id !== prevId && m.id !== nextId) ||
+          pool.find((m) => m.id !== prevId) ||
+          result[i];
+        result[i] = replacement;
+      }
+    }
+  }
+  return result;
+}
+
+function sampleMovies(
+  pool: Movie[],
+  count: number,
+  fallback: Movie,
+  seed = 1,
+  avoidId?: string,
+): Movie[] {
   const result: Movie[] = [];
   const src = pool.length > 0 ? pool : [fallback];
   let s = seed >>> 0;
-  while (result.length < count) {
+  let lastId = avoidId;
+
+  for (let step = 0; step < count; step += 1) {
     s = (Math.imul(1664525, s) + 1013904223) >>> 0;
-    const idx = s % src.length;
-    result.push(src[idx] ?? fallback);
+    let idx = s % src.length;
+    let candidate = src[idx] ?? fallback;
+
+    if (src.length > 1 && candidate.id === lastId) {
+      idx = (idx + 1) % src.length;
+      candidate = src[idx] ?? fallback;
+    }
+
+    result.push(candidate);
+    lastId = candidate.id;
   }
-  return result.slice(0, count);
+  return result;
 }
 
 function buildInitialWindow(pool: Movie[], centerMovie: Movie): Movie[] {
@@ -80,7 +130,8 @@ function buildInitialWindow(pool: Movie[], centerMovie: Movie): Movie[] {
     after.push(src[idx] ?? centerMovie);
   }
 
-  return [...before, centerMovie, ...after];
+  const raw = [...before, centerMovie, ...after];
+  return sanitizeStripNoAdjacentDuplicates(raw, src, HEAD_INDEX);
 }
 
 /* ------------------------------ Измерение бокса ------------------------------ */
@@ -347,11 +398,13 @@ function Lane({
     // Строим новую ленту: начало совпадает с текущим видимым окном
     const head = prevWindowRef.current.slice(0, HEAD_INDEX + 1);
     const middleCount = Math.max(8, spinSteps - 1);
-    const middle = sampleMovies(pool, middleCount, winner, nonce * 7919 + 31);
+    const lastHeadId = head[head.length - 1]?.id;
+    const middle = sampleMovies(pool, middleCount, winner, nonce * 7919 + 31, lastHeadId);
     const stopIndex = head.length - 1 + middle.length + 1;
-    const tail = sampleMovies(pool, 8, winner, nonce * 104729 + 17);
+    const tail = sampleMovies(pool, 8, winner, nonce * 104729 + 17, winner.id);
 
-    const newStrip = [...head, ...middle, winner, ...tail];
+    const rawStrip = [...head, ...middle, winner, ...tail];
+    const newStrip = sanitizeStripNoAdjacentDuplicates(rawStrip, pool, stopIndex);
     currentStopIndexRef.current = stopIndex;
     setItems(newStrip);
 
@@ -527,8 +580,8 @@ function CasinoWheel({
   const SECTOR_ANGLE = 360 / SECTOR_COUNT; // 30 градусов
 
   const slices = useMemo(() => {
-    const list = sampleMovies(pool, SECTOR_COUNT - 1, winner, 777);
-    return [winner, ...list];
+    const list = sampleMovies(pool, SECTOR_COUNT - 1, winner, 777, winner.id);
+    return sanitizeStripNoAdjacentDuplicates([winner, ...list], pool);
   }, [pool, winner]);
 
   const radius = 175;
