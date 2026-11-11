@@ -4,6 +4,7 @@ export type Movie = {
   originalTitle?: string;
   year: number;
   director?: string;
+  actors?: string[];
   genres: string[];
   overview?: string;
   plot?: string;
@@ -51,7 +52,14 @@ const RAW: Movie[] = [
     "runtime": 154,
     "rating": 8.5,
     "posterPath": "/qvbfoyW2zaI15c0quUfF6CRGH4H.jpg",
-    "trailerKey": "tGpTpVyI_OQ"
+    "trailerKey": "tGpTpVyI_OQ",
+    "actors": [
+      "Джон Траволта",
+      "Сэмюэл Л. Джексон",
+      "Ума Турман",
+      "Брюс Уиллис",
+      "Винг Реймз"
+    ]
   },
   {
     "id": "the-big-lebowski",
@@ -67,7 +75,14 @@ const RAW: Movie[] = [
     "runtime": 117,
     "rating": 7.9,
     "posterPath": "/r18wYWEiQxrspk5ogEX4S8HUIvB.jpg",
-    "trailerKey": "GiwMMziJdqg"
+    "trailerKey": "GiwMMziJdqg",
+    "actors": [
+      "Джефф Бриджес",
+      "Джон Гудман",
+      "Джулианна Мур",
+      "Стив Бушеми",
+      "Дэвид Хаддлстон"
+    ]
   },
   {
     "id": "lock-stock",
@@ -84,7 +99,14 @@ const RAW: Movie[] = [
     "runtime": 107,
     "rating": 8.1,
     "posterPath": "/tVpCSFRSRddK5Ma9D4Kgdsjt0cD.jpg",
-    "trailerKey": "HY7mRdQuUSw"
+    "trailerKey": "HY7mRdQuUSw",
+    "actors": [
+      "Винни Джонс",
+      "Джейсон Флеминг",
+      "Декстер Флетчер",
+      "Nick Moran",
+      "Джейсон Стейтем"
+    ]
   },
   {
     "id": "snatch",
@@ -101,7 +123,14 @@ const RAW: Movie[] = [
     "runtime": 104,
     "rating": 7.8,
     "posterPath": "/zuVpG27FbWqEZQxrtDcw4f3Sl1I.jpg",
-    "trailerKey": "ni4tEtuTccc"
+    "trailerKey": "ni4tEtuTccc",
+    "actors": [
+      "Джейсон Стейтем",
+      "Алан Форд",
+      "Стивен Грэм",
+      "Брэд Питт",
+      "Деннис Фарина"
+    ]
   },
   {
     "id": "the-gentlemen",
@@ -117,7 +146,14 @@ const RAW: Movie[] = [
     "runtime": 113,
     "rating": 7.7,
     "posterPath": "/vWxVVECgYDPSg5o0Rhw5u7KFa7X.jpg",
-    "trailerKey": "KlXsguV9g0E"
+    "trailerKey": "KlXsguV9g0E",
+    "actors": [
+      "Мэттью Макконахи",
+      "Чарли Ханнэм",
+      "Мишель Докери",
+      "Джереми Стронг",
+      "Лин Рене"
+    ]
   },
   {
     "id": "reservoir-dogs",
@@ -133,7 +169,14 @@ const RAW: Movie[] = [
     "runtime": 99,
     "rating": 8.1,
     "posterPath": "/cMOM0wJ0V30lns5rXb0iclOcyZV.jpg",
-    "trailerKey": "zrkgS8GYjoY"
+    "trailerKey": "zrkgS8GYjoY",
+    "actors": [
+      "Харви Кейтель",
+      "Тим Рот",
+      "Майкл Медсен",
+      "Крис Пенн",
+      "Стив Бушеми"
+    ]
   },
   {
     "id": "die-hard",
@@ -149,7 +192,14 @@ const RAW: Movie[] = [
     "runtime": 132,
     "rating": 7.8,
     "posterPath": "/bIDUVu4QTAvNLEZqTml5vka8ElV.jpg",
-    "trailerKey": "TotSHi0ViUc"
+    "trailerKey": "TotSHi0ViUc",
+    "actors": [
+      "Брюс Уиллис",
+      "Алан Рикман",
+      "Александр Годунов",
+      "Бонни Беделиа",
+      "Реджинальд Велджонсон"
+    ]
   },
   {
     "id": "die-hard-2",
@@ -165,7 +215,14 @@ const RAW: Movie[] = [
     "runtime": 124,
     "rating": 7,
     "posterPath": "/1ttjEhzFhrFIjcSx0s0fozmCQRW.jpg",
-    "trailerKey": "IoZCfS5290M"
+    "trailerKey": "IoZCfS5290M",
+    "actors": [
+      "Брюс Уиллис",
+      "Бонни Беделиа",
+      "Уильям Сэдлер",
+      "Джон Эймос",
+      "Франко Неро"
+    ]
   },
   {
     "id": "die-hard-with-a-vengeance",
@@ -181,7 +238,14 @@ const RAW: Movie[] = [
     "runtime": 128,
     "rating": 7.3,
     "posterPath": "/2Cd6d7cbK7hWGNJvDR6Tp2jPM2D.jpg",
-    "trailerKey": "aRQetHOPpKA"
+    "trailerKey": "aRQetHOPpKA",
+    "actors": [
+      "Брюс Уиллис",
+      "Джереми Айронс",
+      "Сэмюэл Л. Джексон",
+      "Ларри Бриггман",
+      "Грэм Грин"
+    ]
   },
   {
     "id": "taxi",
@@ -197,7 +261,14 @@ const RAW: Movie[] = [
     "runtime": 86,
     "rating": 6.7,
     "posterPath": "/3I83PHvy6iPqtzuItLaI2DdLeHQ.jpg",
-    "trailerKey": "qYBNjVnbtFg"
+    "trailerKey": "qYBNjVnbtFg",
+    "actors": [
+      "Сами Насери",
+      "Фредерик Дифенталь",
+      "Марион Котийяр",
+      "Manuela Gourary",
+      "Эмма Сьоберг"
+    ]
   },
   {
     "id": "the-fifth-element",
@@ -214,7 +285,14 @@ const RAW: Movie[] = [
     "runtime": 126,
     "rating": 7.6,
     "posterPath": "/bqALmWhVaqfQedyPZn7MeuOjfSk.jpg",
-    "trailerKey": "9Crzl9uoNuo"
+    "trailerKey": "9Crzl9uoNuo",
+    "actors": [
+      "Брюс Уиллис",
+      "Милла Йовович",
+      "Гэри Олдман",
+      "Иэн Холм",
+      "Крис Такер"
+    ]
   },
   {
     "id": "the-wolf-of-wall-street",
@@ -231,7 +309,14 @@ const RAW: Movie[] = [
     "runtime": 180,
     "rating": 8,
     "posterPath": "/ihlWMaVZVXFzxU5wwZnbHJZ7Zpx.jpg",
-    "trailerKey": "ryp0oKu31nE"
+    "trailerKey": "ryp0oKu31nE",
+    "actors": [
+      "Леонардо ДиКаприо",
+      "Джона Хилл",
+      "Марго Робби",
+      "Мэттью Макконахи",
+      "Кайл Чендлер"
+    ]
   },
   {
     "id": "the-departed",
@@ -248,7 +333,14 @@ const RAW: Movie[] = [
     "runtime": 151,
     "rating": 8.2,
     "posterPath": "/jT6JJV6t902SN9dJlSRdiPi6hSv.jpg",
-    "trailerKey": "r-MiSNsCdQ4"
+    "trailerKey": "r-MiSNsCdQ4",
+    "actors": [
+      "Леонардо ДиКаприо",
+      "Мэтт Деймон",
+      "Джек Николсон",
+      "Марк Уолберг",
+      "Мартин Шин"
+    ]
   },
   {
     "id": "once-upon-a-time-in-hollywood",
@@ -264,7 +356,14 @@ const RAW: Movie[] = [
     "runtime": 161,
     "rating": 7.4,
     "posterPath": "/nHg4GLAPjo8rhRkzv6lLfGwuRJq.jpg",
-    "trailerKey": "3vnCrRV0yjQ"
+    "trailerKey": "3vnCrRV0yjQ",
+    "actors": [
+      "Леонардо ДиКаприо",
+      "Брэд Питт",
+      "Марго Робби",
+      "Эмиль Хирш",
+      "Маргарет Куолли"
+    ]
   },
   {
     "id": "inglourious-basterds",
@@ -281,7 +380,14 @@ const RAW: Movie[] = [
     "runtime": 153,
     "rating": 8.2,
     "posterPath": "/cUWnHMRFC1fVQDALtUaGmrJ6MqP.jpg",
-    "trailerKey": "uSEDz-my7XQ"
+    "trailerKey": "uSEDz-my7XQ",
+    "actors": [
+      "Брэд Питт",
+      "Мелани Лорэн",
+      "Кристоф Вальц",
+      "Елай Рот",
+      "Майкл Фассбендер"
+    ]
   },
   {
     "id": "inception",
@@ -298,7 +404,14 @@ const RAW: Movie[] = [
     "runtime": 148,
     "rating": 8.4,
     "posterPath": "/piQXcdOGgv1O9HQ07pI0tnjkGJw.jpg",
-    "trailerKey": "cdx31ak4KbQ"
+    "trailerKey": "cdx31ak4KbQ",
+    "actors": [
+      "Леонардо ДиКаприо",
+      "Джозеф Гордон-Левитт",
+      "Кэн Ватанабэ",
+      "Том Харди",
+      "Эллиот Пейдж"
+    ]
   },
   {
     "id": "fight-club",
@@ -314,7 +427,14 @@ const RAW: Movie[] = [
     "runtime": 139,
     "rating": 8.4,
     "posterPath": "/66RvLrRJTm4J8l3uHXWF09AICol.jpg",
-    "trailerKey": "dfeUzm6KF4g"
+    "trailerKey": "dfeUzm6KF4g",
+    "actors": [
+      "Эдвард Нортон",
+      "Брэд Питт",
+      "Хелена Бонем Картер",
+      "Meat Loaf",
+      "Джаред Лето"
+    ]
   },
   {
     "id": "se7en",
@@ -331,7 +451,14 @@ const RAW: Movie[] = [
     "runtime": 127,
     "rating": 8.4,
     "posterPath": "/1e7WmKXLo6xqibkYBwwGWOcF43E.jpg",
-    "trailerKey": "Z86bQ-Arguc"
+    "trailerKey": "Z86bQ-Arguc",
+    "actors": [
+      "Морган Фримен",
+      "Брэд Питт",
+      "Гвинет Пэлтроу",
+      "Джон Кассини",
+      "Peter Crombie"
+    ]
   },
   {
     "id": "the-matrix",
@@ -347,7 +474,14 @@ const RAW: Movie[] = [
     "runtime": 136,
     "rating": 8.3,
     "posterPath": "/kEDbym5htJgDQNenjUtSJxAHysB.jpg",
-    "trailerKey": "FVI84Dfx2-I"
+    "trailerKey": "FVI84Dfx2-I",
+    "actors": [
+      "Киану Ривз",
+      "Лоренс Фишбёрн",
+      "Кэрри-Энн Мосс",
+      "Хьюго Уивинг",
+      "Глория Фостер"
+    ]
   },
   {
     "id": "terminator-2",
@@ -363,7 +497,14 @@ const RAW: Movie[] = [
     "runtime": 137,
     "rating": 8.2,
     "posterPath": "/67MopMcqqke4sJmcOwY5zu3kmYz.jpg",
-    "trailerKey": "6pGbqdqnKXY"
+    "trailerKey": "6pGbqdqnKXY",
+    "actors": [
+      "Арнольд Шварценеггер",
+      "Линда Хэмилтон",
+      "Эдвард Ферлонг",
+      "Роберт Патрик",
+      "Эрл Боэн"
+    ]
   },
   {
     "id": "alien",
@@ -379,7 +520,14 @@ const RAW: Movie[] = [
     "runtime": 117,
     "rating": 8.2,
     "posterPath": "/zg4fcO8IuYRllK9wWVNqNlYpueL.jpg",
-    "trailerKey": "m9_4qmDys4A"
+    "trailerKey": "m9_4qmDys4A",
+    "actors": [
+      "Том Скеррит",
+      "Сигурни Уивер",
+      "Вероника Картрайт",
+      "Гарри Дин Стэнтон",
+      "Джон Хёрт"
+    ]
   },
   {
     "id": "blade-runner",
@@ -395,7 +543,14 @@ const RAW: Movie[] = [
     "runtime": 117,
     "rating": 7.9,
     "posterPath": "/bX3uwQhyiSr6J5C30aGgdDMuSWt.jpg",
-    "trailerKey": "qoEyZoOTtss"
+    "trailerKey": "qoEyZoOTtss",
+    "actors": [
+      "Харрисон Форд",
+      "Рутгер Хауэр",
+      "Шон Янг",
+      "Эдвард Джеймс Олмос",
+      "М. Эммет Уолш"
+    ]
   },
   {
     "id": "the-martian",
@@ -411,7 +566,14 @@ const RAW: Movie[] = [
     "runtime": 144,
     "rating": 7.7,
     "posterPath": "/6U19srkH4wI6taluviXbVaIpsau.jpg",
-    "trailerKey": "RsJdfMjZlgE"
+    "trailerKey": "RsJdfMjZlgE",
+    "actors": [
+      "Мэтт Деймон",
+      "Джессика Честейн",
+      "Кристен Уиг",
+      "Джефф Дэниелс",
+      "Майкл Пенья"
+    ]
   },
   {
     "id": "grand-budapest",
@@ -428,7 +590,14 @@ const RAW: Movie[] = [
     "runtime": 99,
     "rating": 8,
     "posterPath": "/5qFxj03eBrkI0bUiGIonb4e0AI4.jpg",
-    "trailerKey": "ZcmsxDhjDxs"
+    "trailerKey": "ZcmsxDhjDxs",
+    "actors": [
+      "Рэйф Файнс",
+      "Ф. Мюррей Абрахам",
+      "Тони Револори",
+      "Эдриен Броуди",
+      "Уиллем Дефо"
+    ]
   },
   {
     "id": "the-hateful-eight",
@@ -445,7 +614,14 @@ const RAW: Movie[] = [
     "runtime": 187,
     "rating": 7.8,
     "posterPath": "/7qFSC1xhsHe9wxyTBxQmts7s3n4.jpg",
-    "trailerKey": "GRG7fAPksbg"
+    "trailerKey": "GRG7fAPksbg",
+    "actors": [
+      "Сэмюэл Л. Джексон",
+      "Курт Рассел",
+      "Дженнифер Джейсон Ли",
+      "Уолтон Гоггинс",
+      "Демиан Бичир"
+    ]
   },
   {
     "id": "goodfellas",
@@ -462,7 +638,14 @@ const RAW: Movie[] = [
     "runtime": 145,
     "rating": 8.5,
     "posterPath": "/ft6opiB2onxZe8PhSTba53wYpFb.jpg",
-    "trailerKey": "PTBRNXGQR9Q"
+    "trailerKey": "PTBRNXGQR9Q",
+    "actors": [
+      "Роберт Де Ниро",
+      "Рэй Лиотта",
+      "Джо Пеши",
+      "Лоррейн Бракко",
+      "Paul Sorvino"
+    ]
   },
   {
     "id": "full-metal-jacket",
@@ -478,7 +661,14 @@ const RAW: Movie[] = [
     "runtime": 116,
     "rating": 8.1,
     "posterPath": "/qaMwQ0j4A0QGkis4tE6ODUbC4Nz.jpg",
-    "trailerKey": "n2i917l5RFc"
+    "trailerKey": "n2i917l5RFc",
+    "actors": [
+      "Мэттью Модайн",
+      "Адам Болдуин",
+      "Винсент Д’Онофрио",
+      "Р. Ли Эрми",
+      "Дориан Хэрвуд"
+    ]
   },
   {
     "id": "catch-me-if-you-can",
@@ -495,7 +685,14 @@ const RAW: Movie[] = [
     "runtime": 141,
     "rating": 8,
     "posterPath": "/9Izej6CiwFkptv6aTbRhersjAiT.jpg",
-    "trailerKey": "71rDQ7z4eFg"
+    "trailerKey": "71rDQ7z4eFg",
+    "actors": [
+      "Леонардо ДиКаприо",
+      "Том Хэнкс",
+      "Кристофер Уокен",
+      "Мартин Шин",
+      "Натали Бей"
+    ]
   },
   {
     "id": "the-mask",
@@ -512,7 +709,14 @@ const RAW: Movie[] = [
     "runtime": 101,
     "rating": 7,
     "posterPath": "/q1lEcpir3jbKFv4nnoze95GBpVx.jpg",
-    "trailerKey": "uPrUiKgQVQk"
+    "trailerKey": "uPrUiKgQVQk",
+    "actors": [
+      "Джим Керри",
+      "Питер Ригерт",
+      "Питер Грин",
+      "Эми Ясбек",
+      "Ричард Джени"
+    ]
   },
   {
     "id": "jaws",
@@ -529,7 +733,14 @@ const RAW: Movie[] = [
     "runtime": 124,
     "rating": 7.7,
     "posterPath": "/3l62OClEcFWPtkOH9t7XLO5Emx1.jpg",
-    "trailerKey": "N9hzLQUGr34"
+    "trailerKey": "N9hzLQUGr34",
+    "actors": [
+      "Рой Шайдер",
+      "Роберт Шоу",
+      "Ричард Дрейфус",
+      "Лоррейн Гэри",
+      "Мюррэй Хэмилтон"
+    ]
   },
   {
     "id": "the-fast-and-the-furious",
@@ -546,7 +757,14 @@ const RAW: Movie[] = [
     "runtime": 106,
     "rating": 7,
     "posterPath": "/cHNzdyLZDZ25qRS6Uq3dXKhJJbv.jpg",
-    "trailerKey": "iIU1xlDbbQk"
+    "trailerKey": "iIU1xlDbbQk",
+    "actors": [
+      "Пол Уокер",
+      "Вин Дизель",
+      "Мишель Родригес",
+      "Джордана Брюстер",
+      "Рик Юн"
+    ]
   },
   {
     "id": "2-fast-2-furious",
@@ -563,7 +781,14 @@ const RAW: Movie[] = [
     "runtime": 107,
     "rating": 6.5,
     "posterPath": "/8Rr94aL7VPnkf9HGqIozpbg2sb2.jpg",
-    "trailerKey": "fDooSsgINLQ"
+    "trailerKey": "fDooSsgINLQ",
+    "actors": [
+      "Пол Уокер",
+      "Тайриз Гибсон",
+      "Ева Мендес",
+      "Коул Хаузер",
+      "Лудакрис"
+    ]
   },
   {
     "id": "fast-and-furious-tokyo-drift",
@@ -579,7 +804,14 @@ const RAW: Movie[] = [
     "runtime": 104,
     "rating": 6.6,
     "posterPath": "/qkCOHIXI2vSXsuA0psYghM9Og2U.jpg",
-    "trailerKey": "K6RWbKMSDcg"
+    "trailerKey": "K6RWbKMSDcg",
+    "actors": [
+      "Лукас Блэк",
+      "Натали Келли",
+      "Сон Кан",
+      "Шэд Мосс",
+      "Брайан Ти"
+    ]
   },
   {
     "id": "fast-and-furious-4",
@@ -595,7 +827,14 @@ const RAW: Movie[] = [
     "runtime": 107,
     "rating": 6.7,
     "posterPath": "/A0HOGMFp4mphOCqwt5YNWbuSMJe.jpg",
-    "trailerKey": "ne5E7hOQqn0"
+    "trailerKey": "ne5E7hOQqn0",
+    "actors": [
+      "Вин Дизель",
+      "Пол Уокер",
+      "Мишель Родригес",
+      "Джордана Брюстер",
+      "Джон Ортис"
+    ]
   },
   {
     "id": "fast-five",
@@ -612,7 +851,14 @@ const RAW: Movie[] = [
     "runtime": 130,
     "rating": 7.2,
     "posterPath": "/A9Ud0VPQKLPKvHXnfWGvs26jBsr.jpg",
-    "trailerKey": "P1UVXvKnCLM"
+    "trailerKey": "P1UVXvKnCLM",
+    "actors": [
+      "Вин Дизель",
+      "Пол Уокер",
+      "Джордана Брюстер",
+      "Тайриз Гибсон",
+      "Лудакрис"
+    ]
   },
   {
     "id": "fast-and-furious-6",
@@ -628,7 +874,14 @@ const RAW: Movie[] = [
     "runtime": 130,
     "rating": 6.8,
     "posterPath": "/qsWinjrA5wZbFtcU87EIgpCo0Xm.jpg",
-    "trailerKey": "-1ysq_lKovg"
+    "trailerKey": "-1ysq_lKovg",
+    "actors": [
+      "Вин Дизель",
+      "Пол Уокер",
+      "Дуэйн 'Скала' Джонсон",
+      "Джордана Брюстер",
+      "Мишель Родригес"
+    ]
   },
   {
     "id": "furious-7",
@@ -645,7 +898,14 @@ const RAW: Movie[] = [
     "runtime": 137,
     "rating": 7.2,
     "posterPath": "/i5A0OCxcinzkcxvesvefFu9vX3K.jpg",
-    "trailerKey": "B3Ms2yFvus0"
+    "trailerKey": "B3Ms2yFvus0",
+    "actors": [
+      "Вин Дизель",
+      "Пол Уокер",
+      "Дуэйн 'Скала' Джонсон",
+      "Мишель Родригес",
+      "Тайриз Гибсон"
+    ]
   },
   {
     "id": "the-fate-of-the-furious",
@@ -662,7 +922,14 @@ const RAW: Movie[] = [
     "runtime": 136,
     "rating": 6.8,
     "posterPath": "/mMG9uMqEosiIMjliiPHsyycPcIA.jpg",
-    "trailerKey": "iVdIiOKBPkg"
+    "trailerKey": "iVdIiOKBPkg",
+    "actors": [
+      "Вин Дизель",
+      "Джейсон Стейтем",
+      "Дуэйн 'Скала' Джонсон",
+      "Мишель Родригес",
+      "Тайриз Гибсон"
+    ]
   },
   {
     "id": "f9",
@@ -678,7 +945,14 @@ const RAW: Movie[] = [
     "runtime": 143,
     "rating": 7,
     "posterPath": "/3Abag0sIPHTLFIP2asXcC7E0QxP.jpg",
-    "trailerKey": "TfJkFsCn8Zw"
+    "trailerKey": "TfJkFsCn8Zw",
+    "actors": [
+      "Вин Дизель",
+      "Мишель Родригес",
+      "Тайриз Гибсон",
+      "Лудакрис",
+      "Джон Сина"
+    ]
   },
   {
     "id": "fast-x",
@@ -694,7 +968,14 @@ const RAW: Movie[] = [
     "runtime": 141,
     "rating": 7,
     "posterPath": "/MSc1kcaHXvvyGgoyjDa60jxdqq.jpg",
-    "trailerKey": "_aMNKTiVbg4"
+    "trailerKey": "_aMNKTiVbg4",
+    "actors": [
+      "Вин Дизель",
+      "Мишель Родригес",
+      "Тайриз Гибсон",
+      "Лудакрис",
+      "Джон Сина"
+    ]
   },
   {
     "id": "fast-and-furious-hobbs-and-shaw",
@@ -711,7 +992,14 @@ const RAW: Movie[] = [
     "runtime": 137,
     "rating": 6.8,
     "posterPath": "/uKchEnEOTCvh1iZ7AyOs7p9aoVq.jpg",
-    "trailerKey": "b736ZM_KfEk"
+    "trailerKey": "b736ZM_KfEk",
+    "actors": [
+      "Дуэйн 'Скала' Джонсон",
+      "Джейсон Стейтем",
+      "Идрис Эльба",
+      "Ванесса Кирби",
+      "Хелен Миррен"
+    ]
   },
   {
     "id": "naked-gun",
@@ -727,7 +1015,14 @@ const RAW: Movie[] = [
     "runtime": 85,
     "rating": 7.3,
     "posterPath": "/nJ8R3BrbFd8xnlS7GgYrHtp6GU4.jpg",
-    "trailerKey": "PACTQutbow4"
+    "trailerKey": "PACTQutbow4",
+    "actors": [
+      "Лесли Нильсен",
+      "Присцилла Пресли",
+      "Рикардо Монтальбан",
+      "Джордж Кеннеди",
+      "О. Джей Симпсон"
+    ]
   },
   {
     "id": "naked-gun-2",
@@ -743,7 +1038,14 @@ const RAW: Movie[] = [
     "runtime": 85,
     "rating": 6.8,
     "posterPath": "/cNlIpjxAdkxY1XyLDVOO9oQlpYh.jpg",
-    "trailerKey": "nw-25LgEmpY"
+    "trailerKey": "nw-25LgEmpY",
+    "actors": [
+      "Лесли Нильсен",
+      "Присцилла Пресли",
+      "Джордж Кеннеди",
+      "О. Джей Симпсон",
+      "Робер Гуле"
+    ]
   },
   {
     "id": "naked-gun-33",
@@ -759,7 +1061,14 @@ const RAW: Movie[] = [
     "runtime": 83,
     "rating": 6.5,
     "posterPath": "/nRsOUWC911QlNkiMOaI2PZqAzSl.jpg",
-    "trailerKey": "Cstx7RLWE2o"
+    "trailerKey": "Cstx7RLWE2o",
+    "actors": [
+      "Лесли Нильсен",
+      "Присцилла Пресли",
+      "Джордж Кеннеди",
+      "О. Джей Симпсон",
+      "Фред Уорд"
+    ]
   },
   {
     "id": "scary-movie",
@@ -774,7 +1083,14 @@ const RAW: Movie[] = [
     "runtime": 88,
     "rating": 6.4,
     "posterPath": "/w3kWWWWgE7hxQOP8fyDangxtiga.jpg",
-    "trailerKey": "HTLPULt0eJ4"
+    "trailerKey": "HTLPULt0eJ4",
+    "actors": [
+      "Анна Фэрис",
+      "Реджина Холл",
+      "Марлон Уэйанс",
+      "Шон Уэйанс",
+      "Джон Абрахамс"
+    ]
   },
   {
     "id": "scary-movie-2",
@@ -789,7 +1105,14 @@ const RAW: Movie[] = [
     "runtime": 83,
     "rating": 5.9,
     "posterPath": "/rra2vGpmqa7MpJAiQwxI084noxz.jpg",
-    "trailerKey": "wsHCoKGxjLk"
+    "trailerKey": "wsHCoKGxjLk",
+    "actors": [
+      "Анна Фэрис",
+      "Реджина Холл",
+      "Марлон Уэйанс",
+      "Шон Уэйанс",
+      "Кристофер Мастерсон"
+    ]
   },
   {
     "id": "scary-movie-3",
@@ -804,7 +1127,14 @@ const RAW: Movie[] = [
     "runtime": 84,
     "rating": 6,
     "posterPath": "/viF6jgzIJyKRucdPOkdloK95ntj.jpg",
-    "trailerKey": "O21wD8Tzr2k"
+    "trailerKey": "O21wD8Tzr2k",
+    "actors": [
+      "Анна Фэрис",
+      "Реджина Холл",
+      "Саймон Рекс",
+      "Энтони Андерсон",
+      "Чарли Шин"
+    ]
   },
   {
     "id": "hot-shots",
@@ -820,7 +1150,14 @@ const RAW: Movie[] = [
     "runtime": 84,
     "rating": 6.6,
     "posterPath": "/gfh6Ik1HgWZYx5guJO7PMWiSouy.jpg",
-    "trailerKey": "sWjXE3fljtk"
+    "trailerKey": "sWjXE3fljtk",
+    "actors": [
+      "Чарли Шин",
+      "Кэри Элвис",
+      "Валерия Голино",
+      "Ллойд Бриджес",
+      "Кевин Данн"
+    ]
   },
   {
     "id": "hot-shots-part-deux",
@@ -836,7 +1173,14 @@ const RAW: Movie[] = [
     "runtime": 86,
     "rating": 6.5,
     "posterPath": "/qp7hTSvOf4RYNa2Q8ta8hl8RP95.jpg",
-    "trailerKey": "Rida8js49Uo"
+    "trailerKey": "Rida8js49Uo",
+    "actors": [
+      "Чарли Шин",
+      "Ллойд Бриджес",
+      "Валерия Голино",
+      "Ричард Кренна",
+      "Роуэн Аткинсон"
+    ]
   },
   {
     "id": "tropic-thunder",
@@ -852,7 +1196,14 @@ const RAW: Movie[] = [
     "runtime": 107,
     "rating": 6.7,
     "posterPath": "/d9DzQPBCbX9DxaF9fQNIorMzTqj.jpg",
-    "trailerKey": "ASJvlHExnMA"
+    "trailerKey": "ASJvlHExnMA",
+    "actors": [
+      "Бен Стиллер",
+      "Роберт Дауни мл.",
+      "Джек Блэк",
+      "Джей Барушель",
+      "Брэндон Т. Джексон"
+    ]
   },
   {
     "id": "hot-fuzz",
@@ -869,7 +1220,14 @@ const RAW: Movie[] = [
     "runtime": 121,
     "rating": 7.6,
     "posterPath": "/lzMQlEDjqN0qs46BZS7pqM465ur.jpg",
-    "trailerKey": "L6PKkxn7pq0"
+    "trailerKey": "L6PKkxn7pq0",
+    "actors": [
+      "Саймон Пегг",
+      "Ник Фрост",
+      "Джим Бродбент",
+      "Пэдди Консидайн",
+      "Рейф Сполл"
+    ]
   },
   {
     "id": "from-dusk-till-dawn",
@@ -886,7 +1244,14 @@ const RAW: Movie[] = [
     "runtime": 108,
     "rating": 7.1,
     "posterPath": "/4UUePUiLaoaOc1ND62gh7hakeUo.jpg",
-    "trailerKey": "M0RGile69e0"
+    "trailerKey": "M0RGile69e0",
+    "actors": [
+      "Джордж Клуни",
+      "Квентин Тарантино",
+      "Харви Кейтель",
+      "Джульетт Льюис",
+      "Ernest Liu"
+    ]
   },
   {
     "id": "the-hangover",
@@ -901,7 +1266,14 @@ const RAW: Movie[] = [
     "runtime": 100,
     "rating": 7.3,
     "posterPath": "/eqfuqXcv0MlbnzihcfsTaTGMbd.jpg",
-    "trailerKey": "tlize92ffnY"
+    "trailerKey": "tlize92ffnY",
+    "actors": [
+      "Брэдли Купер",
+      "Эд Хелмс",
+      "Зак Галифианакис",
+      "Джастин Барта",
+      "Хизер Грэм"
+    ]
   },
   {
     "id": "the-hangover-part-2",
@@ -916,7 +1288,14 @@ const RAW: Movie[] = [
     "runtime": 102,
     "rating": 6.5,
     "posterPath": "/zDJYcvMxqIFVXpbs4US4YF5eskU.jpg",
-    "trailerKey": "ohF5ZO_zOYU"
+    "trailerKey": "ohF5ZO_zOYU",
+    "actors": [
+      "Брэдли Купер",
+      "Эд Хелмс",
+      "Зак Галифианакис",
+      "Джастин Барта",
+      "Мейсон Ли"
+    ]
   },
   {
     "id": "the-hangover-part-3",
@@ -931,7 +1310,14 @@ const RAW: Movie[] = [
     "runtime": 100,
     "rating": 6.2,
     "posterPath": "/tKKCvtupZ9QNF9CjnIQ4kLA2Frf.jpg",
-    "trailerKey": "96TelFMZwHc"
+    "trailerKey": "96TelFMZwHc",
+    "actors": [
+      "Брэдли Купер",
+      "Эд Хелмс",
+      "Зак Галифианакис",
+      "Джастин Барта",
+      "Кен Джонг"
+    ]
   },
   {
     "id": "in-bruges",
@@ -948,7 +1334,14 @@ const RAW: Movie[] = [
     "runtime": 107,
     "rating": 7.5,
     "posterPath": "/iLDMVtj7G0Gu0U2cgUFo1AiWuGe.jpg",
-    "trailerKey": "bc4lG_BbIEw"
+    "trailerKey": "bc4lG_BbIEw",
+    "actors": [
+      "Колин Фаррелл",
+      "Брендан Глисон",
+      "Рэйф Файнс",
+      "Клеманс Поэзи",
+      "Текла Рютен"
+    ]
   },
   {
     "id": "valerian",
@@ -965,7 +1358,14 @@ const RAW: Movie[] = [
     "runtime": 137,
     "rating": 6.7,
     "posterPath": "/meFMUVv8HA5wQk2Yu1aTnXfBwcF.jpg",
-    "trailerKey": "BASgoRz72R0"
+    "trailerKey": "BASgoRz72R0",
+    "actors": [
+      "Дэйн Дехаан",
+      "Кара Делевинь",
+      "Клайв Оуэн",
+      "Рианна",
+      "Итан Хоук"
+    ]
   },
   {
     "id": "robocop",
@@ -982,7 +1382,14 @@ const RAW: Movie[] = [
     "runtime": 102,
     "rating": 7.4,
     "posterPath": "/93K1Zf6SpcC7k6SU2Rx5IFWFqQp.jpg",
-    "trailerKey": "NC7Dzlh2EWk"
+    "trailerKey": "NC7Dzlh2EWk",
+    "actors": [
+      "Питер Уэллер",
+      "Нэнси Аллен",
+      "Dan O'Herlihy",
+      "Ronny Cox",
+      "Кертвуд Смит"
+    ]
   },
   {
     "id": "escape-from-new-york",
@@ -998,7 +1405,14 @@ const RAW: Movie[] = [
     "runtime": 99,
     "rating": 7,
     "posterPath": "/pj54AUWwZtpRzhUsttPAKOnzUA5.jpg",
-    "trailerKey": "bqT09APfNKI"
+    "trailerKey": "bqT09APfNKI",
+    "actors": [
+      "Курт Рассел",
+      "Lee Van Cleef",
+      "Эрнест Боргнайн",
+      "Дональд Плезенс",
+      "Isaac Hayes"
+    ]
   },
   {
     "id": "the-thing",
@@ -1015,7 +1429,14 @@ const RAW: Movie[] = [
     "runtime": 109,
     "rating": 8.1,
     "posterPath": "/cxywW6Dl0IJfpywo8o9cqc4EApE.jpg",
-    "trailerKey": "GigeANz21rk"
+    "trailerKey": "GigeANz21rk",
+    "actors": [
+      "Курт Рассел",
+      "Уилфорд Бримли",
+      "Т. К. Картер",
+      "Дэвид Кленнон",
+      "Кит Дэвид"
+    ]
   },
   {
     "id": "avatar",
@@ -1032,7 +1453,14 @@ const RAW: Movie[] = [
     "runtime": 162,
     "rating": 7.6,
     "posterPath": "/lUKcrcO3wEPhNnzGq06JIX7GIEb.jpg",
-    "trailerKey": "LgZ2MDuJvhc"
+    "trailerKey": "LgZ2MDuJvhc",
+    "actors": [
+      "Сэм Уортингтон",
+      "Зои Салдана",
+      "Сигурни Уивер",
+      "Стивен Лэнг",
+      "Мишель Родригес"
+    ]
   },
   {
     "id": "superbad",
@@ -1047,7 +1475,14 @@ const RAW: Movie[] = [
     "runtime": 113,
     "rating": 7.3,
     "posterPath": "/vAXEzegiSceoU9a0FJWFidUsYbr.jpg",
-    "trailerKey": "MuhWxdD0qno"
+    "trailerKey": "MuhWxdD0qno",
+    "actors": [
+      "Джона Хилл",
+      "Майкл Сера",
+      "Кристофер Минц-Плассе",
+      "Билл Хейдер",
+      "Сет Роген"
+    ]
   },
   {
     "id": "american-pie",
@@ -1062,7 +1497,14 @@ const RAW: Movie[] = [
     "runtime": 95,
     "rating": 6.7,
     "posterPath": "/33ILt2uMejyCpQ2svEUT25fF7ac.jpg",
-    "trailerKey": "ACDrQ2p5kAM"
+    "trailerKey": "ACDrQ2p5kAM",
+    "actors": [
+      "Джейсон Биггс",
+      "Крис Клейн",
+      "Томас Иэн Николас",
+      "Элисон Ханниган",
+      "Шеннон Элизабет"
+    ]
   },
   {
     "id": "american-pie-2",
@@ -1077,7 +1519,14 @@ const RAW: Movie[] = [
     "runtime": 108,
     "rating": 6.4,
     "posterPath": "/3FVhJqAuALn0l6xWUVCgUTiqVOG.jpg",
-    "trailerKey": "ntxIBzJ0tU8"
+    "trailerKey": "ntxIBzJ0tU8",
+    "actors": [
+      "Джейсон Биггс",
+      "Томас Иэн Николас",
+      "Крис Клейн",
+      "Шонн Уильям Скотт",
+      "Элисон Ханниган"
+    ]
   },
   {
     "id": "american-wedding",
@@ -1092,7 +1541,14 @@ const RAW: Movie[] = [
     "runtime": 96,
     "rating": 6.2,
     "posterPath": "/uPRafUWqJ5QPQ6XLZIEBw7h9L5Y.jpg",
-    "trailerKey": "4bqeLmhNbfI"
+    "trailerKey": "4bqeLmhNbfI",
+    "actors": [
+      "Джейсон Биггс",
+      "Молли Чик",
+      "Элисон Ханниган",
+      "Дженьюари Джонс",
+      "Томас Иэн Николас"
+    ]
   },
   {
     "id": "american-reunion",
@@ -1107,7 +1563,14 @@ const RAW: Movie[] = [
     "runtime": 113,
     "rating": 6.4,
     "posterPath": "/iz0DokOfackeWchNZBj07gE6qs3.jpg",
-    "trailerKey": "1akixU65dDY"
+    "trailerKey": "1akixU65dDY",
+    "actors": [
+      "Джейсон Биггс",
+      "Элисон Ханниган",
+      "Шонн Уильям Скотт",
+      "Крис Клейн",
+      "Томас Иэн Николас"
+    ]
   },
   {
     "id": "knives-out",
@@ -1124,7 +1587,14 @@ const RAW: Movie[] = [
     "runtime": 130,
     "rating": 7.8,
     "posterPath": "/mGfb75tcFWxuT8esS1isHrNFE90.jpg",
-    "trailerKey": "0eMJE12xS6Y"
+    "trailerKey": "0eMJE12xS6Y",
+    "actors": [
+      "Дэниел Крейг",
+      "Крис Эванс",
+      "Ана де Армас",
+      "Джейми Ли Кёртис",
+      "Майкл Шеннон"
+    ]
   },
   {
     "id": "deadpool-and-wolverine",
@@ -1141,7 +1611,14 @@ const RAW: Movie[] = [
     "runtime": 128,
     "rating": 7.6,
     "posterPath": "/4Li3gy8Ga6q0bAz2odg7ZFoRqLy.jpg",
-    "trailerKey": "dyq7hMlF9iY"
+    "trailerKey": "dyq7hMlF9iY",
+    "actors": [
+      "Райан Рейнольдс",
+      "Хью Джекман",
+      "Эмма Коррин",
+      "Мэттью Макфэдьен",
+      "Дафни Кин"
+    ]
   },
   {
     "id": "shaun-of-the-dead",
@@ -1157,7 +1634,14 @@ const RAW: Movie[] = [
     "runtime": 99,
     "rating": 7.5,
     "posterPath": "/hACq0LdC5WNjPb1jzTZzuj1R4qx.jpg",
-    "trailerKey": "_QuY93B2FS0"
+    "trailerKey": "_QuY93B2FS0",
+    "actors": [
+      "Саймон Пегг",
+      "Ник Фрост",
+      "Кейт Эшфилд",
+      "Люси Дэвис",
+      "Дилан Моран"
+    ]
   },
   {
     "id": "what-we-do-in-the-shadows",
@@ -1173,7 +1657,14 @@ const RAW: Movie[] = [
     "runtime": 86,
     "rating": 7.5,
     "posterPath": "/tmUHOe07a84zgwMeWCpwnAqUwU4.jpg",
-    "trailerKey": "WBly4AfHc3c"
+    "trailerKey": "WBly4AfHc3c",
+    "actors": [
+      "Джемейн Клемент",
+      "Тайка Вайтити",
+      "Джонни Бруг",
+      "Cori Gonzalez-Macuer",
+      "Stu Rutherford"
+    ]
   },
   {
     "id": "men-in-black",
@@ -1190,7 +1681,14 @@ const RAW: Movie[] = [
     "runtime": 98,
     "rating": 7.2,
     "posterPath": "/aWdS4UOb4aeoS9xZsxGHhXTA1jp.jpg",
-    "trailerKey": "yJKQ2K7w9bE"
+    "trailerKey": "yJKQ2K7w9bE",
+    "actors": [
+      "Томми Ли Джонс",
+      "Уилл Смит",
+      "Линда Фиорентино",
+      "Винсент Д’Онофрио",
+      "Рип Торн"
+    ]
   },
   {
     "id": "men-in-black-2",
@@ -1207,7 +1705,14 @@ const RAW: Movie[] = [
     "runtime": 88,
     "rating": 6.4,
     "posterPath": "/nMyU0eGy65dPlGSwqTquSbGGW3b.jpg",
-    "trailerKey": "DMHlNR6x2Sw"
+    "trailerKey": "DMHlNR6x2Sw",
+    "actors": [
+      "Томми Ли Джонс",
+      "Уилл Смит",
+      "Рип Торн",
+      "Лара Флинн Бойл",
+      "Джонни Ноксвилл"
+    ]
   },
   {
     "id": "men-in-black-3",
@@ -1224,7 +1729,14 @@ const RAW: Movie[] = [
     "runtime": 106,
     "rating": 6.6,
     "posterPath": "/6tJB9eTJgwCJJl3Wlscq69AObND.jpg",
-    "trailerKey": "Y2r9AIfYcV8"
+    "trailerKey": "Y2r9AIfYcV8",
+    "actors": [
+      "Уилл Смит",
+      "Томми Ли Джонс",
+      "Джош Бролин",
+      "Джемейн Клемент",
+      "Эмма Томпсон"
+    ]
   },
   {
     "id": "john-wick",
@@ -1241,7 +1753,14 @@ const RAW: Movie[] = [
     "runtime": 101,
     "rating": 7.5,
     "posterPath": "/2hfeF2566IKZ30c1BAay0N2lxBr.jpg",
-    "trailerKey": "6r0s41Ju5XA"
+    "trailerKey": "6r0s41Ju5XA",
+    "actors": [
+      "Киану Ривз",
+      "Микаэль Нюквист",
+      "Альфи Аллен",
+      "Уиллем Дефо",
+      "Дин Уинтерс"
+    ]
   },
   {
     "id": "showdown-in-manila",
@@ -1256,7 +1775,14 @@ const RAW: Movie[] = [
     "runtime": 86,
     "rating": 3.3,
     "posterPath": "/udMLRN0YpdtP1iAHvAypggZho1S.jpg",
-    "trailerKey": "k68Yv2xBNqM"
+    "trailerKey": "k68Yv2xBNqM",
+    "actors": [
+      "Каспер Ван Дин",
+      "Александр Невский",
+      "Don Wilson",
+      "Тиа Каррере",
+      "Синтия Ротрок"
+    ]
   },
   {
     "id": "speed",
@@ -1272,7 +1798,14 @@ const RAW: Movie[] = [
     "runtime": 116,
     "rating": 7.2,
     "posterPath": "/ddQ80U9MNBilNhjbm8V8wuhi7iY.jpg",
-    "trailerKey": "3q_4xiR3VJQ"
+    "trailerKey": "3q_4xiR3VJQ",
+    "actors": [
+      "Киану Ривз",
+      "Деннис Хоппер",
+      "Сандра Буллок",
+      "Джо Мортон",
+      "Джефф Дэниелс"
+    ]
   },
   {
     "id": "guardians-of-the-galaxy",
@@ -1290,7 +1823,14 @@ const RAW: Movie[] = [
     "runtime": 121,
     "rating": 7.9,
     "posterPath": "/4uVdNj0FWCjtG1jEYASuNzE33LS.jpg",
-    "trailerKey": "y2oint9Sdp4"
+    "trailerKey": "y2oint9Sdp4",
+    "actors": [
+      "Крис Прэтт",
+      "Зои Салдана",
+      "Дейв Батиста",
+      "Вин Дизель",
+      "Брэдли Купер"
+    ]
   },
   {
     "id": "tucker-and-dale-vs-evil",
@@ -1306,7 +1846,14 @@ const RAW: Movie[] = [
     "runtime": 89,
     "rating": 7.4,
     "posterPath": "/oId9WDFgTJGLrXz7RAvnjSrn5PX.jpg",
-    "trailerKey": "NdNpFoWrBDQ"
+    "trailerKey": "NdNpFoWrBDQ",
+    "actors": [
+      "Тайлер Лэбин",
+      "Алан Тьюдик",
+      "Катрина Боуден",
+      "Джесси Мосс",
+      "Филип Грэйнджер"
+    ]
   },
   {
     "id": "dungeons-and-dragons-honor-among-thieves",
@@ -1324,7 +1871,14 @@ const RAW: Movie[] = [
     "runtime": 134,
     "rating": 7.4,
     "posterPath": "/nAbRIxxRJfCP2U9tpVJU1zWb6Ni.jpg",
-    "trailerKey": "nw48Ue9dc2Q"
+    "trailerKey": "nw48Ue9dc2Q",
+    "actors": [
+      "Крис Пайн",
+      "Мишель Родригес",
+      "Джастис Смит",
+      "София Лиллис",
+      "Хью Грант"
+    ]
   },
   {
     "id": "the-other-guys",
@@ -1341,7 +1895,14 @@ const RAW: Movie[] = [
     "runtime": 107,
     "rating": 6.3,
     "posterPath": "/4uNROZ3j57RNi9Y6CkAvArKkVvI.jpg",
-    "trailerKey": "D6WOoUG1eNo"
+    "trailerKey": "D6WOoUG1eNo",
+    "actors": [
+      "Уилл Феррелл",
+      "Марк Уолберг",
+      "Ева Мендес",
+      "Майкл Китон",
+      "Стив Куган"
+    ]
   },
   {
     "id": "21-jump-street",
@@ -1358,7 +1919,14 @@ const RAW: Movie[] = [
     "runtime": 109,
     "rating": 6.9,
     "posterPath": "/xe2Z8wgNzKK9dhHr23B18dCBmie.jpg",
-    "trailerKey": "LG6w5_DXni4"
+    "trailerKey": "LG6w5_DXni4",
+    "actors": [
+      "Джона Хилл",
+      "Ченнинг Татум",
+      "Бри Ларсон",
+      "Дэйв Франко",
+      "Роб Риггл"
+    ]
   },
   {
     "id": "22-jump-street",
@@ -1375,7 +1943,14 @@ const RAW: Movie[] = [
     "runtime": 112,
     "rating": 6.8,
     "posterPath": "/iwtNmSFyePLX9CdZ4iXy5kw6wCq.jpg",
-    "trailerKey": "qP755JkDxyM"
+    "trailerKey": "qP755JkDxyM",
+    "actors": [
+      "Джона Хилл",
+      "Ченнинг Татум",
+      "Питер Стормаре",
+      "Уайатт Рассел",
+      "Эмбер Стивенс Уэст"
+    ]
   },
   {
     "id": "rush-hour",
@@ -1392,7 +1967,14 @@ const RAW: Movie[] = [
     "runtime": 98,
     "rating": 7.1,
     "posterPath": "/wGwBIpObDxLVM4a6Qt0XmcoHnRf.jpg",
-    "trailerKey": "0e2Lbnq_lSM"
+    "trailerKey": "0e2Lbnq_lSM",
+    "actors": [
+      "Джеки Чан",
+      "Крис Такер",
+      "Том Уилкинсон",
+      "Филип Бейкер Холл",
+      "Элизабет Пенья"
+    ]
   },
   {
     "id": "rush-hour-2",
@@ -1409,7 +1991,14 @@ const RAW: Movie[] = [
     "runtime": 90,
     "rating": 6.8,
     "posterPath": "/sLtnTxXYxkuTxXfTDngpWsVKhrH.jpg",
-    "trailerKey": "SCTzYY95Aw4"
+    "trailerKey": "SCTzYY95Aw4",
+    "actors": [
+      "Джеки Чан",
+      "Крис Такер",
+      "John Lone",
+      "Roselyn Sánchez",
+      "Чжан Цзыи"
+    ]
   },
   {
     "id": "rush-hour-3",
@@ -1426,7 +2015,14 @@ const RAW: Movie[] = [
     "runtime": 91,
     "rating": 6.5,
     "posterPath": "/oBzCPaoMCADjPiu4GOQVXaErq4Y.jpg",
-    "trailerKey": "FRDRWXfQyJE"
+    "trailerKey": "FRDRWXfQyJE",
+    "actors": [
+      "Джеки Чан",
+      "Крис Такер",
+      "Хироюки Санада",
+      "Макс фон Сюдов",
+      "Иван Атталь"
+    ]
   },
   {
     "id": "the-nice-guys",
@@ -1443,7 +2039,14 @@ const RAW: Movie[] = [
     "runtime": 116,
     "rating": 7.1,
     "posterPath": "/4U7u3htE1CxoRYboQVQYfxr0ZoG.jpg",
-    "trailerKey": "bhKS_QDtOUc"
+    "trailerKey": "bhKS_QDtOUc",
+    "actors": [
+      "Рассел Кроу",
+      "Райан Гослинг",
+      "Энгаури Райс",
+      "Мэтт Бомер",
+      "Маргарет Куолли"
+    ]
   },
   {
     "id": "crank",
@@ -1463,7 +2066,14 @@ const RAW: Movie[] = [
     "budget": 12000000,
     "revenue": 42900000,
     "trailerKey": "218nsccFpag",
-    "posterPath": "/jS7KmWWc3f0mXpXPg2B8KwymxpU.jpg"
+    "posterPath": "/jS7KmWWc3f0mXpXPg2B8KwymxpU.jpg",
+    "actors": [
+      "Джейсон Стейтем",
+      "Эми Смарт",
+      "Хосе Пабло Кантильо",
+      "Эфрен Рамирес",
+      "Дуайт Йоакам"
+    ]
   },
   {
     "id": "crank-high-voltage",
@@ -1483,7 +2093,14 @@ const RAW: Movie[] = [
     "budget": 20000000,
     "revenue": 34600000,
     "trailerKey": "u3Qv_P7sUco",
-    "posterPath": "/7SQZg1HcQdb9kTwn4nLHdUC0O34.jpg"
+    "posterPath": "/7SQZg1HcQdb9kTwn4nLHdUC0O34.jpg",
+    "actors": [
+      "Джейсон Стейтем",
+      "Эми Смарт",
+      "Дуайт Йоакам",
+      "Эфрен Рамирес",
+      "Джуланн Чиди Хилл"
+    ]
   },
   {
     "id": "the-transporter",
@@ -1503,7 +2120,14 @@ const RAW: Movie[] = [
     "budget": 21000000,
     "revenue": 43900000,
     "trailerKey": "0poXFSvX0_4",
-    "posterPath": "/3AriPYR6gWEGvBLzEQ5cwoFoANT.jpg"
+    "posterPath": "/3AriPYR6gWEGvBLzEQ5cwoFoANT.jpg",
+    "actors": [
+      "Джейсон Стейтем",
+      "Шу Ци",
+      "François Berléand",
+      "Мэтт Шульце",
+      "Рик Янг"
+    ]
   },
   {
     "id": "the-mechanic",
@@ -1523,7 +2147,14 @@ const RAW: Movie[] = [
     "budget": 40000000,
     "revenue": 51070807,
     "trailerKey": "GVAvQ6KHCdg",
-    "posterPath": "/22WDkbKn8ZfC6gUqfo0mLTxwl6p.jpg"
+    "posterPath": "/22WDkbKn8ZfC6gUqfo0mLTxwl6p.jpg",
+    "actors": [
+      "Джейсон Стейтем",
+      "Бен Фостер",
+      "Дональд Сазерленд",
+      "Мини Анден",
+      "Тони Голдуин"
+    ]
   },
   {
     "id": "the-expendables",
@@ -1543,7 +2174,14 @@ const RAW: Movie[] = [
     "budget": 80000000,
     "revenue": 274470394,
     "trailerKey": "43Jy9DcbvIc",
-    "posterPath": "/kx6qXzlYwM6lYi8PvU3XhBcmPDq.jpg"
+    "posterPath": "/kx6qXzlYwM6lYi8PvU3XhBcmPDq.jpg",
+    "actors": [
+      "Сильвестр Сталлоне",
+      "Джейсон Стейтем",
+      "Джет Ли",
+      "Дольф Лундгрен",
+      "Эрик Робертс"
+    ]
   },
   {
     "id": "the-expendables-2",
@@ -1563,7 +2201,14 @@ const RAW: Movie[] = [
     "budget": 100000000,
     "revenue": 314975955,
     "trailerKey": "xMdLA4JKTe8",
-    "posterPath": "/gNIYVDBPTDPr7Cur5aOm4wVdbbn.jpg"
+    "posterPath": "/gNIYVDBPTDPr7Cur5aOm4wVdbbn.jpg",
+    "actors": [
+      "Сильвестр Сталлоне",
+      "Джейсон Стейтем",
+      "Джет Ли",
+      "Дольф Лундгрен",
+      "Чак Норрис"
+    ]
   },
   {
     "id": "the-expendables-3",
@@ -1583,7 +2228,14 @@ const RAW: Movie[] = [
     "budget": 95000000,
     "revenue": 214657577,
     "trailerKey": "sF7qAf8VWJ4",
-    "posterPath": "/AvYoPNE5xLAf0NTKBF0m8sQygSs.jpg"
+    "posterPath": "/AvYoPNE5xLAf0NTKBF0m8sQygSs.jpg",
+    "actors": [
+      "Сильвестр Сталлоне",
+      "Джейсон Стейтем",
+      "Харрисон Форд",
+      "Арнольд Шварценеггер",
+      "Мел Гибсон"
+    ]
   },
   {
     "id": "mean-machine",
@@ -1602,7 +2254,14 @@ const RAW: Movie[] = [
     "budget": 2750000,
     "revenue": 7310206,
     "trailerKey": "NNXrZCPU5uc",
-    "posterPath": "/A0SKc34kSVich9TooPd0AezYnZH.jpg"
+    "posterPath": "/A0SKc34kSVich9TooPd0AezYnZH.jpg",
+    "actors": [
+      "Винни Джонс",
+      "Дэвид Келли",
+      "Дэвид Хеммингс",
+      "Ральф Браун",
+      "Вэс Блэквуд"
+    ]
   },
   {
     "id": "the-bourne-identity",
@@ -1622,7 +2281,14 @@ const RAW: Movie[] = [
     "budget": 60000000,
     "revenue": 214034224,
     "trailerKey": "W7kY571jv5A",
-    "posterPath": "/xmWeFWpj9kTKlOt1OsgOptDfRS2.jpg"
+    "posterPath": "/xmWeFWpj9kTKlOt1OsgOptDfRS2.jpg",
+    "actors": [
+      "Мэтт Деймон",
+      "Франка Потенте",
+      "Крис Купер",
+      "Клайв Оуэн",
+      "Брайан Кокс"
+    ]
   },
   {
     "id": "the-bourne-supremacy",
@@ -1642,7 +2308,14 @@ const RAW: Movie[] = [
     "budget": 75000000,
     "revenue": 288500217,
     "trailerKey": "CPW4mABYnAs",
-    "posterPath": "/7s3z2rWg6J3HTwepQODWUghitjl.jpg"
+    "posterPath": "/7s3z2rWg6J3HTwepQODWUghitjl.jpg",
+    "actors": [
+      "Мэтт Деймон",
+      "Франка Потенте",
+      "Брайан Кокс",
+      "Джулия Стайлз",
+      "Карл Урбан"
+    ]
   },
   {
     "id": "the-bourne-ultimatum",
@@ -1663,7 +2336,14 @@ const RAW: Movie[] = [
     "budget": 70000000,
     "revenue": 442824138,
     "trailerKey": "EGOeHPvZ8Zc",
-    "posterPath": "/xfYU1RxtvktWObEEHObGBiWGXqy.jpg"
+    "posterPath": "/xfYU1RxtvktWObEEHObGBiWGXqy.jpg",
+    "actors": [
+      "Мэтт Деймон",
+      "Джулия Стайлз",
+      "Дэвид Стрэтэйрн",
+      "Скотт Гленн",
+      "Пэдди Консидайн"
+    ]
   },
   {
     "id": "first-blood",
@@ -1683,7 +2363,14 @@ const RAW: Movie[] = [
     "budget": 15000000,
     "revenue": 125212904,
     "trailerKey": "Rl_4vPKDijQ",
-    "posterPath": "/6J0PejIiR8d4CGsRbWBHMisgjOf.jpg"
+    "posterPath": "/6J0PejIiR8d4CGsRbWBHMisgjOf.jpg",
+    "actors": [
+      "Сильвестр Сталлоне",
+      "Ричард Кренна",
+      "Брайан Деннехи",
+      "Билл МакКинни",
+      "Jack Starrett"
+    ]
   },
   {
     "id": "rambo-first-blood-part-ii",
@@ -1703,7 +2390,14 @@ const RAW: Movie[] = [
     "budget": 44000000,
     "revenue": 300400432,
     "trailerKey": "TY8LVqaLHwY",
-    "posterPath": "/qY1g0nhofUjeswINRWjeTOhVzCl.jpg"
+    "posterPath": "/qY1g0nhofUjeswINRWjeTOhVzCl.jpg",
+    "actors": [
+      "Сильвестр Сталлоне",
+      "Ричард Кренна",
+      "Чарльз Напьер",
+      "Стивен Беркофф",
+      "Джулия Никсон"
+    ]
   },
   {
     "id": "rambo-iii",
@@ -1723,7 +2417,14 @@ const RAW: Movie[] = [
     "budget": 63000000,
     "revenue": 189015611,
     "trailerKey": "SMLUwNSVX5Y",
-    "posterPath": "/k2UDhhIRHkSeNp94BmzsYre4GSw.jpg"
+    "posterPath": "/k2UDhhIRHkSeNp94BmzsYre4GSw.jpg",
+    "actors": [
+      "Сильвестр Сталлоне",
+      "Ричард Кренна",
+      "Марк де Йонге",
+      "Кертвуд Смит",
+      "Σπύρος Φωκάς"
+    ]
   },
   {
     "id": "constantine",
@@ -1743,7 +2444,14 @@ const RAW: Movie[] = [
     "budget": 100000000,
     "revenue": 230900000,
     "trailerKey": "819JCbGfZpg",
-    "posterPath": "/eQtXfuB5zoD9t2C2zTVr52SpZnM.jpg"
+    "posterPath": "/eQtXfuB5zoD9t2C2zTVr52SpZnM.jpg",
+    "actors": [
+      "Киану Ривз",
+      "Рэйчел Вайс",
+      "Шайа ЛаБаф",
+      "Джимон Хонсу",
+      "Макс Бейкер"
+    ]
   },
   {
     "id": "upgrade",
@@ -1763,7 +2471,14 @@ const RAW: Movie[] = [
     "budget": 3000000,
     "revenue": 16976561,
     "trailerKey": "hwsSGCPRGBc",
-    "posterPath": "/9A14EDBFTP1xlG7poolUcSWhXtW.jpg"
+    "posterPath": "/9A14EDBFTP1xlG7poolUcSWhXtW.jpg",
+    "actors": [
+      "Логан Маршалл-Грин",
+      "Бетти Гэбриел",
+      "Харрисон Слоан Гилбертсон",
+      "Мелани Валльехо",
+      "Бенедикт Харди"
+    ]
   },
   {
     "id": "jay-and-silent-bob-strike-back",
@@ -1783,7 +2498,14 @@ const RAW: Movie[] = [
     "budget": 22000000,
     "revenue": 33788161,
     "trailerKey": "HjDSFna_LXQ",
-    "posterPath": "/nn0zeN8rHiyEqRVOo6BqSSWS8t2.jpg"
+    "posterPath": "/nn0zeN8rHiyEqRVOo6BqSSWS8t2.jpg",
+    "actors": [
+      "Джейсон Мьюз",
+      "Кевин Смит",
+      "Бен Аффлек",
+      "Шеннон Элизабет",
+      "Элайза Душку"
+    ]
   },
   {
     "id": "dogma",
@@ -1803,7 +2525,14 @@ const RAW: Movie[] = [
     "budget": 10000000,
     "revenue": 33535478,
     "trailerKey": "HSf8JaJJb8Q",
-    "posterPath": "/ap7VMKICoxEkTyHgyYlsYYFJRmT.jpg"
+    "posterPath": "/ap7VMKICoxEkTyHgyYlsYYFJRmT.jpg",
+    "actors": [
+      "Бен Аффлек",
+      "Мэтт Деймон",
+      "Линда Фиорентино",
+      "Сальма Хайек",
+      "Джейсон Ли"
+    ]
   },
   {
     "id": "wrongfully-accused",
@@ -1822,7 +2551,14 @@ const RAW: Movie[] = [
     "budget": 3000000,
     "revenue": 9623329,
     "trailerKey": "IvEKtk0TCtI",
-    "posterPath": "/lnfyOFFwPdBKXe0m2zHRkrjcgXc.jpg"
+    "posterPath": "/lnfyOFFwPdBKXe0m2zHRkrjcgXc.jpg",
+    "actors": [
+      "Лесли Нильсен",
+      "Ричард Кренна",
+      "Келли ЛеБрок",
+      "Мелинда МакГроу",
+      "Аарон Перл"
+    ]
   },
   {
     "id": "2001-a-space-travesty",
@@ -1841,7 +2577,14 @@ const RAW: Movie[] = [
     "budget": 26000000,
     "revenue": 270813,
     "trailerKey": "12iTQ7k265o",
-    "posterPath": "/eEbPjuMGZR9iups4RENR7R4xvkI.jpg"
+    "posterPath": "/eEbPjuMGZR9iups4RENR7R4xvkI.jpg",
+    "actors": [
+      "Лесли Нильсен",
+      "Офелия Винтер",
+      "Ezio Greggio",
+      "Peter Egan",
+      "Alexandra Kamp"
+    ]
   },
   {
     "id": "dont-be-a-menace",
@@ -1859,7 +2602,14 @@ const RAW: Movie[] = [
     "budget": 3800000,
     "revenue": 20949601,
     "trailerKey": "bD2wZ6DqdjQ",
-    "posterPath": "/kVxJ6XaAk9koceTmmw8aSEwwHSj.jpg"
+    "posterPath": "/kVxJ6XaAk9koceTmmw8aSEwwHSj.jpg",
+    "actors": [
+      "Шон Уэйанс",
+      "Марлон Уэйанс",
+      "Tracey Cherelle Jones",
+      "Крис Спенсер",
+      "Вивика А. Фокс"
+    ]
   },
   {
     "id": "airplane",
@@ -1876,7 +2626,14 @@ const RAW: Movie[] = [
     "budget": 3500000,
     "revenue": 83453539,
     "trailerKey": "48BcCeSVFuE",
-    "posterPath": "/8VwvyEgaUvjZLV8CCKZBdd3cF1U.jpg"
+    "posterPath": "/8VwvyEgaUvjZLV8CCKZBdd3cF1U.jpg",
+    "actors": [
+      "Роберт Хейз",
+      "Джули Хэгерти",
+      "Лесли Нильсен",
+      "Карим Абдул-Джаббар",
+      "Ллойд Бриджес"
+    ]
   },
   {
     "id": "commando",
@@ -1896,7 +2653,14 @@ const RAW: Movie[] = [
     "budget": 10000000,
     "revenue": 57500000,
     "trailerKey": "CVWcHgLmK-U",
-    "posterPath": "/iMHn218oEVvA2Hs6Veb3jbne0P.jpg"
+    "posterPath": "/iMHn218oEVvA2Hs6Veb3jbne0P.jpg",
+    "actors": [
+      "Арнольд Шварценеггер",
+      "Рэй Чонг",
+      "Дэн Хедайя",
+      "Вернон Уэллс",
+      "Джеймс Олсон"
+    ]
   },
   {
     "id": "kindergarten-cop",
@@ -1913,7 +2677,14 @@ const RAW: Movie[] = [
     "budget": 15000000,
     "revenue": 201957688,
     "trailerKey": "T4gV5yDqFqc",
-    "posterPath": "/q6NfKIWBuvzGjEGimvhT3Cds6jD.jpg"
+    "posterPath": "/q6NfKIWBuvzGjEGimvhT3Cds6jD.jpg",
+    "actors": [
+      "Арнольд Шварценеггер",
+      "Пенелопа Энн Миллер",
+      "Pamela Reed",
+      "Линда Хант",
+      "Richard Tyson"
+    ]
   },
   {
     "id": "last-action-hero",
@@ -1933,7 +2704,14 @@ const RAW: Movie[] = [
     "budget": 85000000,
     "revenue": 137298489,
     "trailerKey": "Kx0ApCyC_cg",
-    "posterPath": "/tuX115qomb1lIouD7wetyC5Iky9.jpg"
+    "posterPath": "/tuX115qomb1lIouD7wetyC5Iky9.jpg",
+    "actors": [
+      "Арнольд Шварценеггер",
+      "Austin O'Brien",
+      "Бриджетт Уилсон",
+      "Ф. Мюррей Абрахам",
+      "Арт Карни"
+    ]
   },
   {
     "id": "tango-and-cash",
@@ -1954,7 +2732,14 @@ const RAW: Movie[] = [
     "budget": 55000000,
     "revenue": 63408614,
     "trailerKey": "DoacpCpBptU",
-    "posterPath": "/rqdkstGi8bS34GNmD51dH1pIq9P.jpg"
+    "posterPath": "/rqdkstGi8bS34GNmD51dH1pIq9P.jpg",
+    "actors": [
+      "Сильвестр Сталлоне",
+      "Курт Рассел",
+      "Тери Хэтчер",
+      "Джек Пэланс",
+      "Брайон Джеймс"
+    ]
   },
   {
     "id": "eurotrip",
@@ -1972,7 +2757,14 @@ const RAW: Movie[] = [
     "budget": 25000000,
     "revenue": 22605153,
     "trailerKey": "UhaoTcD60q4",
-    "posterPath": "/pyNDzXP4UCYz4vDb9ZKaRplumRt.jpg"
+    "posterPath": "/pyNDzXP4UCYz4vDb9ZKaRplumRt.jpg",
+    "actors": [
+      "Скотт Мекловиц",
+      "Джейкоб Питтс",
+      "Мишель Трахтенберг",
+      "Трэвис Вэстер",
+      "Винни Джонс"
+    ]
   },
   {
     "id": "mad-max-fury-road",
@@ -1992,7 +2784,14 @@ const RAW: Movie[] = [
     "budget": 150000000,
     "revenue": 378858340,
     "trailerKey": "5ZW_dQFVloo",
-    "posterPath": "/8FM6AhLMX3X6OcZjfmH24F4rKMI.jpg"
+    "posterPath": "/8FM6AhLMX3X6OcZjfmH24F4rKMI.jpg",
+    "actors": [
+      "Том Харди",
+      "Шарлиз Терон",
+      "Николас Холт",
+      "Хью Кияс-Бёрн",
+      "Джош Хэлман"
+    ]
   },
   {
     "id": "bruce-almighty",
@@ -2011,7 +2810,14 @@ const RAW: Movie[] = [
     "budget": 80000000,
     "revenue": 484592874,
     "trailerKey": "0XBxoKumlqQ",
-    "posterPath": "/vMhL7BZFUa8oWs9Ts10Tk259bFf.jpg"
+    "posterPath": "/vMhL7BZFUa8oWs9Ts10Tk259bFf.jpg",
+    "actors": [
+      "Джим Керри",
+      "Морган Фримен",
+      "Дженнифер Энистон",
+      "Филип Бейкер Холл",
+      "Кэтрин Белл"
+    ]
   },
   {
     "id": "shaolin-soccer",
@@ -2031,7 +2837,14 @@ const RAW: Movie[] = [
     "budget": 10000000,
     "revenue": 42776760,
     "trailerKey": "dWgOYEVtXlw",
-    "posterPath": "/fbzM0MSpEavC20bFp7OxUqdG6Ig.jpg"
+    "posterPath": "/fbzM0MSpEavC20bFp7OxUqdG6Ig.jpg",
+    "actors": [
+      "Стивен Чоу",
+      "Ман Тат Нг",
+      "Чжао Вэй",
+      "Йин Тсе",
+      "Карен Мок"
+    ]
   },
   {
     "id": "smokin-aces",
@@ -2052,7 +2865,14 @@ const RAW: Movie[] = [
     "budget": 17000000,
     "revenue": 57103895,
     "trailerKey": "-JmKzNOqUrM",
-    "posterPath": "/89971dKUQpHPQFAYFrF0IpobfGT.jpg"
+    "posterPath": "/89971dKUQpHPQFAYFrF0IpobfGT.jpg",
+    "actors": [
+      "Райан Рейнольдс",
+      "Энди Гарсиа",
+      "Мартин Хендерсон",
+      "Крис Пайн",
+      "Рэй Лиотта"
+    ]
   },
   {
     "id": "pirates-curse-black-pearl",
@@ -2072,7 +2892,14 @@ const RAW: Movie[] = [
     "budget": 140000000,
     "revenue": 655011224,
     "trailerKey": "0xxLhqjbB2Y",
-    "posterPath": "/70xRYK8orGWA7NfxvzhtkjpZAD6.jpg"
+    "posterPath": "/70xRYK8orGWA7NfxvzhtkjpZAD6.jpg",
+    "actors": [
+      "Джонни Депп",
+      "Джеффри Раш",
+      "Орландо Блум",
+      "Кира Найтли",
+      "Джек Дэвенпорт"
+    ]
   },
   {
     "id": "pirates-dead-mans-chest",
@@ -2092,7 +2919,14 @@ const RAW: Movie[] = [
     "budget": 200000000,
     "revenue": 1066179747,
     "trailerKey": "9SFWn9taQTw",
-    "posterPath": "/guSoA2bedeYB2xGTBKYLx0biENV.jpg"
+    "posterPath": "/guSoA2bedeYB2xGTBKYLx0biENV.jpg",
+    "actors": [
+      "Джонни Депп",
+      "Орландо Блум",
+      "Кира Найтли",
+      "Джек Дэвенпорт",
+      "Билл Найи"
+    ]
   },
   {
     "id": "pirates-at-worlds-end",
@@ -2112,7 +2946,14 @@ const RAW: Movie[] = [
     "budget": 300000000,
     "revenue": 961691209,
     "trailerKey": "TV0j8S7JUpA",
-    "posterPath": "/e69Ov9pCwR6OYQLcrvsodrCBWlc.jpg"
+    "posterPath": "/e69Ov9pCwR6OYQLcrvsodrCBWlc.jpg",
+    "actors": [
+      "Джонни Депп",
+      "Джеффри Раш",
+      "Орландо Блум",
+      "Кира Найтли",
+      "Джек Дэвенпорт"
+    ]
   },
   {
     "id": "hitchhikers-guide-galaxy",
@@ -2132,7 +2973,14 @@ const RAW: Movie[] = [
     "budget": 50000000,
     "revenue": 104500000,
     "trailerKey": "rJPl9i1Vvfg",
-    "posterPath": "/4TzeUoehNARhxBJhVz7MILVJafK.jpg"
+    "posterPath": "/4TzeUoehNARhxBJhVz7MILVJafK.jpg",
+    "actors": [
+      "Мартин Фримен",
+      "Yasiin Bey",
+      "Зоуи Дешанель",
+      "Сэм Рокуэлл",
+      "Алан Рикман"
+    ]
   },
   {
     "id": "district-13",
@@ -2152,7 +3000,14 @@ const RAW: Movie[] = [
     "budget": 12000000,
     "revenue": 11169386,
     "posterPath": "/8HtJ2iH5HTwB3nSt9WEtlvf8niK.jpg",
-    "trailerKey": "iTvltyl5bBU"
+    "trailerKey": "iTvltyl5bBU",
+    "actors": [
+      "Давид Белль",
+      "Сирил Раффаэлли",
+      "Тони Д'Амарио",
+      "Дани Вериссимо",
+      "Биби Насери"
+    ]
   },
   {
     "id": "borat",
@@ -2170,7 +3025,14 @@ const RAW: Movie[] = [
     "budget": 18000000,
     "revenue": 262552893,
     "trailerKey": "o28qWz-u8sU",
-    "posterPath": "/bTUFtYSjjvmWTPa9oLzJK5qYVqn.jpg"
+    "posterPath": "/bTUFtYSjjvmWTPa9oLzJK5qYVqn.jpg",
+    "actors": [
+      "Саша Барон Коэн",
+      "Кен Давитян",
+      "Луэнелль",
+      "Алекс Дэниелс",
+      "Джим Викерз"
+    ]
   },
   {
     "id": "harold-and-kumar-white-castle",
@@ -2189,7 +3051,14 @@ const RAW: Movie[] = [
     "budget": 9000000,
     "revenue": 23936908,
     "trailerKey": "cwP5E15VzRM",
-    "posterPath": "/7ZmojLD15lC61u4ckekzIrq8jYr.jpg"
+    "posterPath": "/7ZmojLD15lC61u4ckekzIrq8jYr.jpg",
+    "actors": [
+      "Джон Чо",
+      "Кэл Пенн",
+      "Паула Гарсес",
+      "Нил Патрик Харрис",
+      "Дэвид Крумхольц"
+    ]
   },
   {
     "id": "bad-santa",
@@ -2208,7 +3077,14 @@ const RAW: Movie[] = [
     "budget": 23000000,
     "revenue": 76500000,
     "trailerKey": "IFptZFprF60",
-    "posterPath": "/R5NT42mCvRKPhr90VAMb6U5hpI.jpg"
+    "posterPath": "/R5NT42mCvRKPhr90VAMb6U5hpI.jpg",
+    "actors": [
+      "Билли Боб Торнтон",
+      "Тони Кокс",
+      "Лорен Грэм",
+      "Brett Kelly",
+      "Лорен Том"
+    ]
   },
   {
     "id": "idiocracy",
@@ -2228,7 +3104,14 @@ const RAW: Movie[] = [
     "budget": 2400000,
     "revenue": 495303,
     "trailerKey": "clYwX8Z43zg",
-    "posterPath": "/rcSy9j3UvSu2GQMar3CpxSEnQTt.jpg"
+    "posterPath": "/rcSy9j3UvSu2GQMar3CpxSEnQTt.jpg",
+    "actors": [
+      "Люк Уилсон",
+      "Майя Рудольф",
+      "Дэкс Шепард",
+      "Терри Крюс",
+      "Anthony 'Citric' Campos"
+    ]
   },
   {
     "id": "bullet-train",
@@ -2248,7 +3131,14 @@ const RAW: Movie[] = [
     "budget": 90000000,
     "revenue": 239268602,
     "trailerKey": "7vNnvqJ3Jb8",
-    "posterPath": "/oK3e4nDFB8lsT8H1D7bMHXoXsRH.jpg"
+    "posterPath": "/oK3e4nDFB8lsT8H1D7bMHXoXsRH.jpg",
+    "actors": [
+      "Брэд Питт",
+      "Джоуи Кинг",
+      "Аарон Тейлор-Джонсон",
+      "Брайан Тайри Генри",
+      "Эндрю Кодзи"
+    ]
   },
   {
     "id": "hot-tub-time-machine",
@@ -2268,7 +3158,14 @@ const RAW: Movie[] = [
     "budget": 36000000,
     "revenue": 64780213,
     "trailerKey": "GbgcEjOgGyM",
-    "posterPath": "/rWGA9tP2iIIHa5XTr7TFAi8ef16.jpg"
+    "posterPath": "/rWGA9tP2iIIHa5XTr7TFAi8ef16.jpg",
+    "actors": [
+      "Джон Кьюсак",
+      "Крэйг Робинсон",
+      "Роб Кордри",
+      "Clark Duke",
+      "Себастиан Стэн"
+    ]
   },
   {
     "id": "drunken-master",
@@ -2284,7 +3181,14 @@ const RAW: Movie[] = [
     "runtime": 111,
     "rating": 7.4,
     "posterPath": "/2tbLbolV6UZSRZPbQMrSU6qIeSV.jpg",
-    "trailerKey": "krvm6ikt6v4"
+    "trailerKey": "krvm6ikt6v4",
+    "actors": [
+      "Джеки Чан",
+      "袁小田",
+      "황정리",
+      "石天",
+      "徐蝦"
+    ]
   },
   {
     "id": "old-school",
@@ -2301,7 +3205,14 @@ const RAW: Movie[] = [
     "budget": 24000000,
     "revenue": 87100000,
     "trailerKey": "VqtymOtKr48",
-    "posterPath": "/sc25IyvdnPVYWsXoVXiY8HrpwmI.jpg"
+    "posterPath": "/sc25IyvdnPVYWsXoVXiY8HrpwmI.jpg",
+    "actors": [
+      "Люк Уилсон",
+      "Уилл Феррелл",
+      "Винс Вон",
+      "Джереми Пивен",
+      "Эллен Помпео"
+    ]
   },
   {
     "id": "the-boondock-saints",
@@ -2320,7 +3231,14 @@ const RAW: Movie[] = [
     "budget": 6000000,
     "revenue": 38256,
     "trailerKey": "n35_xBzqiIc",
-    "posterPath": "/d4EG78TlM65HRrw1JxvS0DszJzl.jpg"
+    "posterPath": "/d4EG78TlM65HRrw1JxvS0DszJzl.jpg",
+    "actors": [
+      "Уиллем Дефо",
+      "Шон Патрик Флэнери",
+      "Норман Ридус",
+      "David Della Rocco",
+      "Билли Коннолли"
+    ]
   },
   {
     "id": "fear-and-loathing-in-las-vegas",
@@ -2340,7 +3258,14 @@ const RAW: Movie[] = [
     "budget": 18500000,
     "revenue": 10700000,
     "trailerKey": "MoEUllH6StQ",
-    "posterPath": "/aiyjiGaVbmYnMD4EQCjNPpvSzK2.jpg"
+    "posterPath": "/aiyjiGaVbmYnMD4EQCjNPpvSzK2.jpg",
+    "actors": [
+      "Джонни Депп",
+      "Бенисио дель Торо",
+      "Тоби Магуайр",
+      "Michael Lee Gogin",
+      "Ларри Седар"
+    ]
   },
   {
     "id": "bloodsport",
@@ -2359,7 +3284,14 @@ const RAW: Movie[] = [
     "budget": 1500000,
     "revenue": 63500000,
     "trailerKey": "psPjTRL0py4",
-    "posterPath": "/3VUieeW6A9paLijpUHnwulf35Rb.jpg"
+    "posterPath": "/3VUieeW6A9paLijpUHnwulf35Rb.jpg",
+    "actors": [
+      "Жан-Клод Ван Дамм",
+      "Donald Gibb",
+      "Leah Ayres",
+      "Норман Бёртон",
+      "Форест Уитакер"
+    ]
   },
   {
     "id": "universal-soldier",
@@ -2379,7 +3311,14 @@ const RAW: Movie[] = [
     "budget": 23000000,
     "revenue": 119200000,
     "trailerKey": "dJ1B8Z3GHMQ",
-    "posterPath": "/eWqDb2QFgqWvDjCfUWAFZuZUS4K.jpg"
+    "posterPath": "/eWqDb2QFgqWvDjCfUWAFZuZUS4K.jpg",
+    "actors": [
+      "Жан-Клод Ван Дамм",
+      "Дольф Лундгрен",
+      "Элли Уокер",
+      "Эд О’Росс",
+      "Ральф Мёллер"
+    ]
   },
   {
     "id": "kickboxer",
@@ -2397,7 +3336,14 @@ const RAW: Movie[] = [
     "budget": 1500000,
     "revenue": 50000000,
     "trailerKey": "H6Yxw4gxfpI",
-    "posterPath": "/imES9parMzk0Ei35MR08OHks5j9.jpg"
+    "posterPath": "/imES9parMzk0Ei35MR08OHks5j9.jpg",
+    "actors": [
+      "Жан-Клод Ван Дамм",
+      "Dennis Alexio",
+      "陳國新",
+      "Haskell V. Anderson III",
+      "Rochelle Ashana"
+    ]
   },
   {
     "id": "double-impact",
@@ -2418,7 +3364,14 @@ const RAW: Movie[] = [
     "budget": 15000000,
     "revenue": 30102717,
     "trailerKey": "txTgynA3iFo",
-    "posterPath": "/gLOxuw9u6yTi4iDSpr5Pn0GiBG2.jpg"
+    "posterPath": "/gLOxuw9u6yTi4iDSpr5Pn0GiBG2.jpg",
+    "actors": [
+      "Жан-Клод Ван Дамм",
+      "Джеффри Льюис",
+      "Alonna Shaw",
+      "Боло Йенг",
+      "Cory Everson"
+    ]
   },
   {
     "id": "jumanji-welcome-to-the-jungle",
@@ -2438,7 +3391,14 @@ const RAW: Movie[] = [
     "budget": 90000000,
     "revenue": 995339117,
     "trailerKey": "_dwpLEFJ3EE",
-    "posterPath": "/8x54Dct05F1mIGKmmswasHFVumt.jpg"
+    "posterPath": "/8x54Dct05F1mIGKmmswasHFVumt.jpg",
+    "actors": [
+      "Дуэйн 'Скала' Джонсон",
+      "Кевин Харт",
+      "Джек Блэк",
+      "Карен Гиллан",
+      "Рис Дэрби"
+    ]
   },
   {
     "id": "jumanji-the-next-level",
@@ -2458,7 +3418,14 @@ const RAW: Movie[] = [
     "budget": 125000000,
     "revenue": 801693929,
     "trailerKey": "aVyHwe0nQvc",
-    "posterPath": "/eEjh9ljWHGLg8jrvgzNJxRrqQVK.jpg"
+    "posterPath": "/eEjh9ljWHGLg8jrvgzNJxRrqQVK.jpg",
+    "actors": [
+      "Дуэйн 'Скала' Джонсон",
+      "Кевин Харт",
+      "Джек Блэк",
+      "Карен Гиллан",
+      "Аквафина"
+    ]
   },
   {
     "id": "kingsman-the-secret-service",
@@ -2477,7 +3444,14 @@ const RAW: Movie[] = [
     "budget": 81000000,
     "revenue": 414351546,
     "trailerKey": "2tn31Ueu8GI",
-    "posterPath": "/1br1GunwmrGaD9H3eyRPjLx1HY4.jpg"
+    "posterPath": "/1br1GunwmrGaD9H3eyRPjLx1HY4.jpg",
+    "actors": [
+      "Тэрон Эджертон",
+      "Колин Ферт",
+      "Сэмюэл Л. Джексон",
+      "Марк Стронг",
+      "Софи Куксон"
+    ]
   },
   {
     "id": "kingsman-the-golden-circle",
@@ -2497,7 +3471,14 @@ const RAW: Movie[] = [
     "budget": 104000000,
     "revenue": 410902662,
     "trailerKey": "TTb2zsCb_B4",
-    "posterPath": "/vVQXYV7x6gpk9oVFbzsBxkIxdqT.jpg"
+    "posterPath": "/vVQXYV7x6gpk9oVFbzsBxkIxdqT.jpg",
+    "actors": [
+      "Тэрон Эджертон",
+      "Колин Ферт",
+      "Джулианна Мур",
+      "Марк Стронг",
+      "Ханна Алстром"
+    ]
   },
   {
     "id": "the-mummy-1999",
@@ -2517,7 +3498,14 @@ const RAW: Movie[] = [
     "budget": 80000000,
     "revenue": 415885488,
     "trailerKey": "V9T4-OzDA9k",
-    "posterPath": "/jzwDpKRBi1gbqIcHLV2LdFqP2rb.jpg"
+    "posterPath": "/jzwDpKRBi1gbqIcHLV2LdFqP2rb.jpg",
+    "actors": [
+      "Брендан Фрейзер",
+      "Рэйчел Вайс",
+      "Джон Ханна",
+      "Арнольд Вослу",
+      "Патрисия Веласкес"
+    ]
   },
   {
     "id": "the-mummy-returns",
@@ -2537,7 +3525,14 @@ const RAW: Movie[] = [
     "budget": 98000000,
     "revenue": 443280904,
     "trailerKey": "3Zua_GMpTCs",
-    "posterPath": "/xvr0yOUvymowA6bIhSxny737Chp.jpg"
+    "posterPath": "/xvr0yOUvymowA6bIhSxny737Chp.jpg",
+    "actors": [
+      "Брендан Фрейзер",
+      "Рэйчел Вайс",
+      "Джон Ханна",
+      "Одед Фер",
+      "Арнольд Вослу"
+    ]
   },
   {
     "id": "free-guy",
@@ -2557,7 +3552,14 @@ const RAW: Movie[] = [
     "budget": 110000000,
     "revenue": 331526598,
     "trailerKey": "gu_7he6F05w",
-    "posterPath": "/qJZ3UeKAOgz2kFVJPZZFzLtn1Qk.jpg"
+    "posterPath": "/qJZ3UeKAOgz2kFVJPZZFzLtn1Qk.jpg",
+    "actors": [
+      "Райан Рейнольдс",
+      "Джоди Комер",
+      "Лил Рел Ховери",
+      "Джо Кири",
+      "Уткараш Амбудкар"
+    ]
   },
   {
     "id": "the-rundown",
@@ -2577,7 +3579,14 @@ const RAW: Movie[] = [
     "budget": 85000000,
     "revenue": 80900000,
     "trailerKey": "BehhBCBSplY",
-    "posterPath": "/9bKYACG9Uv4TlqKoBdMI8tKNXcl.jpg"
+    "posterPath": "/9bKYACG9Uv4TlqKoBdMI8tKNXcl.jpg",
+    "actors": [
+      "Дуэйн 'Скала' Джонсон",
+      "Шонн Уильям Скотт",
+      "Розарио Доусон",
+      "Кристофер Уокен",
+      "Юэн Бремнер"
+    ]
   },
   {
     "id": "lethal-weapon",
@@ -2597,7 +3606,14 @@ const RAW: Movie[] = [
     "budget": 15000000,
     "revenue": 120207127,
     "trailerKey": "RLu49mRcmYs",
-    "posterPath": "/g1II923AlGO0wT4KTY89o2zCk6M.jpg"
+    "posterPath": "/g1II923AlGO0wT4KTY89o2zCk6M.jpg",
+    "actors": [
+      "Мел Гибсон",
+      "Дэнни Гловер",
+      "Гэри Бьюзи",
+      "Mitchell Ryan",
+      "Tom Atkins"
+    ]
   },
   {
     "id": "lethal-weapon-2",
@@ -2616,7 +3632,14 @@ const RAW: Movie[] = [
     "budget": 25000000,
     "revenue": 227853986,
     "trailerKey": "xGcCI8JWCic",
-    "posterPath": "/ejUuDkyP6WmYiyuG8r3dFRMb37L.jpg"
+    "posterPath": "/ejUuDkyP6WmYiyuG8r3dFRMb37L.jpg",
+    "actors": [
+      "Мел Гибсон",
+      "Дэнни Гловер",
+      "Джо Пеши",
+      "Джосс Экленд",
+      "Деррик О’Коннор"
+    ]
   },
   {
     "id": "lethal-weapon-3",
@@ -2636,7 +3659,14 @@ const RAW: Movie[] = [
     "budget": 35000000,
     "revenue": 321731527,
     "trailerKey": "qGqEpNGwanc",
-    "posterPath": "/h6fTuK3BgyNy3kce4guusbB43bQ.jpg"
+    "posterPath": "/h6fTuK3BgyNy3kce4guusbB43bQ.jpg",
+    "actors": [
+      "Мел Гибсон",
+      "Дэнни Гловер",
+      "Джо Пеши",
+      "Рене Руссо",
+      "Stuart Wilson"
+    ]
   },
   {
     "id": "final-destination",
@@ -2654,7 +3684,14 @@ const RAW: Movie[] = [
     "budget": 23000000,
     "revenue": 112880294,
     "trailerKey": "rRNLwFe7Dxk",
-    "posterPath": "/rrXMDkTZYK4MeEqUAu1jqVNLzg3.jpg"
+    "posterPath": "/rrXMDkTZYK4MeEqUAu1jqVNLzg3.jpg",
+    "actors": [
+      "Девон Сава",
+      "Эли Лартер",
+      "Керр Смит",
+      "Кристен Клоук",
+      "Дэниэл Робак"
+    ]
   },
   {
     "id": "movie-2012",
@@ -2674,7 +3711,14 @@ const RAW: Movie[] = [
     "budget": 200000000,
     "revenue": 791217826,
     "trailerKey": "swYMx2suhLs",
-    "posterPath": "/akAYvqKGukyqkjUp17lJArycjlm.jpg"
+    "posterPath": "/akAYvqKGukyqkjUp17lJArycjlm.jpg",
+    "actors": [
+      "Джон Кьюсак",
+      "Аманда Пит",
+      "Чиветел Эджиофор",
+      "Тэнди Ньютон",
+      "Оливер Платт"
+    ]
   },
   {
     "id": "the-day-after-tomorrow",
@@ -2694,7 +3738,14 @@ const RAW: Movie[] = [
     "budget": 125000000,
     "revenue": 552639571,
     "trailerKey": "IN79kI4VlNk",
-    "posterPath": "/kJoflQrJ6KdMZ8B1Rw1uCDkHmE3.jpg"
+    "posterPath": "/kJoflQrJ6KdMZ8B1Rw1uCDkHmE3.jpg",
+    "actors": [
+      "Деннис Куэйд",
+      "Джейк Джилленхол",
+      "Иэн Холм",
+      "Эмми Россум",
+      "Села Уорд"
+    ]
   },
   {
     "id": "the-faculty",
@@ -2713,7 +3764,14 @@ const RAW: Movie[] = [
     "budget": 15000000,
     "revenue": 40283321,
     "trailerKey": "NcHMJWCmCfY",
-    "posterPath": "/LCQh1V4JYCSAS9cqcBwEe7i6ka.jpg"
+    "posterPath": "/LCQh1V4JYCSAS9cqcBwEe7i6ka.jpg",
+    "actors": [
+      "Джош Хартнетт",
+      "Элайджа Вуд",
+      "Джордана Брюстер",
+      "Клеа ДюВалл",
+      "Шон Хэтоси"
+    ]
   },
   {
     "id": "independence-day",
@@ -2733,7 +3791,14 @@ const RAW: Movie[] = [
     "budget": 75000000,
     "revenue": 817400891,
     "trailerKey": "l_1gkaRDmTA",
-    "posterPath": "/11JBDcDtvqh072jCYGjGE910WcK.jpg"
+    "posterPath": "/11JBDcDtvqh072jCYGjGE910WcK.jpg",
+    "actors": [
+      "Уилл Смит",
+      "Билл Пуллман",
+      "Джефф Голдблюм",
+      "Мэри МакДоннелл",
+      "Джадд Хирш"
+    ]
   },
   {
     "id": "jurassic-park",
@@ -2752,7 +3817,14 @@ const RAW: Movie[] = [
     "budget": 63000000,
     "revenue": 1058454230,
     "trailerKey": "sqlfsYpUFSQ",
-    "posterPath": "/qoDjoRP7vYmPZ1lZIMTGzoHG1iR.jpg"
+    "posterPath": "/qoDjoRP7vYmPZ1lZIMTGzoHG1iR.jpg",
+    "actors": [
+      "Сэм Нилл",
+      "Лора Дерн",
+      "Джефф Голдблюм",
+      "Ричард Аттенборо",
+      "Боб Пек"
+    ]
   },
   {
     "id": "transformers",
@@ -2772,7 +3844,14 @@ const RAW: Movie[] = [
     "budget": 150000000,
     "revenue": 709709780,
     "trailerKey": "cSwuDTqx9uo",
-    "posterPath": "/eYFRGx7qk4JGOqUvjSWIpgToHLi.jpg"
+    "posterPath": "/eYFRGx7qk4JGOqUvjSWIpgToHLi.jpg",
+    "actors": [
+      "Шайа ЛаБаф",
+      "Меган Фокс",
+      "Марк Райан",
+      "Питер Каллен",
+      "Хьюго Уивинг"
+    ]
   },
   {
     "id": "ghostbusters-1984",
@@ -2791,7 +3870,14 @@ const RAW: Movie[] = [
     "budget": 30000000,
     "revenue": 296640120,
     "trailerKey": "aQF9XnP3uKg",
-    "posterPath": "/q9gSeNEXzwTllZC6Wrjfb7Rcr2X.jpg"
+    "posterPath": "/q9gSeNEXzwTllZC6Wrjfb7Rcr2X.jpg",
+    "actors": [
+      "Билл Мюррей",
+      "Дэн Эйкройд",
+      "Гарольд Рамис",
+      "Сигурни Уивер",
+      "Rick Moranis"
+    ]
   },
   {
     "id": "the-raid",
@@ -2811,7 +3897,14 @@ const RAW: Movie[] = [
     "budget": 1100000,
     "revenue": 9148519,
     "trailerKey": "GDYwcjhvD-Y",
-    "posterPath": "/owbpAPpgUGUmK2O0Ig9T6hbI6ED.jpg"
+    "posterPath": "/owbpAPpgUGUmK2O0Ig9T6hbI6ED.jpg",
+    "actors": [
+      "Ико Ювайс",
+      "Джо Таслим",
+      "Donny Alamsyah",
+      "Яян Рухьян",
+      "Pierre Gruno"
+    ]
   },
   {
     "id": "rrr",
@@ -2831,7 +3924,14 @@ const RAW: Movie[] = [
     "budget": 69000000,
     "revenue": 166602994,
     "trailerKey": "Gz5vojj-Rjw",
-    "posterPath": "/wx8xjQIxx3da4bqdm9bpERf69h2.jpg"
+    "posterPath": "/wx8xjQIxx3da4bqdm9bpERf69h2.jpg",
+    "actors": [
+      "జూనియర్ ఎన్టీఆర్",
+      "రామ్ చరణ్",
+      "Оливия Моррис",
+      "Рэй Стивенсон",
+      "Элисон Дуди"
+    ]
   },
   {
     "id": "judge-dredd-1995",
@@ -2850,7 +3950,14 @@ const RAW: Movie[] = [
     "budget": 90000000,
     "revenue": 113493481,
     "trailerKey": "7-PvgHwBrSo",
-    "posterPath": "/wxYYoXRYO6lXvtfknBsmmYV7gGn.jpg"
+    "posterPath": "/wxYYoXRYO6lXvtfknBsmmYV7gGn.jpg",
+    "actors": [
+      "Сильвестр Сталлоне",
+      "Дайан Лейн",
+      "Арманд Ассанте",
+      "Роб Шнайдер",
+      "Юрген Прохнов"
+    ]
   },
   {
     "id": "red-heat",
@@ -2869,7 +3976,14 @@ const RAW: Movie[] = [
     "budget": 29000000,
     "revenue": 34994648,
     "trailerKey": "N9Ap93cf0q8",
-    "posterPath": "/wySVLsb7MgWNYBm0UYfBQYNGNoo.jpg"
+    "posterPath": "/wySVLsb7MgWNYBm0UYfBQYNGNoo.jpg",
+    "actors": [
+      "Арнольд Шварценеггер",
+      "Джеймс Белуши",
+      "Питер Бойл",
+      "Эд О’Росс",
+      "Лоренс Фишбёрн"
+    ]
   },
   {
     "id": "mission-impossible",
@@ -2889,7 +4003,14 @@ const RAW: Movie[] = [
     "budget": 80000000,
     "revenue": 457696391,
     "trailerKey": "dc-JZB8GABc",
-    "posterPath": "/1qnh1n1tVRq7JY8MYbvaZgfRfq2.jpg"
+    "posterPath": "/1qnh1n1tVRq7JY8MYbvaZgfRfq2.jpg",
+    "actors": [
+      "Том Круз",
+      "Джон Войт",
+      "Эммануэль Беар",
+      "Генри Черни",
+      "Жан Рено"
+    ]
   },
   {
     "id": "mission-impossible-2",
@@ -2909,7 +4030,14 @@ const RAW: Movie[] = [
     "budget": 125000000,
     "revenue": 546388108,
     "trailerKey": "hSPtsCQq52k",
-    "posterPath": "/er6j9Gh6cX2na9B0wXMcPAD2tbl.jpg"
+    "posterPath": "/er6j9Gh6cX2na9B0wXMcPAD2tbl.jpg",
+    "actors": [
+      "Том Круз",
+      "Дугрей Скотт",
+      "Тэнди Ньютон",
+      "Винг Реймз",
+      "Ричард Роксбург"
+    ]
   },
   {
     "id": "mission-impossible-3",
@@ -2929,7 +4057,14 @@ const RAW: Movie[] = [
     "budget": 150000000,
     "revenue": 398479497,
     "trailerKey": "4oVva0muTE8",
-    "posterPath": "/1QgOjoYLproxIWRZxhZx9pXsmuY.jpg"
+    "posterPath": "/1QgOjoYLproxIWRZxhZx9pXsmuY.jpg",
+    "actors": [
+      "Том Круз",
+      "Филип Сеймур Хоффман",
+      "Винг Реймз",
+      "Билли Крудап",
+      "Мишель Монахэн"
+    ]
   },
   {
     "id": "sherlock-holmes-2009",
@@ -2949,7 +4084,14 @@ const RAW: Movie[] = [
     "budget": 90000000,
     "revenue": 524028679,
     "trailerKey": "zBQfbc1t_I8",
-    "posterPath": "/lJos8orxIwxEVEK15SFuePKBfha.jpg"
+    "posterPath": "/lJos8orxIwxEVEK15SFuePKBfha.jpg",
+    "actors": [
+      "Роберт Дауни мл.",
+      "Джуд Лоу",
+      "Рэйчел МакАдамс",
+      "Марк Стронг",
+      "Эдди Марсан"
+    ]
   },
   {
     "id": "sherlock-holmes-a-game-of-shadows",
@@ -2969,7 +4111,14 @@ const RAW: Movie[] = [
     "budget": 125000000,
     "revenue": 334615000,
     "trailerKey": "qEGh1AU6f4c",
-    "posterPath": "/c1fkymjh9JmKEFvOnVCGghmeBPY.jpg"
+    "posterPath": "/c1fkymjh9JmKEFvOnVCGghmeBPY.jpg",
+    "actors": [
+      "Роберт Дауни мл.",
+      "Джуд Лоу",
+      "Нуми Рапас",
+      "Джаред Харрис",
+      "Рэйчел МакАдамс"
+    ]
   },
   {
     "id": "ready-player-one",
@@ -2989,7 +4138,14 @@ const RAW: Movie[] = [
     "budget": 175000000,
     "revenue": 607274134,
     "trailerKey": "grN1EDebElc",
-    "posterPath": "/eVvMjpcw2lkS1A7hTeOzZDk0Ocf.jpg"
+    "posterPath": "/eVvMjpcw2lkS1A7hTeOzZDk0Ocf.jpg",
+    "actors": [
+      "Тай Шеридан",
+      "Оливия Кук",
+      "Бен Мендельсон",
+      "Лина Уэйт",
+      "Ти Джей Миллер"
+    ]
   },
   {
     "id": "johnny-mnemonic",
@@ -3009,7 +4165,14 @@ const RAW: Movie[] = [
     "budget": 25000000,
     "revenue": 19075720,
     "trailerKey": "PDzjBr1c4qs",
-    "posterPath": "/5kd6VWnER8f2q7tBygeBCfYbUn.jpg"
+    "posterPath": "/5kd6VWnER8f2q7tBygeBCfYbUn.jpg",
+    "actors": [
+      "Киану Ривз",
+      "Дина Мейер",
+      "Такеши Китано",
+      "Айс-Ти",
+      "Дольф Лундгрен"
+    ]
   },
   {
     "id": "home-alone",
@@ -3028,7 +4191,14 @@ const RAW: Movie[] = [
     "budget": 18000000,
     "revenue": 476684675,
     "trailerKey": "bBU_64CTNsw",
-    "posterPath": "/e6TQfEJbaFqueq1CIvqfpse4yNF.jpg"
+    "posterPath": "/e6TQfEJbaFqueq1CIvqfpse4yNF.jpg",
+    "actors": [
+      "Маколей Калкин",
+      "Джо Пеши",
+      "Дэниел Стерн",
+      "Джон Хёрд",
+      "Робертс Блоссом"
+    ]
   },
   {
     "id": "home-alone-2",
@@ -3047,7 +4217,14 @@ const RAW: Movie[] = [
     "budget": 18000000,
     "revenue": 358994850,
     "trailerKey": "yT28xgMufGM",
-    "posterPath": "/tOpSeLYsZLL4h1N9tHcqRm1Y5t2.jpg"
+    "posterPath": "/tOpSeLYsZLL4h1N9tHcqRm1Y5t2.jpg",
+    "actors": [
+      "Маколей Калкин",
+      "Джо Пеши",
+      "Дэниел Стерн",
+      "Кэтрин О’Хара",
+      "Джон Хёрд"
+    ]
   },
   {
     "id": "the-guard-2011",
@@ -3068,7 +4245,14 @@ const RAW: Movie[] = [
     "budget": 6000000,
     "revenue": 19560274,
     "trailerKey": "uJvTd87lTLo",
-    "posterPath": "/atogHz2HLabuYOSRitdogFZFbNi.jpg"
+    "posterPath": "/atogHz2HLabuYOSRitdogFZFbNi.jpg",
+    "actors": [
+      "Брендан Глисон",
+      "Дон Чидл",
+      "Лиам Каннингем",
+      "Марк Стронг",
+      "Катарина Час"
+    ]
   },
   {
     "id": "ace-ventura-pet-detective",
@@ -3088,7 +4272,14 @@ const RAW: Movie[] = [
     "budget": 15000000,
     "revenue": 107217396,
     "trailerKey": "Cqg3QmUKTks",
-    "posterPath": "/uORHpMC2IKPw3xARPiK3kNbFTSE.jpg"
+    "posterPath": "/uORHpMC2IKPw3xARPiK3kNbFTSE.jpg",
+    "actors": [
+      "Джим Керри",
+      "Кортни Кокс",
+      "Шон Янг",
+      "Тоун Лок",
+      "Дэн Марино"
+    ]
   },
   {
     "id": "van-helsing",
@@ -3108,7 +4299,14 @@ const RAW: Movie[] = [
     "budget": 160000000,
     "revenue": 300257475,
     "trailerKey": "aMJ5rZ5cjI8",
-    "posterPath": "/8qMrEp95arejdje8MgCFzKLBOUR.jpg"
+    "posterPath": "/8qMrEp95arejdje8MgCFzKLBOUR.jpg",
+    "actors": [
+      "Хью Джекман",
+      "Кейт Бекинсейл",
+      "Ричард Роксбург",
+      "Джози Мэран",
+      "Дэвид Уэнэм"
+    ]
   },
   {
     "id": "the-tomorrow-war",
@@ -3128,7 +4326,14 @@ const RAW: Movie[] = [
     "budget": 200000000,
     "revenue": 14400000,
     "trailerKey": "RQjEbkV-9ZM",
-    "posterPath": "/hrEOz8DAnAo29S6maXlvWd4TB06.jpg"
+    "posterPath": "/hrEOz8DAnAo29S6maXlvWd4TB06.jpg",
+    "actors": [
+      "Крис Прэтт",
+      "Ивонн Страховски",
+      "Джей Кей Симмонс",
+      "Бетти Гилпин",
+      "Сэм Ричардсон"
+    ]
   },
   {
     "id": "edge-of-tomorrow",
@@ -3147,7 +4352,14 @@ const RAW: Movie[] = [
     "budget": 178000000,
     "revenue": 370541256,
     "trailerKey": "6l2yLRijoJM",
-    "posterPath": "/98Ll6igWXdjHiKuZtCacTzRGyNX.jpg"
+    "posterPath": "/98Ll6igWXdjHiKuZtCacTzRGyNX.jpg",
+    "actors": [
+      "Том Круз",
+      "Эмили Блант",
+      "Брендан Глисон",
+      "Билл Пэкстон",
+      "Джонас Армстронг"
+    ]
   }
 ];
 

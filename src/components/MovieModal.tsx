@@ -178,6 +178,15 @@ export function MovieModal({
                   <Unknown>жанры не указаны</Unknown>
                 )}
               </div>
+
+              {movie.actors && movie.actors.length > 0 ? (
+                <div className="mt-3.5 flex flex-wrap items-baseline gap-1.5 text-xs">
+                  <span className="font-semibold text-muted">В главных ролях:</span>
+                  <span className="font-medium text-fg/90">
+                    {movie.actors.join(", ")}
+                  </span>
+                </div>
+              ) : null}
             </div>
           </div>
 

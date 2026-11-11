@@ -175,7 +175,10 @@ export function SinApp() {
       const matchTitle = movie.title.toLowerCase().includes(q);
       const matchOriginal = movie.originalTitle?.toLowerCase().includes(q);
       const matchDirector = movie.director?.toLowerCase().includes(q);
-      return matchTitle || matchOriginal || matchDirector;
+      const matchActor = movie.actors?.some((actor) =>
+        actor.toLowerCase().includes(q),
+      );
+      return matchTitle || matchOriginal || matchDirector || matchActor;
     });
   }, [rawPool, searchQuery]);
 
