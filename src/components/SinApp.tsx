@@ -70,6 +70,12 @@ export function SinApp() {
     (v): v is boolean => typeof v === "boolean",
   );
   const noRepeatEnabled = noRepeat.value ?? false;
+  const autoOpenModal = useStoredJson<boolean>(
+    STORAGE_KEYS.autoOpenModal,
+    true,
+    (v): v is boolean => typeof v === "boolean",
+  );
+  const autoOpenModalEnabled = autoOpenModal.value ?? true;
 
   const [settingsOpen, setSettingsOpen] = useState(false);
   const [historyOpen, setHistoryOpen] = useState(false);
@@ -258,12 +264,14 @@ export function SinApp() {
     setSpinning(false);
     if (!spin) return;
     const winner = spin.winner;
-    changeOpenMovie(winner);
+    if (autoOpenModalEnabled) {
+      changeOpenMovie(winner);
+    }
     const at = new Date().toISOString();
     lastDropped.setValue({ id: winner.id, at });
     const currentList = history.value ?? [];
     history.setValue([{ id: winner.id, at }, ...currentList].slice(0, 100));
-  }, [spin, lastDropped, history, changeOpenMovie]);
+  }, [spin, lastDropped, history, changeOpenMovie, autoOpenModalEnabled]);
 
   const activeSpin = spin ?? {
     winner: pool[0] ?? movies[0],
@@ -532,6 +540,8 @@ export function SinApp() {
         onSound={sound.setValue}
         noRepeat={noRepeatEnabled}
         onNoRepeat={noRepeat.setValue}
+        autoOpenModal={autoOpenModalEnabled}
+        onAutoOpenModal={autoOpenModal.setValue}
       />
 
       <MovieModal movie={openMovie} onClose={() => changeOpenMovie(null)} />

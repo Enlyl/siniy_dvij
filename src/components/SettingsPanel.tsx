@@ -14,6 +14,8 @@ export function SettingsPanel({
   onSound,
   noRepeat,
   onNoRepeat,
+  autoOpenModal = true,
+  onAutoOpenModal,
 }: {
   open: boolean;
   onClose: () => void;
@@ -25,6 +27,8 @@ export function SettingsPanel({
   onSound: (enabled: boolean) => void;
   noRepeat: boolean;
   onNoRepeat: (enabled: boolean) => void;
+  autoOpenModal?: boolean;
+  onAutoOpenModal?: (enabled: boolean) => void;
 }) {
   useEffect(() => {
     if (!open) return;
@@ -152,6 +156,47 @@ export function SettingsPanel({
                 <span
                   className={`pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out ${
                     noRepeat ? "translate-x-5" : "translate-x-0"
+                  }`}
+                />
+              </div>
+            </button>
+          </div>
+        </section>
+
+        <section className="mt-6">
+          <h3 className="font-display text-xs tracking-[0.16em] text-muted uppercase">
+            Модальное окно
+          </h3>
+          <div className="mt-3">
+            <button
+              type="button"
+              onClick={() => onAutoOpenModal?.(!autoOpenModal)}
+              aria-pressed={autoOpenModal}
+              className="flex w-full items-center justify-between rounded-2xl border border-line bg-surface-2 p-3 text-left transition-colors hover:border-accent/60"
+            >
+              <div className="flex items-center gap-3">
+                <span className="text-xl">🪟</span>
+                <div>
+                  <span className="block text-sm font-semibold">
+                    {autoOpenModal
+                      ? "Автооткрытие карточки"
+                      : "Без автооткрытия"}
+                  </span>
+                  <span className="block text-xs text-muted">
+                    {autoOpenModal
+                      ? "Сразу открывать информацию о выпавшем фильме"
+                      : "Оставаться на рулетке (карточку можно открыть кликом)"}
+                  </span>
+                </div>
+              </div>
+              <div
+                className={`relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out ${
+                  autoOpenModal ? "bg-accent" : "bg-line"
+                }`}
+              >
+                <span
+                  className={`pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out ${
+                    autoOpenModal ? "translate-x-5" : "translate-x-0"
                   }`}
                 />
               </div>

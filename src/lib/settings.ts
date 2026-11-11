@@ -80,6 +80,7 @@ export const STORAGE_KEYS = {
   history: "dm.history",
   sound: "dm.sound",
   noRepeat: "dm.noRepeat",
+  autoOpenModal: "dm.autoOpenModal",
 } as const;
 
 export function isThemeId(value: unknown): value is ThemeId {
