@@ -116,9 +116,6 @@ export function SinApp() {
   }, []);
 
   const changeOpenMovie = useCallback((movie: Movie | null) => {
-    if (movie && movie.id !== EASTER_EGG_ID) {
-      consecutiveSpinsRef.current = 0;
-    }
     setOpenMovie(movie);
     if (typeof window === "undefined") return;
     try {
@@ -198,15 +195,27 @@ export function SinApp() {
 
   const startSpin = useCallback(() => {
     if (pool.length === 0 || spinning) return;
-    consecutiveSpinsRef.current += 1;
+
+    let streak = consecutiveSpinsRef.current + 1;
+    try {
+      const stored = parseInt(sessionStorage.getItem("sin_spin_streak") || "0", 10) || 0;
+      streak = Math.max(streak, stored + 1);
+    } catch {}
+    consecutiveSpinsRef.current = streak;
+    try {
+      sessionStorage.setItem("sin_spin_streak", String(streak));
+    } catch {}
 
     let winner: Movie;
     let spinPool: Movie[];
 
-    if (consecutiveSpinsRef.current > EASTER_EGG_SPIN_THRESHOLD) {
+    if (streak > EASTER_EGG_SPIN_THRESHOLD) {
       winner = EASTER_EGG_MOVIE;
       spinPool = [EASTER_EGG_MOVIE, ...pool];
       consecutiveSpinsRef.current = 0;
+      try {
+        sessionStorage.setItem("sin_spin_streak", "0");
+      } catch {}
     } else {
       winner = pool[Math.floor(Math.random() * pool.length)];
       spinPool = [...pool];
@@ -445,7 +454,13 @@ export function SinApp() {
                 <li key={movie.id} className="rise">
                   <button
                     type="button"
-                    onClick={() => changeOpenMovie(movie)}
+                    onClick={() => {
+                      consecutiveSpinsRef.current = 0;
+                      try {
+                        sessionStorage.setItem("sin_spin_streak", "0");
+                      } catch {}
+                      changeOpenMovie(movie);
+                    }}
                     className="group block w-full text-left"
                   >
                     <Poster
