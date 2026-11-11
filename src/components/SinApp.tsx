@@ -4,6 +4,9 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { formatRating } from "@/lib/format";
 import { MOVIES, type Movie } from "@/lib/movies";
 import {
+  BROKEBACK_MOUNTAIN_ID,
+  BROKEBACK_MOUNTAIN_MOVIE,
+  BROKEBACK_UNLOCK_THRESHOLD,
   EASTER_EGG_ID,
   EASTER_EGG_MOVIE,
   EASTER_EGG_SPIN_THRESHOLD,
@@ -77,9 +80,17 @@ export function SinApp() {
     genres: [],
   });
   const [searchQuery, setSearchQuery] = useState("");
+  const [totalSpins, setTotalSpins] = useState(0);
 
   const nonceRef = useRef(0);
   const consecutiveSpinsRef = useRef(0);
+
+  useEffect(() => {
+    try {
+      const stored = parseInt(sessionStorage.getItem("sin_total_spins") || "0", 10) || 0;
+      setTotalSpins(stored);
+    } catch {}
+  }, []);
 
   /* тема живёт на <html>, чтобы не мигало при загрузке */
   useEffect(() => {
@@ -103,6 +114,8 @@ export function SinApp() {
       if (slug) {
         if (slug === EASTER_EGG_ID) {
           setOpenMovie(EASTER_EGG_MOVIE);
+        } else if (slug === BROKEBACK_MOUNTAIN_ID) {
+          setOpenMovie(BROKEBACK_MOUNTAIN_MOVIE);
         } else {
           const found = MOVIES.find((m) => m.id === slug);
           if (found) {
@@ -160,10 +173,18 @@ export function SinApp() {
   );
 
   const pool = useMemo(() => {
-    if (!noRepeatEnabled) return rawPool;
-    const available = rawPool.filter((movie) => !droppedIds.has(movie.id));
+    let available = noRepeatEnabled
+      ? rawPool.filter((movie) => !droppedIds.has(movie.id))
+      : rawPool;
+
+    // После 3х круток Горбатая гора получает возможность участвовать в крутках
+    if (totalSpins >= BROKEBACK_UNLOCK_THRESHOLD) {
+      if (!noRepeatEnabled || !droppedIds.has(BROKEBACK_MOUNTAIN_ID)) {
+        available = [...available, BROKEBACK_MOUNTAIN_MOVIE];
+      }
+    }
     return available;
-  }, [rawPool, noRepeatEnabled, droppedIds]);
+  }, [rawPool, noRepeatEnabled, droppedIds, totalSpins]);
 
   const displayedCatalog = useMemo(() => {
     const q = searchQuery.trim().toLowerCase();
@@ -196,6 +217,12 @@ export function SinApp() {
   const startSpin = useCallback(() => {
     if (pool.length === 0 || spinning) return;
 
+    const nextTotal = totalSpins + 1;
+    setTotalSpins(nextTotal);
+    try {
+      sessionStorage.setItem("sin_total_spins", String(nextTotal));
+    } catch {}
+
     let streak = consecutiveSpinsRef.current + 1;
     try {
       const stored = parseInt(sessionStorage.getItem("sin_spin_streak") || "0", 10) || 0;
@@ -225,7 +252,7 @@ export function SinApp() {
     changeOpenMovie(null);
     setSpinning(true);
     setSpin({ winner, pool: spinPool, nonce: nonceRef.current });
-  }, [pool, spinning, changeOpenMovie]);
+  }, [pool, spinning, changeOpenMovie, totalSpins]);
 
   const handleSettled = useCallback(() => {
     setSpinning(false);
@@ -244,7 +271,10 @@ export function SinApp() {
     nonce: 0,
   };
 
-  const allMovies = useMemo(() => [EASTER_EGG_MOVIE, ...movies], [movies]);
+  const allMovies = useMemo(
+    () => [EASTER_EGG_MOVIE, BROKEBACK_MOUNTAIN_MOVIE, ...movies],
+    [movies],
+  );
 
   // Предыдущий выпавший фильм: history[1] (history[0] - текущий)
   const previousEntry = historyList.length >= 2 ? historyList[1] : null;

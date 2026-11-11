@@ -22,3 +22,25 @@ export const EASTER_EGG_MOVIE: Movie = {
   revenue: 0,
   posterPath: null,
 };
+
+export const BROKEBACK_MOUNTAIN_ID = "brokeback-mountain";
+export const BROKEBACK_UNLOCK_THRESHOLD = 3; // После 3 круток начинает участвовать в рулетке
+
+export const BROKEBACK_MOUNTAIN_MOVIE: Movie = {
+  id: BROKEBACK_MOUNTAIN_ID,
+  title: "Горбатая гора",
+  originalTitle: "Brokeback Mountain",
+  year: 2005,
+  director: "Энг Ли",
+  actors: ["Ты", "Ты"],
+  genres: ["Драма", "Мелодрама"],
+  overview: "Ахаха хахахахах ахах ха ха ха",
+  plot: "Ахаха хахахахах ахах ха ха ха",
+  tagline: "Ахаха хахахахах ахах ха ха ха",
+  runtime: 134,
+  rating: 7.7,
+  budget: 14000000,
+  revenue: 178043761,
+  posterPath: "/nunI538UpO4xnNmpRAWmMQP93Y3.jpg",
+  trailerKey: "Wm7WfkjDdBs",
+};
