@@ -22,7 +22,7 @@ export function MirrorPoster({ className = "" }: { className?: string }) {
       <div className="relative z-10 w-full pt-1">
         <span className="inline-flex items-center gap-1 rounded-full border border-amber-400/40 bg-amber-500/15 px-2 py-0.5 text-[0.625rem] font-extrabold tracking-wider text-amber-300 uppercase shadow-sm">
           <span aria-hidden>🪞</span>
-          <span>16-я крутка подряд</span>
+          <span>17-я крутка подряд</span>
         </span>
       </div>
 
