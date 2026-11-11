@@ -4,6 +4,11 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { formatRating } from "@/lib/format";
 import { MOVIES, type Movie } from "@/lib/movies";
 import {
+  EASTER_EGG_ID,
+  EASTER_EGG_MOVIE,
+  EASTER_EGG_SPIN_THRESHOLD,
+} from "@/lib/easterEgg";
+import {
   DEFAULT_SPIN_MODE,
   DEFAULT_THEME,
   isSpinMode,
@@ -74,6 +79,7 @@ export function SinApp() {
   const [searchQuery, setSearchQuery] = useState("");
 
   const nonceRef = useRef(0);
+  const consecutiveSpinsRef = useRef(0);
 
   /* тема живёт на <html>, чтобы не мигало при загрузке */
   useEffect(() => {
@@ -95,9 +101,13 @@ export function SinApp() {
           ? window.location.hash.slice(7)
           : null);
       if (slug) {
-        const found = MOVIES.find((m) => m.id === slug);
-        if (found) {
-          setOpenMovie(found);
+        if (slug === EASTER_EGG_ID) {
+          setOpenMovie(EASTER_EGG_MOVIE);
+        } else {
+          const found = MOVIES.find((m) => m.id === slug);
+          if (found) {
+            setOpenMovie(found);
+          }
         }
       }
     } catch {
@@ -106,6 +116,9 @@ export function SinApp() {
   }, []);
 
   const changeOpenMovie = useCallback((movie: Movie | null) => {
+    if (movie && movie.id !== EASTER_EGG_ID) {
+      consecutiveSpinsRef.current = 0;
+    }
     setOpenMovie(movie);
     if (typeof window === "undefined") return;
     try {
@@ -182,11 +195,24 @@ export function SinApp() {
 
   const startSpin = useCallback(() => {
     if (pool.length === 0 || spinning) return;
-    const winner = pool[Math.floor(Math.random() * pool.length)];
+    consecutiveSpinsRef.current += 1;
+
+    let winner: Movie;
+    let spinPool: Movie[];
+
+    if (consecutiveSpinsRef.current > EASTER_EGG_SPIN_THRESHOLD) {
+      winner = EASTER_EGG_MOVIE;
+      spinPool = [EASTER_EGG_MOVIE, ...pool];
+      consecutiveSpinsRef.current = 0;
+    } else {
+      winner = pool[Math.floor(Math.random() * pool.length)];
+      spinPool = [...pool];
+    }
+
     nonceRef.current += 1;
     changeOpenMovie(null);
     setSpinning(true);
-    setSpin({ winner, pool: [...pool], nonce: nonceRef.current });
+    setSpin({ winner, pool: spinPool, nonce: nonceRef.current });
   }, [pool, spinning, changeOpenMovie]);
 
   const handleSettled = useCallback(() => {
@@ -206,10 +232,12 @@ export function SinApp() {
     nonce: 0,
   };
 
+  const allMovies = useMemo(() => [EASTER_EGG_MOVIE, ...movies], [movies]);
+
   // Предыдущий выпавший фильм: history[1] (history[0] - текущий)
   const previousEntry = historyList.length >= 2 ? historyList[1] : null;
-  const previousMovie = previousEntry ? movies.find((m) => m.id === previousEntry.id) : null;
-  const currentOrLastMovie = historyList.length > 0 ? movies.find((m) => m.id === historyList[0].id) : null;
+  const previousMovie = previousEntry ? allMovies.find((m) => m.id === previousEntry.id) : null;
+  const currentOrLastMovie = historyList.length > 0 ? allMovies.find((m) => m.id === historyList[0].id) : null;
 
   return (
     <div className="mx-auto flex min-h-dvh w-full max-w-6xl flex-col gap-5 px-4 pt-5 pb-16 sm:px-6">
@@ -464,7 +492,7 @@ export function SinApp() {
         open={historyOpen}
         onClose={() => setHistoryOpen(false)}
         history={historyList}
-        movies={movies}
+        movies={allMovies}
         onSelectMovie={changeOpenMovie}
         onClearHistory={() => history.setValue([])}
       />

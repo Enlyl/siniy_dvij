@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { formatMoney, formatRating, formatRuntime, formatYear } from "@/lib/format";
 import type { Movie } from "@/lib/movies";
+import { EASTER_EGG_ID } from "@/lib/easterEgg";
 import { Poster } from "./Poster";
 import { Field, Unknown } from "./Unknown";
 
@@ -104,12 +105,14 @@ export function MovieModal({
 
   if (!movie) return null;
 
+  const isEasterEgg = movie.id === EASTER_EGG_ID;
+
   const money = {
-    budget: formatMoney(movie.budget),
-    revenue: formatMoney(movie.revenue),
+    budget: isEasterEgg ? "Твоё время" : formatMoney(movie.budget),
+    revenue: isEasterEgg ? "0 фильмов" : formatMoney(movie.revenue),
   };
-  const runtime = formatRuntime(movie.runtime);
-  const rating = formatRating(movie.rating);
+  const runtime = isEasterEgg ? "Весь вечер" : formatRuntime(movie.runtime);
+  const rating = isEasterEgg ? "0.1 / 10" : formatRating(movie.rating);
   const year = formatYear(movie.year);
 
   return (
@@ -201,7 +204,26 @@ export function MovieModal({
               <h3 className="font-display text-xs tracking-[0.16em] text-muted uppercase">
                 Трейлер
               </h3>
-              {movie.trailerKey ? (
+              {isEasterEgg ? (
+                <div className="mt-2 rounded-2xl border border-dashed border-amber-500/40 bg-amber-500/5 p-5 text-center">
+                  <p className="text-3xl">🪞</p>
+                  <p className="mt-2 font-display text-base font-bold text-fg">
+                    Трейлер не требуется
+                  </p>
+                  <p className="mx-auto mt-1.5 max-w-md text-xs leading-relaxed text-muted">
+                    Выключи экран или оглянись вокруг — трансляция уже идёт в прямом эфире. Хватит выбирать, нажимай на любой выпавший фильм или просто наливай!
+                  </p>
+                  <div className="mt-4 flex justify-center">
+                    <button
+                      type="button"
+                      onClick={onClose}
+                      className="btn btn-primary h-10 px-5 text-xs font-bold"
+                    >
+                      Ладно, беру себя в руки
+                    </button>
+                  </div>
+                </div>
+              ) : movie.trailerKey ? (
                 <Trailer key={movie.id} trailerKey={movie.trailerKey} title={movie.title} />
               ) : (
                 <p className="mt-2 text-[0.9375rem]">
@@ -222,7 +244,13 @@ export function MovieModal({
             }`}
           >
             <span aria-hidden>{copied ? "✓" : "🔗"}</span>
-            <span>{copied ? "Ссылка скопирована" : "Поделиться фильмом"}</span>
+            <span>
+              {copied
+                ? "Ссылка скопирована"
+                : isEasterEgg
+                  ? "Поделиться позором"
+                  : "Поделиться фильмом"}
+            </span>
           </button>
         </div>
       </div>
