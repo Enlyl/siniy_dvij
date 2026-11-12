@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import {
   ACHIEVEMENTS,
   trackAchievementClick,
@@ -32,8 +32,13 @@ export function AchievementsModal({
   soundEnabled?: boolean;
   onTriggerAchievement?: (id: AchievementId) => void;
 }) {
+  const [confirmReset, setConfirmReset] = useState(false);
+
   useEffect(() => {
-    if (!open) return;
+    if (!open) {
+      setConfirmReset(false);
+      return;
+    }
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") onClose();
     };
@@ -203,13 +208,36 @@ export function AchievementsModal({
         </div>
 
         <div className="mt-4 flex items-center justify-between border-t border-line pt-3">
-          <button
-            type="button"
-            onClick={onReset}
-            className="text-xs text-muted underline decoration-dotted transition-colors hover:text-red-400"
-          >
-            Сбросить достижения
-          </button>
+          {confirmReset ? (
+            <div className="flex flex-wrap items-center gap-2 text-xs">
+              <span className="font-semibold text-red-400">Сбросить все?</span>
+              <button
+                type="button"
+                onClick={() => {
+                  onReset();
+                  setConfirmReset(false);
+                }}
+                className="rounded-lg bg-red-500/20 px-2.5 py-1 font-bold text-red-400 transition-colors hover:bg-red-500/30"
+              >
+                Да, очистить
+              </button>
+              <button
+                type="button"
+                onClick={() => setConfirmReset(false)}
+                className="text-muted underline decoration-dotted transition-colors hover:text-fg"
+              >
+                Отмена
+              </button>
+            </div>
+          ) : (
+            <button
+              type="button"
+              onClick={() => setConfirmReset(true)}
+              className="text-xs text-muted underline decoration-dotted transition-colors hover:text-red-400"
+            >
+              Сбросить достижения
+            </button>
+          )}
           <button
             type="button"
             onClick={onClose}
