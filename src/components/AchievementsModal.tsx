@@ -199,7 +199,7 @@ export function AchievementToast({
   return (
     <div
       onClick={onClose}
-      className={`pop fixed bottom-6 right-6 z-50 flex max-w-sm cursor-pointer items-center gap-3 rounded-2xl border p-4 shadow-2xl transition-all ${
+      className={`pop fixed bottom-6 right-6 z-[100] flex max-w-sm cursor-pointer items-center gap-3 rounded-2xl border p-4 shadow-2xl transition-all ${
         isPlatinum
           ? "border-amber-400 bg-surface shadow-[0_0_25px_rgba(234,179,8,0.4)]"
           : "border-accent bg-surface glow-ring"
