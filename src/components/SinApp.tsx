@@ -49,6 +49,7 @@ import { SpinTrack } from "./SpinTrack";
 import { NeonSign } from "./NeonSign";
 import { SmokeEffect } from "./SmokeEffect";
 import { AchievementsModal, AchievementToast } from "./AchievementsModal";
+import { playAchievementSound } from "@/lib/sound";
 
 type LastDropped = { id: string; at: string };
 
@@ -163,6 +164,7 @@ export function SinApp() {
         if (isNew) {
           const ach = ACHIEVEMENTS.find((a) => a.id === id);
           if (ach) setToastAchievement(ach);
+          playAchievementSound(soundEnabled);
 
           // Проверка на получение платины «Абсолют синема!»
           if (id !== "absolute-cinema" && !set.has("absolute-cinema")) {
@@ -179,7 +181,7 @@ export function SinApp() {
         return set;
       });
     },
-    [achievementsEnabled],
+    [achievementsEnabled, soundEnabled],
   );
   triggerRef.current = triggerAchievement;
 

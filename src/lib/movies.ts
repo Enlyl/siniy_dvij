@@ -4384,6 +4384,15 @@ export function getYearBounds(): { min: number; max: number } {
 export function posterUrl(posterPath: string | null | undefined, size = "w500"): string | null {
   if (!posterPath) return null;
   if (/^https?:\/\//.test(posterPath)) return posterPath;
+  if (posterPath.startsWith("/posters/") || posterPath.startsWith("posters/")) {
+    const cleanPath = posterPath.startsWith("/") ? posterPath : `/${posterPath}`;
+    const basePath =
+      typeof window !== "undefined" &&
+      window.location.pathname.startsWith("/siniy_dvij")
+        ? "/siniy_dvij"
+        : "";
+    return `${basePath}${cleanPath}`;
+  }
   const clean = posterPath.replace(/^\//, "");
   return `https://image.tmdb.org/t/p/${size}/${clean}`;
 }

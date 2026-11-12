@@ -85,3 +85,79 @@ export function playWinSound(enabled: boolean) {
     // Игнорируем
   }
 }
+
+/** Басовитый приятный звук получения достижения (глубокий бархатный саб-бас + теплый аккорд) */
+export function playAchievementSound(enabled: boolean = true) {
+  if (!enabled) return;
+  const ctx = getAudioContext();
+  if (!ctx) return;
+
+  try {
+    const now = ctx.currentTime;
+
+    // 1. Глубокий бархатный саб-бас (130Hz -> 48Hz)
+    const subOsc = ctx.createOscillator();
+    const subGain = ctx.createGain();
+    const subFilter = ctx.createBiquadFilter();
+
+    subOsc.type = "sine";
+    subOsc.frequency.setValueAtTime(130, now);
+    subOsc.frequency.exponentialRampToValueAtTime(65, now + 0.3);
+    subOsc.frequency.exponentialRampToValueAtTime(48, now + 0.85);
+
+    subFilter.type = "lowpass";
+    subFilter.frequency.setValueAtTime(260, now);
+    subFilter.frequency.exponentialRampToValueAtTime(80, now + 0.7);
+    subFilter.Q.setValueAtTime(2.5, now);
+
+    subGain.gain.setValueAtTime(0.001, now);
+    subGain.gain.linearRampToValueAtTime(0.5, now + 0.03); // мягкий приятный панч
+    subGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.9);
+
+    subOsc.connect(subFilter);
+    subFilter.connect(subGain);
+    subGain.connect(ctx.destination);
+
+    subOsc.start(now);
+    subOsc.stop(now + 0.95);
+
+    // 2. Тёплое гармоническое тело (треугольная волна 98Hz -> 65Hz)
+    const bodyOsc = ctx.createOscillator();
+
+    bodyOsc.type = "triangle";
+    bodyOsc.frequency.setValueAtTime(98, now);
+    bodyOsc.frequency.exponentialRampToValueAtTime(65.4, now + 0.6);
+
+    bodyOsc.connect(subFilter);
+    bodyOsc.start(now);
+    bodyOsc.stop(now + 0.85);
+
+    // 3. Мягкий деликатный перелив (До4 - Соль4 - До5) поверх баса
+    const chimes = [
+      { freq: 261.63, delay: 0.04, dur: 0.55, vol: 0.12 },
+      { freq: 392.0, delay: 0.11, dur: 0.65, vol: 0.1 },
+      { freq: 523.25, delay: 0.19, dur: 0.75, vol: 0.08 },
+    ];
+
+    chimes.forEach(({ freq, delay, dur, vol }) => {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      const start = now + delay;
+
+      osc.type = "sine";
+      osc.frequency.setValueAtTime(freq, start);
+
+      gain.gain.setValueAtTime(0.0001, start);
+      gain.gain.linearRampToValueAtTime(vol, start + 0.02);
+      gain.gain.exponentialRampToValueAtTime(0.0001, start + dur);
+
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+
+      osc.start(start);
+      osc.stop(start + dur);
+    });
+  } catch {
+    // Игнорируем
+  }
+}

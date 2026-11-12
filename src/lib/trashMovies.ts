@@ -14,7 +14,7 @@ export const TRASH_MOVIES: Movie[] = [
     tagline: "Зачем",
     runtime: 110,
     rating: 2.8,
-    posterPath: "/wrFpXMNBRj2PBiN4Z5FSfbZkAU1.jpg",
+    posterPath: "/posters/trash/trash-cats-2019.jpg",
   },
   {
     id: "trash-hitler-kaput",
@@ -140,7 +140,7 @@ export const TRASH_MOVIES: Movie[] = [
     tagline: "Они испортили всё",
     runtime: 85,
     rating: 2.6,
-    posterPath: "/dPSfLyIShFNdLmK8CwRlaj0UHKH.jpg",
+    posterPath: "/posters/trash/trash-dragonball-evolution.jpg",
   },
   {
     id: "trash-the-room",
@@ -154,7 +154,7 @@ export const TRASH_MOVIES: Movie[] = [
     tagline: "Oh hi Mark",
     runtime: 99,
     rating: 3.6,
-    posterPath: "/gbLhJBsAkBMJp1PZ7adcFmQj6zt.jpg",
+    posterPath: "/posters/trash/trash-the-room.jpg",
   },
   {
     id: "trash-birdemic",
@@ -168,7 +168,7 @@ export const TRASH_MOVIES: Movie[] = [
     tagline: "Орнитологический апокалипсис на минималках",
     runtime: 93,
     rating: 1.8,
-    posterPath: "/iORaiRg3kYMDy0vGSXzhkWspB7G.jpg",
+    posterPath: "/posters/trash/trash-birdemic.jpg",
   },
   {
     id: "trash-disaster-movie",
@@ -182,7 +182,7 @@ export const TRASH_MOVIES: Movie[] = [
     tagline: "Катастрофа, да",
     runtime: 87,
     rating: 2.1,
-    posterPath: "/tZPpKqrnB3I3sE7VFe3hE4DkgDl.jpg",
+    posterPath: "/posters/trash/trash-disaster-movie.jpg",
   },
   {
     id: "trash-sharknado",
@@ -196,7 +196,7 @@ export const TRASH_MOVIES: Movie[] = [
     tagline: "Достаточно акул",
     runtime: 86,
     rating: 3.3,
-    posterPath: "/2gfexMOMJtpPESunOOvMIyRDIuW.jpg",
+    posterPath: "/posters/trash/trash-sharknado.jpg",
   },
   {
     id: "trash-human-centipede",
@@ -210,7 +210,7 @@ export const TRASH_MOVIES: Movie[] = [
     tagline: "Кто это вообще придумал",
     runtime: 92,
     rating: 4.4,
-    posterPath: "/7hJV4lFSEJwIxRBfLCDBJKqh8R5.jpg",
+    posterPath: "/posters/trash/trash-human-centipede.jpg",
   },
 ];
 
