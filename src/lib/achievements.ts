@@ -15,13 +15,15 @@ export type AchievementId =
   | "drunk-mode"
   | "all-themes"
   | "all-modes"
-  | "night-owl";
+  | "night-owl"
+  | "absolute-cinema";
 
 export type Achievement = {
   id: AchievementId;
   icon: string;
   title: string;
   description: string;
+  image?: string;
   secret?: boolean;
 };
 
@@ -104,22 +106,28 @@ export const ACHIEVEMENTS: Achievement[] = [
   {
     id: "all-themes",
     icon: "🎨",
-    title: "Эстет",
-    description: "Попробовал все 4 темы.",
-    secret: true,
+    title: "Примерил всё",
+    description: "Попробовал все 4 темы оформления.",
   },
   {
     id: "all-modes",
     icon: "🎲",
     title: "Все виды кайфа",
-    description: "Попробовал все 4 режима крутки.",
-    secret: true,
+    description: "Попробовал все 4 режима крутки рулетки.",
   },
   {
     id: "night-owl",
     icon: "🦉",
     title: "Ночная сова",
     description: "Крутишь рулетку после полуночи. Спать не пробовал?",
+  },
+  {
+    id: "absolute-cinema",
+    icon: "🎬",
+    title: "Абсолют синема!",
+    description: "Аналог платины на PlayStation. Собраны все остальные достижения!",
+    image: "/abs_cin.jpg",
+    secret: true,
   },
 ];
 
@@ -149,7 +157,13 @@ export function resetAchievements(): void {
   } catch {}
 }
 
-export function unlock(id: AchievementId, current: Set<AchievementId>): { set: Set<AchievementId>; isNew: boolean } {
+/** Количество обычных достижений без учета платины */
+export const REGULAR_ACHIEVEMENTS_COUNT = ACHIEVEMENTS.length - 1;
+
+export function unlock(
+  id: AchievementId,
+  current: Set<AchievementId>,
+): { set: Set<AchievementId>; isNew: boolean } {
   if (current.has(id)) return { set: current, isNew: false };
   const next = new Set(current);
   next.add(id);
@@ -170,7 +184,9 @@ export function trackTheme(themeId: string): string[] {
       localStorage.setItem(USED_THEMES_KEY, JSON.stringify(arr));
     }
     return arr;
-  } catch { return []; }
+  } catch {
+    return [];
+  }
 }
 
 export function trackMode(modeId: string): string[] {
@@ -182,5 +198,7 @@ export function trackMode(modeId: string): string[] {
       localStorage.setItem(USED_MODES_KEY, JSON.stringify(arr));
     }
     return arr;
-  } catch { return []; }
+  } catch {
+    return [];
+  }
 }

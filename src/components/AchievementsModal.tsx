@@ -7,6 +7,14 @@ import {
   type AchievementId,
 } from "@/lib/achievements";
 
+function getAssetPath(path: string): string {
+  if (typeof window === "undefined") return path;
+  const prefix = window.location.pathname.startsWith("/siniy_dvij")
+    ? "/siniy_dvij"
+    : "";
+  return prefix + (path.startsWith("/") ? path : `/${path}`);
+}
+
 export function AchievementsModal({
   open,
   onClose,
@@ -80,32 +88,59 @@ export function AchievementsModal({
           <div className="grid gap-2.5 sm:grid-cols-2">
             {ACHIEVEMENTS.map((item) => {
               const isUnlocked = unlocked.has(item.id);
+              const isPlatinum = item.id === "absolute-cinema";
+
+              let cardStyle = "border-line bg-surface-2/60 opacity-60";
+              if (isUnlocked) {
+                if (isPlatinum) {
+                  cardStyle =
+                    "border-amber-400/80 bg-gradient-to-br from-amber-500/15 via-purple-500/10 to-accent/15 shadow-[0_0_15px_rgba(234,179,8,0.25)]";
+                } else {
+                  cardStyle = "border-accent/50 bg-accent/10";
+                }
+              }
+
               return (
                 <div
                   key={item.id}
-                  className={`flex items-start gap-3 rounded-2xl border p-3 transition-colors ${
-                    isUnlocked
-                      ? "border-accent/50 bg-accent/10"
-                      : "border-line bg-surface-2/60 opacity-60"
-                  }`}
+                  className={`flex items-start gap-3 rounded-2xl border p-3 transition-all ${cardStyle}`}
                 >
-                  <span
-                    className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl text-2xl ${
-                      isUnlocked
-                        ? "bg-accent/20 border border-accent/40 shadow-sm"
-                        : "bg-surface border border-line grayscale"
-                    }`}
-                  >
-                    {item.icon}
-                  </span>
+                  {item.image && isUnlocked ? (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img
+                      src={getAssetPath(item.image)}
+                      alt={item.title}
+                      className="h-11 w-11 shrink-0 rounded-xl object-cover border border-amber-400/80 shadow-md"
+                    />
+                  ) : (
+                    <span
+                      className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl text-2xl ${
+                        isUnlocked
+                          ? "bg-accent/20 border border-accent/40 shadow-sm"
+                          : "bg-surface border border-line grayscale"
+                      }`}
+                    >
+                      {item.icon}
+                    </span>
+                  )}
                   <div className="min-w-0 flex-1">
                     <div className="flex items-center justify-between gap-1">
-                      <span className="truncate text-sm font-bold text-fg">
+                      <span
+                        className={`truncate text-sm font-bold ${
+                          isPlatinum && isUnlocked
+                            ? "text-amber-300 drop-shadow-[0_0_8px_rgba(234,179,8,0.5)]"
+                            : "text-fg"
+                        }`}
+                      >
                         {!isUnlocked && item.secret ? "???" : item.title}
                       </span>
                       {isUnlocked ? (
-                        <span className="text-xs font-semibold text-accent">
-                          ✓
+                        <span
+                          className={`text-xs font-semibold ${
+                            isPlatinum ? "text-amber-400" : "text-accent"
+                          }`}
+                        >
+                          {isPlatinum ? "★" : "✓"}
                         </span>
                       ) : (
                         <span className="text-xs text-muted">🔒</span>
@@ -113,7 +148,7 @@ export function AchievementsModal({
                     </div>
                     <p className="mt-0.5 text-xs text-muted leading-snug">
                       {!isUnlocked && item.secret
-                        ? "Секретное достижение. Продолжай крутить!"
+                        ? "Секретное достижение. Собери все остальные награды!"
                         : item.description}
                     </p>
                   </div>
@@ -159,19 +194,42 @@ export function AchievementToast({
 
   if (!achievement) return null;
 
+  const isPlatinum = achievement.id === "absolute-cinema";
+
   return (
     <div
       onClick={onClose}
-      className="pop fixed bottom-6 right-6 z-50 flex max-w-sm cursor-pointer items-center gap-3 rounded-2xl border border-accent bg-surface p-4 shadow-2xl glow-ring"
+      className={`pop fixed bottom-6 right-6 z-50 flex max-w-sm cursor-pointer items-center gap-3 rounded-2xl border p-4 shadow-2xl transition-all ${
+        isPlatinum
+          ? "border-amber-400 bg-surface shadow-[0_0_25px_rgba(234,179,8,0.4)]"
+          : "border-accent bg-surface glow-ring"
+      }`}
     >
-      <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-accent/20 text-3xl">
-        {achievement.icon}
-      </span>
-      <div className="min-w-0">
-        <span className="block text-[0.6875rem] font-bold tracking-wider text-accent uppercase">
-          🏆 Новое достижение!
+      {achievement.image ? (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
+          src={getAssetPath(achievement.image)}
+          alt={achievement.title}
+          className="h-12 w-12 shrink-0 rounded-xl object-cover border border-amber-400/80 shadow-md"
+        />
+      ) : (
+        <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-accent/20 text-3xl">
+          {achievement.icon}
         </span>
-        <span className="block truncate text-sm font-bold text-fg">
+      )}
+      <div className="min-w-0">
+        <span
+          className={`block text-[0.6875rem] font-bold tracking-wider uppercase ${
+            isPlatinum ? "text-amber-400" : "text-accent"
+          }`}
+        >
+          {isPlatinum ? "🏆 ПЛАТИНА РАЗБЛОКИРОВАНА!" : "🏆 Новое достижение!"}
+        </span>
+        <span
+          className={`block truncate text-sm font-bold ${
+            isPlatinum ? "text-amber-300" : "text-fg"
+          }`}
+        >
           {achievement.title}
         </span>
         <span className="block text-xs text-muted line-clamp-1">

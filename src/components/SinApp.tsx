@@ -18,9 +18,9 @@ import {
 } from "@/lib/trashMovies";
 import {
   ACHIEVEMENTS,
+  REGULAR_ACHIEVEMENTS_COUNT,
   getUnlocked,
   resetAchievements,
-  saveUnlocked,
   trackMode,
   trackTheme,
   unlock,
@@ -153,14 +153,7 @@ export function SinApp() {
 
   const nonceRef = useRef(0);
   const consecutiveSpinsRef = useRef(0);
-
-  useEffect(() => {
-    try {
-      const stored = parseInt(sessionStorage.getItem("sin_total_spins") || "0", 10) || 0;
-      setTotalSpins(stored);
-    } catch {}
-    setUnlockedAchievements(getUnlocked());
-  }, []);
+  const triggerRef = useRef<(id: AchievementId) => void>(() => {});
 
   const triggerAchievement = useCallback(
     (id: AchievementId) => {
@@ -170,12 +163,46 @@ export function SinApp() {
         if (isNew) {
           const ach = ACHIEVEMENTS.find((a) => a.id === id);
           if (ach) setToastAchievement(ach);
+
+          // Проверка на получение платины «Абсолют синема!»
+          if (id !== "absolute-cinema" && !set.has("absolute-cinema")) {
+            const hasAllRegular = ACHIEVEMENTS.filter(
+              (a) => a.id !== "absolute-cinema",
+            ).every((a) => set.has(a.id));
+            if (hasAllRegular) {
+              setTimeout(() => {
+                triggerRef.current("absolute-cinema");
+              }, 1200);
+            }
+          }
         }
         return set;
       });
     },
     [achievementsEnabled],
   );
+  triggerRef.current = triggerAchievement;
+
+  useEffect(() => {
+    try {
+      const stored =
+        parseInt(sessionStorage.getItem("sin_total_spins") || "0", 10) || 0;
+      setTotalSpins(stored);
+    } catch {}
+    const unlocked = getUnlocked();
+    setUnlockedAchievements(unlocked);
+    if (
+      unlocked.size >= REGULAR_ACHIEVEMENTS_COUNT &&
+      !unlocked.has("absolute-cinema")
+    ) {
+      const hasAllRegular = ACHIEVEMENTS.filter(
+        (a) => a.id !== "absolute-cinema",
+      ).every((a) => unlocked.has(a.id));
+      if (hasAllRegular) {
+        triggerRef.current("absolute-cinema");
+      }
+    }
+  }, []);
 
   /* тема живёт на <html>, чтобы не мигало при загрузке */
   useEffect(() => {
