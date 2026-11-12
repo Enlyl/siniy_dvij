@@ -158,13 +158,13 @@ export function AchievementsModal({
                     />
                   ) : (
                     <span
-                      className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl text-2xl ${
+                      className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl ${
                         isUnlocked
-                          ? "bg-accent/20 border border-accent/40 shadow-sm"
-                          : "bg-surface border border-line grayscale"
+                          ? "bg-accent/20 border border-accent/40 shadow-sm text-2xl"
+                          : "bg-surface border border-line text-muted/70 text-lg"
                       }`}
                     >
-                      {item.icon}
+                      {isUnlocked ? item.icon : "🔒"}
                     </span>
                   )}
                   <div className="min-w-0 flex-1">
