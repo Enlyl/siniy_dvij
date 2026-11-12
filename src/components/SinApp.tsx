@@ -536,10 +536,6 @@ export function SinApp() {
         onTheme={theme.setValue}
         spin={spinMode.value}
         onSpin={changeSpinMode}
-        sound={soundEnabled}
-        onSound={sound.setValue}
-        noRepeat={noRepeatEnabled}
-        onNoRepeat={noRepeat.setValue}
         autoOpenModal={autoOpenModalEnabled}
         onAutoOpenModal={autoOpenModal.setValue}
       />
