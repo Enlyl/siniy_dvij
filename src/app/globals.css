@@ -518,12 +518,7 @@ body {
 }
 
 .drunk-level-2 {
-  animation: drunk-sway-anim 3.5s ease-in-out infinite;
-  filter: blur(0.25px);
-}
-
-.drunk-level-3 {
-  animation: drunk-sway-heavy 2.8s ease-in-out infinite;
-  filter: blur(0.5px);
+  animation: drunk-sway-heavy 3s ease-in-out infinite;
+  filter: blur(0.45px);
 }
 

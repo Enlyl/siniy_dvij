@@ -149,6 +149,7 @@ export function SinApp() {
   });
   const [searchQuery, setSearchQuery] = useState("");
   const [totalSpins, setTotalSpins] = useState(0);
+  const [sessionSpins, setSessionSpins] = useState(0);
 
   const nonceRef = useRef(0);
   const consecutiveSpinsRef = useRef(0);
@@ -311,6 +312,14 @@ export function SinApp() {
       sessionStorage.setItem("sin_total_spins", String(nextTotal));
     } catch {}
 
+    setSessionSpins((prev) => {
+      const next = prev + 1;
+      if (drunkModeEnabled && getDrunkLevel(next) > 0) {
+        setDrunkQuote(getRandomDrunkPhrase());
+      }
+      return next;
+    });
+
     let streak = consecutiveSpinsRef.current + 1;
     try {
       const stored = parseInt(sessionStorage.getItem("sin_spin_streak") || "0", 10) || 0;
@@ -337,10 +346,6 @@ export function SinApp() {
     } else {
       winner = pool[Math.floor(Math.random() * pool.length)];
       spinPool = [...pool];
-    }
-
-    if (drunkModeEnabled) {
-      setDrunkQuote(getRandomDrunkPhrase());
     }
 
     nonceRef.current += 1;
@@ -387,7 +392,7 @@ export function SinApp() {
       triggerAchievement("fast-and-furious");
     }
 
-    const drunkLvl = drunkModeEnabled ? getDrunkLevel(totalSpins) : 0;
+    const drunkLvl = drunkModeEnabled ? getDrunkLevel(sessionSpins) : 0;
     if (drunkLvl >= 2) triggerAchievement("drunk-mode");
 
     const hours = new Date().getHours();
@@ -399,6 +404,7 @@ export function SinApp() {
     changeOpenMovie,
     autoOpenModalEnabled,
     totalSpins,
+    sessionSpins,
     triggerAchievement,
     drunkModeEnabled,
   ]);
@@ -424,7 +430,7 @@ export function SinApp() {
   const previousMovie = previousEntry ? allMovies.find((m) => m.id === previousEntry.id) : null;
   const currentOrLastMovie = historyList.length > 0 ? allMovies.find((m) => m.id === historyList[0].id) : null;
 
-  const drunkLevel = drunkModeEnabled ? getDrunkLevel(totalSpins) : 0;
+  const drunkLevel = drunkModeEnabled ? getDrunkLevel(sessionSpins) : 0;
 
   return (
     <>
@@ -435,8 +441,6 @@ export function SinApp() {
             ? "drunk-level-1"
             : drunkLevel === 2
             ? "drunk-level-2"
-            : drunkLevel === 3
-            ? "drunk-level-3"
             : ""
         }`}
       >
@@ -736,6 +740,8 @@ export function SinApp() {
           resetAchievements();
           setUnlockedAchievements(new Set());
           setTotalSpins(0);
+          setSessionSpins(0);
+          setDrunkQuote("");
           consecutiveSpinsRef.current = 0;
           try {
             sessionStorage.removeItem("sin_total_spins");
