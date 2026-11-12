@@ -10,6 +10,7 @@ export type AchievementId =
   | "streak-17"
   | "found-mirror"
   | "found-brokeback"
+  | "fast-and-furious"
   | "got-trash"
   | "drunk-mode"
   | "all-themes"
@@ -83,6 +84,12 @@ export const ACHIEVEMENTS: Achievement[] = [
     secret: true,
   },
   {
+    id: "fast-and-furious",
+    icon: "🩳",
+    title: "Добро пожаловать в семью!",
+    description: "Выпал один из «Форсажей». Главное — семья, Торретто одобряет.",
+  },
+  {
     id: "got-trash",
     icon: "🗑️",
     title: "Русская рулетка",
@@ -131,6 +138,14 @@ export function getUnlocked(): Set<AchievementId> {
 export function saveUnlocked(ids: Set<AchievementId>): void {
   try {
     localStorage.setItem(STORAGE_KEY, JSON.stringify([...ids]));
+  } catch {}
+}
+
+export function resetAchievements(): void {
+  try {
+    localStorage.removeItem(STORAGE_KEY);
+    localStorage.removeItem(USED_THEMES_KEY);
+    localStorage.removeItem(USED_MODES_KEY);
   } catch {}
 }
 

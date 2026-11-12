@@ -201,7 +201,7 @@ export function SettingsPanel({
                     Режим «Русская рулетка»
                   </span>
                   <span className="block text-xs text-muted">
-                    Шанс 1 из 6 выбить треш-фильм (Кошки, Эмоджи фильм…)
+                    Шанс 1 из 6 выбить секретный треш-фильм
                   </span>
                 </div>
               </div>

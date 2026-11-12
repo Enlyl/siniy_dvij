@@ -19,6 +19,7 @@ import {
 import {
   ACHIEVEMENTS,
   getUnlocked,
+  resetAchievements,
   saveUnlocked,
   trackMode,
   trackTheme,
@@ -379,6 +380,12 @@ export function SinApp() {
     if (winner.id === EASTER_EGG_ID) triggerAchievement("found-mirror");
     if (winner.id === BROKEBACK_MOUNTAIN_ID) triggerAchievement("found-brokeback");
     if (TRASH_MOVIES.some((t) => t.id === winner.id)) triggerAchievement("got-trash");
+    if (
+      winner.title.toLowerCase().includes("форсаж") ||
+      (winner.originalTitle && winner.originalTitle.toLowerCase().includes("fast"))
+    ) {
+      triggerAchievement("fast-and-furious");
+    }
 
     const drunkLvl = drunkModeEnabled ? getDrunkLevel(totalSpins) : 0;
     if (drunkLvl >= 2) triggerAchievement("drunk-mode");
@@ -726,8 +733,14 @@ export function SinApp() {
         onClose={() => setAchievementsOpen(false)}
         unlocked={unlockedAchievements}
         onReset={() => {
-          saveUnlocked(new Set());
+          resetAchievements();
           setUnlockedAchievements(new Set());
+          setTotalSpins(0);
+          consecutiveSpinsRef.current = 0;
+          try {
+            sessionStorage.removeItem("sin_total_spins");
+            sessionStorage.removeItem("sin_spin_streak");
+          } catch {}
         }}
       />
 

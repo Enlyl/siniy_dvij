@@ -32,41 +32,56 @@ export function SmokeEffect({ enabled = true }: { enabled?: boolean }) {
       alpha: number;
       maxAlpha: number;
       growing: boolean;
+      driftAngle: number;
+      driftSpeed: number;
     };
 
-    const particleCount = 18;
-    const particles: Particle[] = Array.from({ length: particleCount }, () => ({
-      x: Math.random() * width,
-      y: height + Math.random() * 100,
-      radius: 80 + Math.random() * 120,
-      vx: (Math.random() - 0.5) * 0.4,
-      vy: -(0.3 + Math.random() * 0.5),
-      alpha: 0,
-      maxAlpha: 0.04 + Math.random() * 0.05,
-      growing: true,
-    }));
+    const particleCount = 28;
+    const particles: Particle[] = Array.from({ length: particleCount }, () => {
+      const radius = 130 + Math.random() * 160;
+      return {
+        x: Math.random() * width,
+        // Сразу распределяем по всей высоте экрана, чтобы дым был виден сразу
+        y: Math.random() * (height + 200),
+        radius,
+        vx: (Math.random() - 0.5) * 0.5,
+        // Поднимается заметно быстрее и уверенно вверх через весь экран
+        vy: -(0.6 + Math.random() * 0.9),
+        alpha: Math.random() * 0.08,
+        maxAlpha: 0.12 + Math.random() * 0.1,
+        growing: Math.random() > 0.4,
+        driftAngle: Math.random() * Math.PI * 2,
+        driftSpeed: 0.008 + Math.random() * 0.012,
+      };
+    });
 
     const render = () => {
       ctx.clearRect(0, 0, width, height);
 
       for (let i = 0; i < particles.length; i++) {
         const p = particles[i];
-        p.x += p.vx;
+        p.driftAngle += p.driftSpeed;
+        p.x += p.vx + Math.sin(p.driftAngle) * 0.35;
         p.y += p.vy;
 
+        // Плавное появление и затухание
         if (p.growing) {
-          p.alpha += 0.0008;
+          p.alpha += 0.0012;
           if (p.alpha >= p.maxAlpha) p.growing = false;
         } else {
+          // Затухает медленнее, пока поднимается к самому верху
           p.alpha -= 0.0006;
         }
 
+        // Перезапуск частицы снизу
         if (p.y < -p.radius * 2 || p.alpha <= 0) {
           p.x = Math.random() * width;
-          p.y = height + 40;
-          p.alpha = 0;
+          p.y = height + p.radius * 0.5;
+          p.radius = 130 + Math.random() * 160;
+          p.alpha = 0.01;
           p.growing = true;
-          p.maxAlpha = 0.04 + Math.random() * 0.05;
+          p.maxAlpha = 0.12 + Math.random() * 0.1;
+          p.vy = -(0.6 + Math.random() * 0.9);
         }
 
         const gradient = ctx.createRadialGradient(
@@ -77,8 +92,9 @@ export function SmokeEffect({ enabled = true }: { enabled?: boolean }) {
           p.y,
           p.radius,
         );
-        gradient.addColorStop(0, `rgba(255, 255, 255, ${p.alpha})`);
-        gradient.addColorStop(0.6, `rgba(200, 220, 210, ${p.alpha * 0.4})`);
+        gradient.addColorStop(0, `rgba(255, 255, 255, ${p.alpha * 1.1})`);
+        gradient.addColorStop(0.45, `rgba(215, 235, 225, ${p.alpha * 0.7})`);
+        gradient.addColorStop(0.8, `rgba(180, 205, 195, ${p.alpha * 0.25})`);
         gradient.addColorStop(1, "rgba(0, 0, 0, 0)");
 
         ctx.fillStyle = gradient;
@@ -104,7 +120,7 @@ export function SmokeEffect({ enabled = true }: { enabled?: boolean }) {
     <canvas
       ref={canvasRef}
       aria-hidden="true"
-      className="pointer-events-none fixed inset-0 z-0 h-full w-full opacity-60"
+      className="pointer-events-none fixed inset-0 z-0 h-full w-full opacity-90"
     />
   );
 }

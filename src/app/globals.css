@@ -405,33 +405,82 @@ body {
 /* ================================================================== */
 /* НЕОНОВАЯ ВЫВЕСКА                                                   */
 /* ================================================================== */
+@keyframes neon-hum-pulse {
+  0%, 100% {
+    text-shadow:
+      0 0 4px rgb(var(--glow) / 0.95),
+      0 0 10px rgb(var(--glow) / 0.7),
+      0 0 22px rgb(var(--glow) / 0.45);
+    opacity: 1;
+  }
+  50% {
+    text-shadow:
+      0 0 2px rgb(var(--glow) / 0.75),
+      0 0 6px rgb(var(--glow) / 0.5),
+      0 0 14px rgb(var(--glow) / 0.3);
+    opacity: 0.92;
+  }
+}
+
 .neon-sign {
-  text-shadow:
-    0 0 4px rgb(var(--glow) / 0.8),
-    0 0 12px rgb(var(--glow) / 0.5),
-    0 0 24px rgb(var(--glow) / 0.3);
+  animation: neon-hum-pulse 3s ease-in-out infinite;
 }
 
 .neon-sign:hover {
   text-shadow:
     0 0 6px rgb(var(--glow)),
-    0 0 16px rgb(var(--glow) / 0.8),
-    0 0 32px rgb(var(--glow) / 0.6);
+    0 0 16px rgb(var(--glow) / 0.9),
+    0 0 32px rgb(var(--glow) / 0.7);
 }
 
 @keyframes neon-flicker-anim {
-  0%, 19.999%, 22%, 62.999%, 64%, 64.999%, 70%, 100% {
+  0%, 100% {
     opacity: 1;
-    filter: drop-shadow(0 0 10px rgb(var(--glow) / 0.9));
+    text-shadow:
+      0 0 5px rgb(var(--glow)),
+      0 0 15px rgb(var(--glow) / 0.9),
+      0 0 30px rgb(var(--glow) / 0.7);
   }
-  20%, 21.999%, 63%, 63.999%, 65%, 69.999% {
+  14% {
+    opacity: 0.15;
+    text-shadow: none;
+  }
+  17% {
+    opacity: 1;
+    text-shadow: 0 0 6px rgb(var(--glow));
+  }
+  31% {
+    opacity: 0.1;
+    text-shadow: none;
+  }
+  35% {
+    opacity: 0.9;
+    text-shadow: 0 0 8px rgb(var(--glow) / 0.8);
+  }
+  52% {
+    opacity: 0.2;
+    text-shadow: none;
+  }
+  56% {
+    opacity: 1;
+    text-shadow:
+      0 0 6px rgb(var(--glow)),
+      0 0 18px rgb(var(--glow) / 0.8);
+  }
+  72% {
     opacity: 0.3;
-    filter: none;
+    text-shadow: none;
+  }
+  76% {
+    opacity: 1;
+    text-shadow:
+      0 0 6px rgb(var(--glow)),
+      0 0 20px rgb(var(--glow));
   }
 }
 
 .neon-sign-flicker {
-  animation: neon-flicker-anim 800ms linear;
+  animation: neon-flicker-anim 700ms linear;
 }
 
 /* ================================================================== */

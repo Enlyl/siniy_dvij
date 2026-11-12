@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export function NeonSign({
   enabled = true,
@@ -11,10 +11,39 @@ export function NeonSign({
 }) {
   const [flicker, setFlicker] = useState(false);
 
+  useEffect(() => {
+    if (!enabled) return;
+
+    let timeoutId: NodeJS.Timeout;
+    let cancel = false;
+
+    const scheduleNextFlicker = () => {
+      // Рандомный интервал между мерцаниями (от 2.5 до 6 секунд)
+      const nextDelay = 2500 + Math.random() * 3500;
+      timeoutId = setTimeout(() => {
+        if (cancel) return;
+        setFlicker(true);
+        const flickerDuration = 500 + Math.random() * 400;
+        timeoutId = setTimeout(() => {
+          if (cancel) return;
+          setFlicker(false);
+          scheduleNextFlicker();
+        }, flickerDuration);
+      }, nextDelay);
+    };
+
+    scheduleNextFlicker();
+
+    return () => {
+      cancel = true;
+      clearTimeout(timeoutId);
+    };
+  }, [enabled]);
+
   const handleClick = () => {
     if (!enabled) return;
     setFlicker(true);
-    setTimeout(() => setFlicker(false), 800);
+    setTimeout(() => setFlicker(false), 900);
   };
 
   if (!enabled) {
@@ -34,7 +63,7 @@ export function NeonSign({
       }`}
     >
       <span className="neon-text">{title}</span>
-      <span className="ml-2 inline-block text-xs font-normal opacity-75 sm:text-sm">
+      <span className="ml-2 inline-block text-xs font-normal opacity-85 sm:text-sm">
         🍻
       </span>
     </h1>
