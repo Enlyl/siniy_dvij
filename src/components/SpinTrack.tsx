@@ -9,10 +9,10 @@ import { playRatchet, playWinSound } from "@/lib/sound";
 /* ------------------------------- геометрия ------------------------------- */
 
 const GEO: Record<SpinMode, { itemW: number; itemH: number; gap: number }> = {
-  horizontal: { itemW: 132, itemH: 198, gap: 14 },
-  vertical: { itemW: 216, itemH: 324, gap: 14 },
-  slot: { itemW: 140, itemH: 210, gap: 10 },
-  wheel: { itemW: 360, itemH: 360, gap: 0 },
+  horizontal: { itemW: 160, itemH: 240, gap: 16 },
+  vertical: { itemW: 250, itemH: 375, gap: 16 },
+  slot: { itemW: 160, itemH: 240, gap: 12 },
+  wheel: { itemW: 400, itemH: 400, gap: 0 },
 };
 
 const MAIN_DURATION = 3600;
@@ -798,10 +798,10 @@ export function SpinTrack({
 
   if (mode === "horizontal") {
     return (
-      <div className="relative mx-auto w-full max-w-3xl">
+      <div className="relative mx-auto w-full max-w-4xl">
         <div
           className="theme-track-frame relative overflow-hidden rounded-2xl border border-line bg-surface/70"
-          style={{ height: geo.itemH + 68, padding: "34px 12px" }}
+          style={{ height: geo.itemH + 72, padding: "36px 16px" }}
         >
           <Lane
             axis="x"
