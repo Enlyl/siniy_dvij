@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { posterUrl, type Movie } from "@/lib/movies";
 import { EASTER_EGG_ID } from "@/lib/easterEgg";
 
@@ -208,12 +208,39 @@ export function Poster({
   className?: string;
 }) {
   const [broken, setBroken] = useState(false);
+  const [fallbackAttempted, setFallbackAttempted] = useState(false);
+
+  useEffect(() => {
+    setBroken(false);
+    setFallbackAttempted(false);
+  }, [movie.id, movie.posterPath]);
 
   if (movie.id === EASTER_EGG_ID) {
     return <MirrorPoster className={className} />;
   }
 
-  const url = posterUrl(movie.posterPath);
+  let url = posterUrl(movie.posterPath);
+  if (
+    fallbackAttempted &&
+    url &&
+    !url.startsWith("/siniy_dvij") &&
+    !/^https?:\/\//.test(url)
+  ) {
+    url = `/siniy_dvij${url.startsWith("/") ? url : `/${url}`}`;
+  }
+
+  const handleError = () => {
+    if (
+      !fallbackAttempted &&
+      url &&
+      !url.startsWith("/siniy_dvij") &&
+      !/^https?:\/\//.test(url)
+    ) {
+      setFallbackAttempted(true);
+    } else {
+      setBroken(true);
+    }
+  };
 
   return (
     <div className={`relative overflow-hidden bg-surface-2 ${className}`}>
@@ -223,7 +250,7 @@ export function Poster({
           alt={`Постер фильма «${movie.title}»`}
           loading={priority ? "eager" : "lazy"}
           className="absolute inset-0 h-full w-full object-cover"
-          onError={() => setBroken(true)}
+          onError={handleError}
         />
       ) : (
         <PosterArt movie={movie} />

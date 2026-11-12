@@ -6,6 +6,9 @@ const nextConfig: NextConfig = {
   output: "export",
   basePath: isGhPages ? "/siniy_dvij" : "",
   assetPrefix: isGhPages ? "/siniy_dvij/" : undefined,
+  env: {
+    NEXT_PUBLIC_BASE_PATH: isGhPages ? "/siniy_dvij" : "",
+  },
   images: {
     unoptimized: true,
     remotePatterns: [

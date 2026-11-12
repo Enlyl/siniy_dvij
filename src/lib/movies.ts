@@ -4466,10 +4466,11 @@ export function posterUrl(posterPath: string | null | undefined, size = "w500"):
   if (posterPath.startsWith("/posters/") || posterPath.startsWith("posters/")) {
     const cleanPath = posterPath.startsWith("/") ? posterPath : `/${posterPath}`;
     const basePath =
-      typeof window !== "undefined" &&
+      (typeof process !== "undefined" && process.env.NEXT_PUBLIC_BASE_PATH) ||
+      (typeof window !== "undefined" &&
       window.location.pathname.startsWith("/siniy_dvij")
         ? "/siniy_dvij"
-        : "";
+        : "");
     return `${basePath}${cleanPath}`;
   }
   const clean = posterPath.replace(/^\//, "");
