@@ -86,7 +86,7 @@ export function playWinSound(enabled: boolean) {
   }
 }
 
-/** Тихий бархатный звук получения достижения (мягкий саб-бас + нежный перелив) */
+/** Короткий резкий звук получения достижения (панч-бас + яркий блик) */
 export function playAchievementSound(enabled: boolean = true) {
   if (!enabled) return;
   const ctx = getAudioContext();
@@ -95,75 +95,55 @@ export function playAchievementSound(enabled: boolean = true) {
   try {
     const now = ctx.currentTime;
 
-    // 1. Мягкий саб-бас (110Hz -> 55Hz), тихий и обволакивающий
+    // 1. Резкий панч-бас (150Hz -> 40Hz, быстрая атака)
     const subOsc = ctx.createOscillator();
     const subGain = ctx.createGain();
-    const subFilter = ctx.createBiquadFilter();
 
     subOsc.type = "sine";
-    subOsc.frequency.setValueAtTime(110, now);
-    subOsc.frequency.exponentialRampToValueAtTime(70, now + 0.4);
-    subOsc.frequency.exponentialRampToValueAtTime(55, now + 1.0);
+    subOsc.frequency.setValueAtTime(150, now);
+    subOsc.frequency.exponentialRampToValueAtTime(40, now + 0.12);
 
-    subFilter.type = "lowpass";
-    subFilter.frequency.setValueAtTime(180, now);
-    subFilter.frequency.exponentialRampToValueAtTime(60, now + 0.8);
-    subFilter.Q.setValueAtTime(1.2, now);
+    subGain.gain.setValueAtTime(0.35, now);
+    subGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.25);
 
-    subGain.gain.setValueAtTime(0.001, now);
-    subGain.gain.linearRampToValueAtTime(0.18, now + 0.06);
-    subGain.gain.exponentialRampToValueAtTime(0.0001, now + 1.1);
-
-    subOsc.connect(subFilter);
-    subFilter.connect(subGain);
+    subOsc.connect(subGain);
     subGain.connect(ctx.destination);
-
     subOsc.start(now);
-    subOsc.stop(now + 1.15);
+    subOsc.stop(now + 0.28);
 
-    // 2. Тёплое тело (треугольная волна, тихо)
-    const bodyOsc = ctx.createOscillator();
-    const bodyGain = ctx.createGain();
+    // 2. Яркий блик (короткий синус 880Hz)
+    const blipOsc = ctx.createOscillator();
+    const blipGain = ctx.createGain();
 
-    bodyOsc.type = "triangle";
-    bodyOsc.frequency.setValueAtTime(88, now);
-    bodyOsc.frequency.exponentialRampToValueAtTime(55, now + 0.7);
+    blipOsc.type = "sine";
+    blipOsc.frequency.setValueAtTime(880, now);
+    blipOsc.frequency.exponentialRampToValueAtTime(660, now + 0.08);
 
-    bodyGain.gain.setValueAtTime(0.001, now);
-    bodyGain.gain.linearRampToValueAtTime(0.08, now + 0.05);
-    bodyGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.9);
+    blipGain.gain.setValueAtTime(0.15, now);
+    blipGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.15);
 
-    bodyOsc.connect(bodyGain);
-    bodyGain.connect(ctx.destination);
+    blipOsc.connect(blipGain);
+    blipGain.connect(ctx.destination);
+    blipOsc.start(now);
+    blipOsc.stop(now + 0.18);
 
-    bodyOsc.start(now);
-    bodyOsc.stop(now + 0.95);
+    // 3. Второй блик чуть выше (подтверждение)
+    const blip2 = ctx.createOscillator();
+    const blip2Gain = ctx.createGain();
+    const t2 = now + 0.07;
 
-    // 3. Нежный деликатный перелив (До4 - Ми4 - Соль4), очень тихо
-    const chimes = [
-      { freq: 261.63, delay: 0.06, dur: 0.7, vol: 0.04 },
-      { freq: 329.63, delay: 0.14, dur: 0.8, vol: 0.035 },
-      { freq: 392.0, delay: 0.23, dur: 0.9, vol: 0.03 },
-    ];
+    blip2.type = "sine";
+    blip2.frequency.setValueAtTime(1175, t2);
+    blip2.frequency.exponentialRampToValueAtTime(880, t2 + 0.06);
 
-    chimes.forEach(({ freq, delay, dur, vol }) => {
-      const osc = ctx.createOscillator();
-      const gain = ctx.createGain();
-      const start = now + delay;
+    blip2Gain.gain.setValueAtTime(0.0001, t2);
+    blip2Gain.gain.linearRampToValueAtTime(0.12, t2 + 0.01);
+    blip2Gain.gain.exponentialRampToValueAtTime(0.0001, t2 + 0.12);
 
-      osc.type = "sine";
-      osc.frequency.setValueAtTime(freq, start);
-
-      gain.gain.setValueAtTime(0.0001, start);
-      gain.gain.linearRampToValueAtTime(vol, start + 0.04);
-      gain.gain.exponentialRampToValueAtTime(0.0001, start + dur);
-
-      osc.connect(gain);
-      gain.connect(ctx.destination);
-
-      osc.start(start);
-      osc.stop(start + dur);
-    });
+    blip2.connect(blip2Gain);
+    blip2Gain.connect(ctx.destination);
+    blip2.start(t2);
+    blip2.stop(t2 + 0.15);
   } catch {
     // Игнорируем
   }
