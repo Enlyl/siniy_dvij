@@ -2,6 +2,16 @@
 
 import { useState } from "react";
 
+type Spark = {
+  id: number;
+  x: number;
+  y: number;
+  dx: number;
+  dy: number;
+  color: string;
+  size: number;
+};
+
 export function NeonSign({
   enabled = true,
   title = "Список фильмов под синьку",
@@ -10,11 +20,35 @@ export function NeonSign({
   title?: string;
 }) {
   const [glitch, setGlitch] = useState(false);
+  const [sparks, setSparks] = useState<Spark[]>([]);
 
-  const handleClick = () => {
+  const handleClick = (e: React.MouseEvent<HTMLElement>) => {
     if (!enabled) return;
     setGlitch(true);
-    setTimeout(() => setGlitch(false), 500);
+    setTimeout(() => setGlitch(false), 450);
+
+    // Координаты клика для вылета искр
+    const rect = e.currentTarget.getBoundingClientRect();
+    const originX = e.clientX - rect.left;
+    const originY = e.clientY - rect.top;
+
+    const sparkColors = ["#38bdf8", "#ff1493", "#ffb700", "#ffffff", "#67e8f9"];
+    const newSparks: Spark[] = Array.from({ length: 22 }, (_, i) => {
+      const angle = Math.random() * Math.PI * 2;
+      const distance = 25 + Math.random() * 75;
+      return {
+        id: Date.now() + i + Math.random(),
+        x: originX,
+        y: originY,
+        dx: Math.cos(angle) * distance,
+        dy: Math.sin(angle) * distance + 14, // легкая гравитация
+        color: sparkColors[Math.floor(Math.random() * sparkColors.length)],
+        size: 2.5 + Math.random() * 3,
+      };
+    });
+
+    setSparks(newSparks);
+    setTimeout(() => setSparks([]), 550);
   };
 
   if (!enabled) {
@@ -46,7 +80,7 @@ export function NeonSign({
   if (amberIndex === -1) amberIndex = letters.length - 2;
 
   return (
-    <>
+    <div className="relative inline-block max-w-full">
       <style>{`
         /* Все голубые буквы мигают строго одновременно и с одинаковой интенсивностью */
         .neon-letter-cyan {
@@ -167,10 +201,53 @@ export function NeonSign({
 
         /* При клике вся вывеска на мгновение тухнет от удара */
         .neon-glitch-hit {
-          opacity: 0.2 !important;
-          filter: drop-shadow(0 0 20px #38bdf8);
+          opacity: 0.15 !important;
+          filter: drop-shadow(0 0 25px #38bdf8);
+        }
+
+        /* Анимация разлета электрических искр */
+        @keyframes neon-spark-fly {
+          0% {
+            opacity: 1;
+            transform: translate(0, 0) scale(1);
+          }
+          60% {
+            opacity: 1;
+          }
+          100% {
+            opacity: 0;
+            transform: translate(var(--dx), var(--dy)) scale(0.1);
+          }
+        }
+
+        .neon-spark {
+          position: absolute;
+          border-radius: 9999px;
+          pointer-events: none;
+          z-index: 40;
+          animation: neon-spark-fly 0.52s cubic-bezier(0.12, 0.8, 0.32, 1) forwards;
         }
       `}</style>
+
+      {/* Искры от удара */}
+      {sparks.map((spark) => (
+        <span
+          key={spark.id}
+          className="neon-spark"
+          style={
+            {
+              left: spark.x,
+              top: spark.y,
+              width: spark.size,
+              height: spark.size,
+              backgroundColor: spark.color,
+              boxShadow: `0 0 6px ${spark.color}, 0 0 12px ${spark.color}`,
+              "--dx": `${spark.dx}px`,
+              "--dy": `${spark.dy}px`,
+            } as React.CSSProperties
+          }
+        />
+      ))}
 
       <h1
         onClick={handleClick}
@@ -207,6 +284,6 @@ export function NeonSign({
           );
         })}
       </h1>
-    </>
+    </div>
   );
 }
