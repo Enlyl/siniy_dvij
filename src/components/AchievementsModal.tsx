@@ -3,6 +3,7 @@
 import { useEffect } from "react";
 import {
   ACHIEVEMENTS,
+  trackAchievementClick,
   type Achievement,
   type AchievementId,
 } from "@/lib/achievements";
@@ -22,12 +23,14 @@ export function AchievementsModal({
   unlocked,
   onReset,
   soundEnabled = true,
+  onTriggerAchievement,
 }: {
   open: boolean;
   onClose: () => void;
   unlocked: Set<AchievementId>;
   onReset: () => void;
   soundEnabled?: boolean;
+  onTriggerAchievement?: (id: AchievementId) => void;
 }) {
   useEffect(() => {
     if (!open) return;
@@ -50,6 +53,11 @@ export function AchievementsModal({
     // force reflow
     void el.offsetWidth;
     el.classList.add("achievement-shake");
+
+    const clicks = trackAchievementClick();
+    if (clicks >= 11) {
+      onTriggerAchievement?.("achievement-clicker");
+    }
   };
 
   return (

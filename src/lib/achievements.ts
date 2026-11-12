@@ -16,6 +16,7 @@ export type AchievementId =
   | "all-themes"
   | "all-modes"
   | "night-owl"
+  | "achievement-clicker"
   | "absolute-cinema";
 
 export type Achievement = {
@@ -122,6 +123,13 @@ export const ACHIEVEMENTS: Achievement[] = [
     description: "Крутишь рулетку после полуночи. Спать не пробовал?",
   },
   {
+    id: "achievement-clicker",
+    icon: "🫨",
+    title: "Трогательный момент",
+    description: "Нажал 11 раз на полученные достижения. Понравилась вибрация?",
+    secret: true,
+  },
+  {
     id: "absolute-cinema",
     icon: "🎬",
     title: "Абсолют синема!",
@@ -132,6 +140,7 @@ export const ACHIEVEMENTS: Achievement[] = [
 ];
 
 const STORAGE_KEY = "dm.achievements";
+const ACHIEVEMENT_CLICKS_KEY = "dm.achievementClicks";
 
 export function getUnlocked(): Set<AchievementId> {
   try {
@@ -154,6 +163,7 @@ export function resetAchievements(): void {
     localStorage.removeItem(STORAGE_KEY);
     localStorage.removeItem(USED_THEMES_KEY);
     localStorage.removeItem(USED_MODES_KEY);
+    localStorage.removeItem(ACHIEVEMENT_CLICKS_KEY);
   } catch {}
 }
 
@@ -200,5 +210,16 @@ export function trackMode(modeId: string): string[] {
     return arr;
   } catch {
     return [];
+  }
+}
+
+export function trackAchievementClick(): number {
+  try {
+    const raw = localStorage.getItem(ACHIEVEMENT_CLICKS_KEY);
+    const count = (raw ? parseInt(raw, 10) : 0) + 1;
+    localStorage.setItem(ACHIEVEMENT_CLICKS_KEY, String(count));
+    return count;
+  } catch {
+    return 0;
   }
 }
