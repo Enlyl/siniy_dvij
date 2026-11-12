@@ -406,252 +406,262 @@ body {
 /* НЕОНОВАЯ ВЫВЕСКА                                                   */
 /* ================================================================== */
 
-/* Первая группа обычных букв — активное неоновое свечение и мигание */
-@keyframes neon-main-flicker-1 {
+/* 1. Первая группа основных букв: ярко-голубой неон (Cyan) */
+@keyframes neon-flicker-cyan-1 {
   0%, 100% {
+    color: #38bdf8;
     opacity: 1;
     text-shadow:
-      0 0 3px rgb(var(--glow)),
-      0 0 9px rgb(var(--glow) / 0.85),
-      0 0 18px rgb(var(--glow) / 0.5);
+      0 0 4px #38bdf8,
+      0 0 10px #0284c7,
+      0 0 20px #0369a1;
   }
-  19% {
-    opacity: 1;
-  }
-  20% {
-    opacity: 0.15;
-    text-shadow: none;
-  }
-  21% {
-    opacity: 1;
-    text-shadow: 0 0 5px rgb(var(--glow));
-  }
-  23% {
+  14% { opacity: 0.96; }
+  15% {
+    color: #0c4a6e;
     opacity: 0.2;
     text-shadow: none;
   }
-  25% {
+  17% {
+    color: #38bdf8;
     opacity: 1;
-    text-shadow:
-      0 0 4px rgb(var(--glow)),
-      0 0 12px rgb(var(--glow) / 0.8);
+    text-shadow: 0 0 6px #38bdf8;
   }
-  79% {
-    opacity: 1;
-  }
-  80% {
-    opacity: 0.3;
-    text-shadow: none;
-  }
-  82% {
-    opacity: 1;
-  }
-}
-
-.neon-main-1 {
-  display: inline-block;
-  color: var(--fg);
-  animation: neon-main-flicker-1 2.7s linear infinite;
-}
-
-/* Вторая группа обычных букв — другой ритм мигания */
-@keyframes neon-main-flicker-2 {
-  0%, 100% {
-    opacity: 1;
-    text-shadow:
-      0 0 3px rgb(var(--glow)),
-      0 0 9px rgb(var(--glow) / 0.85),
-      0 0 18px rgb(var(--glow) / 0.5);
-  }
-  48% {
-    opacity: 1;
-  }
-  49% {
-    opacity: 0.12;
-    text-shadow: none;
-  }
-  50% {
-    opacity: 1;
-  }
-  52% {
+  44% { opacity: 0.94; }
+  45% {
+    color: #0c4a6e;
     opacity: 0.25;
     text-shadow: none;
   }
-  54% {
+  47% {
+    color: #38bdf8;
     opacity: 1;
-    text-shadow:
-      0 0 4px rgb(var(--glow)),
-      0 0 14px rgb(var(--glow) / 0.8);
+    text-shadow: 0 0 10px #0284c7;
+  }
+  78% { opacity: 0.98; }
+  79% {
+    color: #0c4a6e;
+    opacity: 0.3;
+    text-shadow: none;
+  }
+  81% {
+    color: #38bdf8;
+    opacity: 1;
+    text-shadow: 0 0 10px #0284c7;
   }
 }
 
-.neon-main-2 {
+.neon-char-cyan-1 {
   display: inline-block;
-  color: var(--fg);
-  animation: neon-main-flicker-2 3.4s linear infinite;
+  color: #38bdf8;
+  animation: neon-flicker-cyan-1 2.4s linear infinite;
 }
 
-/* Буква с дефектом №1 — ярко-розовый / маджента неон (мигает в рассинхрон) */
+/* 2. Вторая группа основных букв: со сдвинутым тактом */
+@keyframes neon-flicker-cyan-2 {
+  0%, 100% {
+    color: #38bdf8;
+    opacity: 1;
+    text-shadow:
+      0 0 4px #38bdf8,
+      0 0 10px #0284c7,
+      0 0 20px #0369a1;
+  }
+  28% { opacity: 0.97; }
+  29% {
+    color: #0c4a6e;
+    opacity: 0.18;
+    text-shadow: none;
+  }
+  31% {
+    color: #38bdf8;
+    opacity: 1;
+    text-shadow: 0 0 7px #38bdf8;
+  }
+  62% { opacity: 0.95; }
+  63% {
+    color: #0c4a6e;
+    opacity: 0.22;
+    text-shadow: none;
+  }
+  65% {
+    color: #38bdf8;
+    opacity: 1;
+    text-shadow: 0 0 10px #0284c7;
+  }
+  90% { opacity: 0.96; }
+  91% {
+    color: #0c4a6e;
+    opacity: 0.25;
+    text-shadow: none;
+  }
+  93% {
+    color: #38bdf8;
+    opacity: 1;
+    text-shadow: 0 0 10px #0284c7;
+  }
+}
+
+.neon-char-cyan-2 {
+  display: inline-block;
+  color: #38bdf8;
+  animation: neon-flicker-cyan-2 3.1s linear infinite;
+}
+
+/* 3. Буква рассинхрона №1: Ярко-розовый / Маджента неон (Hot Pink) */
 @keyframes neon-flicker-pink {
   0%, 100% {
-    color: #ff2d75;
+    color: #ff1493;
     opacity: 1;
     text-shadow:
-      0 0 4px #ff2d75,
-      0 0 12px #ff1493,
-      0 0 24px #ff1493,
-      0 0 38px #c71585;
+      0 0 5px #ff1493,
+      0 0 14px #ff007f,
+      0 0 28px #c71585,
+      0 0 42px #be185d;
   }
+  10% { opacity: 0.95; }
   11% {
-    opacity: 1;
-  }
-  12% {
-    color: #551128;
-    opacity: 0.1;
+    color: #500724;
+    opacity: 0.15;
     text-shadow: none;
   }
-  14% {
-    color: #ff2d75;
+  13% {
+    color: #ff1493;
     opacity: 1;
-    text-shadow: 0 0 8px #ff1493;
+    text-shadow: 0 0 8px #ff007f;
   }
-  35% {
-    opacity: 1;
-  }
+  35% { opacity: 0.93; }
   36% {
-    color: #440e20;
-    opacity: 0.1;
-    text-shadow: none;
-  }
-  38% {
-    color: #ff2d75;
-    opacity: 0.9;
-    text-shadow: 0 0 12px #ff1493;
-  }
-  39% {
-    color: #330b18;
-    opacity: 0.15;
-    text-shadow: none;
-  }
-  42% {
-    color: #ff2d75;
-    opacity: 1;
-    text-shadow:
-      0 0 4px #ff2d75,
-      0 0 16px #ff1493;
-  }
-  74% {
-    opacity: 1;
-  }
-  75% {
-    color: #440e20;
-    opacity: 0.15;
-    text-shadow: none;
-  }
-  77% {
-    color: #ff2d75;
-    opacity: 1;
-    text-shadow: 0 0 14px #ff1493;
-  }
-}
-
-.neon-special-pink {
-  display: inline-block;
-  color: #ff2d75;
-  animation: neon-flicker-pink 1.9s linear infinite;
-}
-
-/* Буква с дефектом №2 — ярко-янтарный оранжевый неон (мигает в рассинхрон) */
-@keyframes neon-flicker-amber {
-  0%, 100% {
-    color: #ffaa00;
-    opacity: 1;
-    text-shadow:
-      0 0 4px #ffaa00,
-      0 0 12px #ff8800,
-      0 0 24px #ff6600,
-      0 0 38px #cc4400;
-  }
-  26% {
-    opacity: 1;
-  }
-  27% {
-    color: #442a00;
-    opacity: 0.1;
-    text-shadow: none;
-  }
-  29% {
-    color: #ffaa00;
-    opacity: 1;
-    text-shadow: 0 0 9px #ff8800;
-  }
-  59% {
-    opacity: 1;
-  }
-  60% {
-    color: #332000;
+    color: #4c0519;
     opacity: 0.12;
     text-shadow: none;
   }
-  62% {
-    color: #ffaa00;
-    opacity: 0.85;
-    text-shadow: 0 0 6px #ff8800;
+  38% {
+    color: #ff1493;
+    opacity: 0.9;
+    text-shadow: 0 0 10px #ff007f;
   }
-  64% {
-    color: #332000;
+  40% {
+    color: #4c0519;
+    opacity: 0.18;
+    text-shadow: none;
+  }
+  43% {
+    color: #ff1493;
+    opacity: 1;
+    text-shadow:
+      0 0 5px #ff1493,
+      0 0 15px #ff007f;
+  }
+  72% { opacity: 0.97; }
+  73% {
+    color: #500724;
+    opacity: 0.2;
+    text-shadow: none;
+  }
+  75% {
+    color: #ff1493;
+    opacity: 1;
+    text-shadow: 0 0 12px #ff007f;
+  }
+}
+
+.neon-char-pink {
+  display: inline-block;
+  color: #ff1493;
+  animation: neon-flicker-pink 1.7s linear infinite;
+}
+
+/* 4. Буква рассинхрона №2: Ярко-янтарный / Золотистый неон (Amber Gold) */
+@keyframes neon-flicker-amber {
+  0%, 100% {
+    color: #ffb700;
+    opacity: 1;
+    text-shadow:
+      0 0 5px #ffb700,
+      0 0 14px #f59e0b,
+      0 0 28px #d97706,
+      0 0 42px #b45309;
+  }
+  21% { opacity: 0.96; }
+  22% {
+    color: #451a03;
     opacity: 0.15;
     text-shadow: none;
   }
-  67% {
-    color: #ffaa00;
+  24% {
+    color: #ffb700;
+    opacity: 1;
+    text-shadow: 0 0 9px #f59e0b;
+  }
+  56% { opacity: 0.94; }
+  57% {
+    color: #3b1502;
+    opacity: 0.1;
+    text-shadow: none;
+  }
+  59% {
+    color: #ffb700;
+    opacity: 0.85;
+    text-shadow: 0 0 7px #f59e0b;
+  }
+  61% {
+    color: #3b1502;
+    opacity: 0.18;
+    text-shadow: none;
+  }
+  64% {
+    color: #ffb700;
     opacity: 1;
     text-shadow:
-      0 0 5px #ffaa00,
-      0 0 18px #ff8800;
+      0 0 6px #ffb700,
+      0 0 18px #f59e0b;
+  }
+  83% { opacity: 0.97; }
+  84% {
+    color: #451a03;
+    opacity: 0.25;
+    text-shadow: none;
+  }
+  86% {
+    color: #ffb700;
+    opacity: 1;
+    text-shadow: 0 0 12px #f59e0b;
   }
 }
 
-.neon-special-amber {
+.neon-char-amber {
   display: inline-block;
-  color: #ffaa00;
-  animation: neon-flicker-amber 2.3s linear infinite;
+  color: #ffb700;
+  animation: neon-flicker-amber 2.1s linear infinite;
 }
 
-/* Общий сбой по клику или скачку напряжения */
-@keyframes neon-surge-anim {
+/* Общий глитч по клику */
+@keyframes neon-click-glitch-anim {
   0%, 100% {
     opacity: 1;
-    filter: drop-shadow(0 0 12px rgb(var(--glow)));
+    filter: drop-shadow(0 0 15px #38bdf8);
   }
-  15% {
-    opacity: 0.15;
-    filter: none;
-  }
-  18% {
-    opacity: 1;
-    filter: drop-shadow(0 0 8px rgb(var(--glow)));
-  }
-  32% {
+  20% {
     opacity: 0.1;
     filter: none;
   }
-  36% {
-    opacity: 0.95;
-    filter: drop-shadow(0 0 10px rgb(var(--glow)));
+  30% {
+    opacity: 0.9;
+    filter: drop-shadow(0 0 8px #ff1493);
   }
-  55% {
-    opacity: 0.2;
+  50% {
+    opacity: 0.15;
     filter: none;
   }
-  60% {
+  65% {
     opacity: 1;
-    filter: drop-shadow(0 0 14px rgb(var(--glow)));
+    filter: drop-shadow(0 0 18px #ffb700);
   }
 }
 
-.neon-sign-surge {
-  animation: neon-surge-anim 750ms linear;
+.neon-click-glitch {
+  animation: neon-click-glitch-anim 600ms linear;
 }
 
 /* ================================================================== */
