@@ -86,7 +86,7 @@ export function playWinSound(enabled: boolean) {
   }
 }
 
-/** Басовитый приятный звук получения достижения (глубокий бархатный саб-бас + теплый аккорд) */
+/** Тихий бархатный звук получения достижения (мягкий саб-бас + нежный перелив) */
 export function playAchievementSound(enabled: boolean = true) {
   if (!enabled) return;
   const ctx = getAudioContext();
@@ -95,48 +95,55 @@ export function playAchievementSound(enabled: boolean = true) {
   try {
     const now = ctx.currentTime;
 
-    // 1. Глубокий бархатный саб-бас (130Hz -> 48Hz)
+    // 1. Мягкий саб-бас (110Hz -> 55Hz), тихий и обволакивающий
     const subOsc = ctx.createOscillator();
     const subGain = ctx.createGain();
     const subFilter = ctx.createBiquadFilter();
 
     subOsc.type = "sine";
-    subOsc.frequency.setValueAtTime(130, now);
-    subOsc.frequency.exponentialRampToValueAtTime(65, now + 0.3);
-    subOsc.frequency.exponentialRampToValueAtTime(48, now + 0.85);
+    subOsc.frequency.setValueAtTime(110, now);
+    subOsc.frequency.exponentialRampToValueAtTime(70, now + 0.4);
+    subOsc.frequency.exponentialRampToValueAtTime(55, now + 1.0);
 
     subFilter.type = "lowpass";
-    subFilter.frequency.setValueAtTime(260, now);
-    subFilter.frequency.exponentialRampToValueAtTime(80, now + 0.7);
-    subFilter.Q.setValueAtTime(2.5, now);
+    subFilter.frequency.setValueAtTime(180, now);
+    subFilter.frequency.exponentialRampToValueAtTime(60, now + 0.8);
+    subFilter.Q.setValueAtTime(1.2, now);
 
     subGain.gain.setValueAtTime(0.001, now);
-    subGain.gain.linearRampToValueAtTime(0.5, now + 0.03); // мягкий приятный панч
-    subGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.9);
+    subGain.gain.linearRampToValueAtTime(0.18, now + 0.06);
+    subGain.gain.exponentialRampToValueAtTime(0.0001, now + 1.1);
 
     subOsc.connect(subFilter);
     subFilter.connect(subGain);
     subGain.connect(ctx.destination);
 
     subOsc.start(now);
-    subOsc.stop(now + 0.95);
+    subOsc.stop(now + 1.15);
 
-    // 2. Тёплое гармоническое тело (треугольная волна 98Hz -> 65Hz)
+    // 2. Тёплое тело (треугольная волна, тихо)
     const bodyOsc = ctx.createOscillator();
+    const bodyGain = ctx.createGain();
 
     bodyOsc.type = "triangle";
-    bodyOsc.frequency.setValueAtTime(98, now);
-    bodyOsc.frequency.exponentialRampToValueAtTime(65.4, now + 0.6);
+    bodyOsc.frequency.setValueAtTime(88, now);
+    bodyOsc.frequency.exponentialRampToValueAtTime(55, now + 0.7);
 
-    bodyOsc.connect(subFilter);
+    bodyGain.gain.setValueAtTime(0.001, now);
+    bodyGain.gain.linearRampToValueAtTime(0.08, now + 0.05);
+    bodyGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.9);
+
+    bodyOsc.connect(bodyGain);
+    bodyGain.connect(ctx.destination);
+
     bodyOsc.start(now);
-    bodyOsc.stop(now + 0.85);
+    bodyOsc.stop(now + 0.95);
 
-    // 3. Мягкий деликатный перелив (До4 - Соль4 - До5) поверх баса
+    // 3. Нежный деликатный перелив (До4 - Ми4 - Соль4), очень тихо
     const chimes = [
-      { freq: 261.63, delay: 0.04, dur: 0.55, vol: 0.12 },
-      { freq: 392.0, delay: 0.11, dur: 0.65, vol: 0.1 },
-      { freq: 523.25, delay: 0.19, dur: 0.75, vol: 0.08 },
+      { freq: 261.63, delay: 0.06, dur: 0.7, vol: 0.04 },
+      { freq: 329.63, delay: 0.14, dur: 0.8, vol: 0.035 },
+      { freq: 392.0, delay: 0.23, dur: 0.9, vol: 0.03 },
     ];
 
     chimes.forEach(({ freq, delay, dur, vol }) => {
@@ -148,7 +155,7 @@ export function playAchievementSound(enabled: boolean = true) {
       osc.frequency.setValueAtTime(freq, start);
 
       gain.gain.setValueAtTime(0.0001, start);
-      gain.gain.linearRampToValueAtTime(vol, start + 0.02);
+      gain.gain.linearRampToValueAtTime(vol, start + 0.04);
       gain.gain.exponentialRampToValueAtTime(0.0001, start + dur);
 
       osc.connect(gain);
