@@ -12,6 +12,17 @@ export function SettingsPanel({
   onSpin,
   autoOpenModal = true,
   onAutoOpenModal,
+  russianRoulette = false,
+  onRussianRoulette,
+  drunkMode = true,
+  onDrunkMode,
+  neonSign = true,
+  onNeonSign,
+  smokeEffect = true,
+  onSmokeEffect,
+  achievementsEnabled = true,
+  onAchievementsEnabled,
+  onOpenAchievements,
 }: {
   open: boolean;
   onClose: () => void;
@@ -21,6 +32,17 @@ export function SettingsPanel({
   onSpin: (id: SpinMode) => void;
   autoOpenModal?: boolean;
   onAutoOpenModal?: (enabled: boolean) => void;
+  russianRoulette?: boolean;
+  onRussianRoulette?: (enabled: boolean) => void;
+  drunkMode?: boolean;
+  onDrunkMode?: (enabled: boolean) => void;
+  neonSign?: boolean;
+  onNeonSign?: (enabled: boolean) => void;
+  smokeEffect?: boolean;
+  onSmokeEffect?: (enabled: boolean) => void;
+  achievementsEnabled?: boolean;
+  onAchievementsEnabled?: (enabled: boolean) => void;
+  onOpenAchievements?: () => void;
 }) {
   useEffect(() => {
     if (!open) return;
@@ -156,6 +178,181 @@ export function SettingsPanel({
                 />
               </div>
             </button>
+          </div>
+        </section>
+
+        {/* Спецэффекты и приколы */}
+        <section className="mt-6">
+          <h3 className="font-display text-xs tracking-[0.16em] text-muted uppercase">
+            Веселье и атмосфера
+          </h3>
+          <div className="mt-3 grid gap-2">
+            {/* Русская рулетка */}
+            <button
+              type="button"
+              onClick={() => onRussianRoulette?.(!russianRoulette)}
+              aria-pressed={russianRoulette}
+              className="flex w-full items-center justify-between rounded-2xl border border-line bg-surface-2 p-3 text-left transition-colors hover:border-accent/60"
+            >
+              <div className="flex items-center gap-3">
+                <span className="text-xl">🎯</span>
+                <div>
+                  <span className="block text-sm font-semibold">
+                    Режим «Русская рулетка»
+                  </span>
+                  <span className="block text-xs text-muted">
+                    Шанс 1 из 6 выбить треш-фильм (Кошки, Эмоджи фильм…)
+                  </span>
+                </div>
+              </div>
+              <div
+                className={`relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out ${
+                  russianRoulette ? "bg-accent" : "bg-line"
+                }`}
+              >
+                <span
+                  className={`pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out ${
+                    russianRoulette ? "translate-x-5" : "translate-x-0"
+                  }`}
+                />
+              </div>
+            </button>
+
+            {/* Пьяный режим */}
+            <button
+              type="button"
+              onClick={() => onDrunkMode?.(!drunkMode)}
+              aria-pressed={drunkMode}
+              className="flex w-full items-center justify-between rounded-2xl border border-line bg-surface-2 p-3 text-left transition-colors hover:border-accent/60"
+            >
+              <div className="flex items-center gap-3">
+                <span className="text-xl">🥴</span>
+                <div>
+                  <span className="block text-sm font-semibold">
+                    Пьяный режим
+                  </span>
+                  <span className="block text-xs text-muted">
+                    Интерфейс слегка пьянеет и покачивается от круток
+                  </span>
+                </div>
+              </div>
+              <div
+                className={`relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out ${
+                  drunkMode ? "bg-accent" : "bg-line"
+                }`}
+              >
+                <span
+                  className={`pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out ${
+                    drunkMode ? "translate-x-5" : "translate-x-0"
+                  }`}
+                />
+              </div>
+            </button>
+
+            {/* Неоновая вывеска */}
+            <button
+              type="button"
+              onClick={() => onNeonSign?.(!neonSign)}
+              aria-pressed={neonSign}
+              className="flex w-full items-center justify-between rounded-2xl border border-line bg-surface-2 p-3 text-left transition-colors hover:border-accent/60"
+            >
+              <div className="flex items-center gap-3">
+                <span className="text-xl">💡</span>
+                <div>
+                  <span className="block text-sm font-semibold">
+                    Неоновая вывеска
+                  </span>
+                  <span className="block text-xs text-muted">
+                    Мерцающий барный неон в заголовке
+                  </span>
+                </div>
+              </div>
+              <div
+                className={`relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out ${
+                  neonSign ? "bg-accent" : "bg-line"
+                }`}
+              >
+                <span
+                  className={`pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out ${
+                    neonSign ? "translate-x-5" : "translate-x-0"
+                  }`}
+                />
+              </div>
+            </button>
+
+            {/* Дым / туман */}
+            <button
+              type="button"
+              onClick={() => onSmokeEffect?.(!smokeEffect)}
+              aria-pressed={smokeEffect}
+              className="flex w-full items-center justify-between rounded-2xl border border-line bg-surface-2 p-3 text-left transition-colors hover:border-accent/60"
+            >
+              <div className="flex items-center gap-3">
+                <span className="text-xl">💨</span>
+                <div>
+                  <span className="block text-sm font-semibold">
+                    Дым и туман
+                  </span>
+                  <span className="block text-xs text-muted">
+                    Атмосферный дым на фоне страницы
+                  </span>
+                </div>
+              </div>
+              <div
+                className={`relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out ${
+                  smokeEffect ? "bg-accent" : "bg-line"
+                }`}
+              >
+                <span
+                  className={`pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out ${
+                    smokeEffect ? "translate-x-5" : "translate-x-0"
+                  }`}
+                />
+              </div>
+            </button>
+
+            {/* Достижения */}
+            <div className="rounded-2xl border border-line bg-surface-2 p-3">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <span className="text-xl">🏆</span>
+                  <div>
+                    <span className="block text-sm font-semibold">
+                      Система достижений
+                    </span>
+                    <span className="block text-xs text-muted">
+                      Уведомления и ачивки за крутки
+                    </span>
+                  </div>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => onAchievementsEnabled?.(!achievementsEnabled)}
+                  aria-pressed={achievementsEnabled}
+                  className={`relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out ${
+                    achievementsEnabled ? "bg-accent" : "bg-line"
+                  }`}
+                >
+                  <span
+                    className={`pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out ${
+                      achievementsEnabled ? "translate-x-5" : "translate-x-0"
+                    }`}
+                  />
+                </button>
+              </div>
+              {onOpenAchievements && achievementsEnabled && (
+                <button
+                  type="button"
+                  onClick={() => {
+                    onClose();
+                    onOpenAchievements();
+                  }}
+                  className="btn btn-ghost mt-2 w-full h-8 text-xs font-semibold text-accent"
+                >
+                  Открыть список достижений →
+                </button>
+              )}
+            </div>
           </div>
         </section>
       </aside>

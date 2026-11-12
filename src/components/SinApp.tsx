@@ -12,6 +12,25 @@ import {
   EASTER_EGG_SPIN_THRESHOLD,
 } from "@/lib/easterEgg";
 import {
+  TRASH_MOVIES,
+  pickTrashMovie,
+  shouldInsertTrash,
+} from "@/lib/trashMovies";
+import {
+  ACHIEVEMENTS,
+  getUnlocked,
+  saveUnlocked,
+  trackMode,
+  trackTheme,
+  unlock,
+  type Achievement,
+  type AchievementId,
+} from "@/lib/achievements";
+import {
+  getDrunkLevel,
+  getRandomDrunkPhrase,
+} from "@/lib/drunkMode";
+import {
   DEFAULT_SPIN_MODE,
   DEFAULT_THEME,
   isSpinMode,
@@ -26,6 +45,9 @@ import { MovieModal } from "./MovieModal";
 import { Poster } from "./Poster";
 import { SettingsPanel } from "./SettingsPanel";
 import { SpinTrack } from "./SpinTrack";
+import { NeonSign } from "./NeonSign";
+import { SmokeEffect } from "./SmokeEffect";
+import { AchievementsModal, AchievementToast } from "./AchievementsModal";
 
 type LastDropped = { id: string; at: string };
 
@@ -77,8 +99,47 @@ export function SinApp() {
   );
   const autoOpenModalEnabled = autoOpenModal.value ?? true;
 
+  const russianRoulette = useStoredJson<boolean>(
+    STORAGE_KEYS.russianRoulette,
+    false,
+    (v): v is boolean => typeof v === "boolean",
+  );
+  const russianRouletteEnabled = russianRoulette.value ?? false;
+
+  const drunkMode = useStoredJson<boolean>(
+    STORAGE_KEYS.drunkMode,
+    true,
+    (v): v is boolean => typeof v === "boolean",
+  );
+  const drunkModeEnabled = drunkMode.value ?? true;
+
+  const neonSign = useStoredJson<boolean>(
+    STORAGE_KEYS.neonSign,
+    true,
+    (v): v is boolean => typeof v === "boolean",
+  );
+  const neonSignEnabled = neonSign.value ?? true;
+
+  const smokeEffect = useStoredJson<boolean>(
+    STORAGE_KEYS.smokeEffect,
+    true,
+    (v): v is boolean => typeof v === "boolean",
+  );
+  const smokeEffectEnabled = smokeEffect.value ?? true;
+
+  const achievements = useStoredJson<boolean>(
+    STORAGE_KEYS.achievements,
+    true,
+    (v): v is boolean => typeof v === "boolean",
+  );
+  const achievementsEnabled = achievements.value ?? true;
+
   const [settingsOpen, setSettingsOpen] = useState(false);
   const [historyOpen, setHistoryOpen] = useState(false);
+  const [achievementsOpen, setAchievementsOpen] = useState(false);
+  const [unlockedAchievements, setUnlockedAchievements] = useState<Set<AchievementId>>(new Set());
+  const [toastAchievement, setToastAchievement] = useState<Achievement | null>(null);
+  const [drunkQuote, setDrunkQuote] = useState("");
   const [openMovie, setOpenMovie] = useState<Movie | null>(null);
   const [spin, setSpin] = useState<SpinState | null>(null);
   const [spinning, setSpinning] = useState(false);
@@ -96,16 +157,36 @@ export function SinApp() {
       const stored = parseInt(sessionStorage.getItem("sin_total_spins") || "0", 10) || 0;
       setTotalSpins(stored);
     } catch {}
+    setUnlockedAchievements(getUnlocked());
   }, []);
+
+  const triggerAchievement = useCallback(
+    (id: AchievementId) => {
+      if (!achievementsEnabled) return;
+      setUnlockedAchievements((prev) => {
+        const { set, isNew } = unlock(id, prev);
+        if (isNew) {
+          const ach = ACHIEVEMENTS.find((a) => a.id === id);
+          if (ach) setToastAchievement(ach);
+        }
+        return set;
+      });
+    },
+    [achievementsEnabled],
+  );
 
   /* тема живёт на <html>, чтобы не мигало при загрузке */
   useEffect(() => {
     document.documentElement.dataset.theme = theme.value;
-  }, [theme.value]);
+    const themes = trackTheme(theme.value);
+    if (themes.length >= 4) triggerAchievement("all-themes");
+  }, [theme.value, triggerAchievement]);
 
   useEffect(() => {
     document.documentElement.dataset.spin = spinMode.value;
-  }, [spinMode.value]);
+    const modes = trackMode(spinMode.value);
+    if (modes.length >= 4) triggerAchievement("all-modes");
+  }, [spinMode.value, triggerAchievement]);
 
   /* Чтение ?movie=id или #movie=id из URL при открытии страницы */
   useEffect(() => {
@@ -249,16 +330,30 @@ export function SinApp() {
       try {
         sessionStorage.setItem("sin_spin_streak", "0");
       } catch {}
+    } else if (russianRouletteEnabled && shouldInsertTrash()) {
+      winner = pickTrashMovie();
+      spinPool = [winner, ...pool];
     } else {
       winner = pool[Math.floor(Math.random() * pool.length)];
       spinPool = [...pool];
+    }
+
+    if (drunkModeEnabled) {
+      setDrunkQuote(getRandomDrunkPhrase());
     }
 
     nonceRef.current += 1;
     changeOpenMovie(null);
     setSpinning(true);
     setSpin({ winner, pool: spinPool, nonce: nonceRef.current });
-  }, [pool, spinning, changeOpenMovie, totalSpins]);
+  }, [
+    pool,
+    spinning,
+    changeOpenMovie,
+    totalSpins,
+    russianRouletteEnabled,
+    drunkModeEnabled,
+  ]);
 
   const handleSettled = useCallback(() => {
     setSpinning(false);
@@ -271,7 +366,35 @@ export function SinApp() {
     lastDropped.setValue({ id: winner.id, at });
     const currentList = history.value ?? [];
     history.setValue([{ id: winner.id, at }, ...currentList].slice(0, 100));
-  }, [spin, lastDropped, history, changeOpenMovie, autoOpenModalEnabled]);
+
+    // Проверка ачивок
+    const currentStreak = consecutiveSpinsRef.current;
+    triggerAchievement("first-spin");
+    if (totalSpins >= 10) triggerAchievement("spin-10");
+    if (totalSpins >= 50) triggerAchievement("spin-50");
+    if (totalSpins >= 100) triggerAchievement("spin-100");
+    if (currentStreak >= 5) triggerAchievement("streak-5");
+    if (currentStreak >= 10) triggerAchievement("streak-10");
+    if (currentStreak >= 17) triggerAchievement("streak-17");
+    if (winner.id === EASTER_EGG_ID) triggerAchievement("found-mirror");
+    if (winner.id === BROKEBACK_MOUNTAIN_ID) triggerAchievement("found-brokeback");
+    if (TRASH_MOVIES.some((t) => t.id === winner.id)) triggerAchievement("got-trash");
+
+    const drunkLvl = drunkModeEnabled ? getDrunkLevel(totalSpins) : 0;
+    if (drunkLvl >= 2) triggerAchievement("drunk-mode");
+
+    const hours = new Date().getHours();
+    if (hours >= 0 && hours < 5) triggerAchievement("night-owl");
+  }, [
+    spin,
+    lastDropped,
+    history,
+    changeOpenMovie,
+    autoOpenModalEnabled,
+    totalSpins,
+    triggerAchievement,
+    drunkModeEnabled,
+  ]);
 
   const activeSpin = spin ?? {
     winner: pool[0] ?? movies[0],
@@ -280,7 +403,12 @@ export function SinApp() {
   };
 
   const allMovies = useMemo(
-    () => [EASTER_EGG_MOVIE, BROKEBACK_MOUNTAIN_MOVIE, ...movies],
+    () => [
+      EASTER_EGG_MOVIE,
+      BROKEBACK_MOUNTAIN_MOVIE,
+      ...TRASH_MOVIES,
+      ...movies,
+    ],
     [movies],
   );
 
@@ -289,39 +417,67 @@ export function SinApp() {
   const previousMovie = previousEntry ? allMovies.find((m) => m.id === previousEntry.id) : null;
   const currentOrLastMovie = historyList.length > 0 ? allMovies.find((m) => m.id === historyList[0].id) : null;
 
+  const drunkLevel = drunkModeEnabled ? getDrunkLevel(totalSpins) : 0;
+
   return (
-    <div className="mx-auto flex min-h-dvh w-full max-w-6xl flex-col gap-5 px-4 pt-5 pb-16 sm:px-6">
-      <header className="flex items-center justify-between gap-3">
-        <div className="min-w-0">
-          <h1 className="font-display truncate text-lg leading-tight font-extrabold sm:text-2xl">
-            Список фильмов под синьку
-          </h1>
-        </div>
-        <div className="flex items-center gap-2">
-          <button
-            type="button"
-            onClick={() => sound.setValue(!soundEnabled)}
-            aria-label={soundEnabled ? "Выключить звук" : "Включить звук"}
-            title={
-              soundEnabled
-                ? "Звук включен (нажми, чтобы выключить)"
-                : "Звук выключен (нажми, чтобы включить)"
-            }
-            className="btn btn-ghost h-11 w-11 shrink-0 p-0 text-base"
-          >
-            {soundEnabled ? "🔊" : "🔇"}
-          </button>
-          <button
-            type="button"
-            onClick={() => setSettingsOpen(true)}
-            className="btn btn-ghost h-11 shrink-0 px-4 text-sm"
-          >
-            <span aria-hidden>⚙️</span>
-            <span className="hidden sm:inline">Настройки</span>
-            <span className="sm:hidden">Настройки</span>
-          </button>
-        </div>
-      </header>
+    <>
+      <SmokeEffect enabled={smokeEffectEnabled} />
+      <div
+        className={`mx-auto flex min-h-dvh w-full max-w-6xl flex-col gap-5 px-4 pt-5 pb-16 sm:px-6 relative z-10 transition-all duration-700 ${
+          drunkLevel === 1
+            ? "drunk-level-1"
+            : drunkLevel === 2
+            ? "drunk-level-2"
+            : drunkLevel === 3
+            ? "drunk-level-3"
+            : ""
+        }`}
+      >
+        <header className="flex items-center justify-between gap-3">
+          <div className="min-w-0">
+            <NeonSign enabled={neonSignEnabled} />
+          </div>
+          <div className="flex items-center gap-2">
+            {achievementsEnabled && (
+              <button
+                type="button"
+                onClick={() => setAchievementsOpen(true)}
+                aria-label="Достижения"
+                title={`Достижения (${unlockedAchievements.size} из ${ACHIEVEMENTS.length})`}
+                className="btn btn-ghost h-11 w-11 shrink-0 p-0 text-base relative"
+              >
+                <span>🏆</span>
+                {unlockedAchievements.size > 0 && (
+                  <span className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-accent text-[0.625rem] font-bold text-accent-fg">
+                    {unlockedAchievements.size}
+                  </span>
+                )}
+              </button>
+            )}
+            <button
+              type="button"
+              onClick={() => sound.setValue(!soundEnabled)}
+              aria-label={soundEnabled ? "Выключить звук" : "Включить звук"}
+              title={
+                soundEnabled
+                  ? "Звук включен (нажми, чтобы выключить)"
+                  : "Звук выключен (нажми, чтобы включить)"
+              }
+              className="btn btn-ghost h-11 w-11 shrink-0 p-0 text-base"
+            >
+              {soundEnabled ? "🔊" : "🔇"}
+            </button>
+            <button
+              type="button"
+              onClick={() => setSettingsOpen(true)}
+              className="btn btn-ghost h-11 shrink-0 px-4 text-sm"
+            >
+              <span aria-hidden>⚙️</span>
+              <span className="hidden sm:inline">Настройки</span>
+              <span className="sm:hidden">Настройки</span>
+            </button>
+          </div>
+        </header>
 
       <section className="panel relative overflow-hidden p-4 sm:p-6">
         <div
@@ -382,6 +538,20 @@ export function SinApp() {
             >
               {spinning ? "Крутится…" : "Крутить"}
             </button>
+
+            {/* Пьяная фраза или подсказка */}
+            {drunkModeEnabled && drunkLevel > 0 && drunkQuote && (
+              <p className="animate-pulse text-center text-xs font-medium text-accent/90 italic">
+                🥴 {drunkQuote}
+              </p>
+            )}
+
+            {/* Бейджик Русской рулетки */}
+            {russianRouletteEnabled && (
+              <span className="text-[0.6875rem] font-medium text-rose-400/80">
+                🎯 Русская рулетка включена (1 из 6 треш)
+              </span>
+            )}
 
             {/* Быстрый тумблер «Без повторов» */}
             <button
@@ -538,6 +708,32 @@ export function SinApp() {
         onSpin={changeSpinMode}
         autoOpenModal={autoOpenModalEnabled}
         onAutoOpenModal={autoOpenModal.setValue}
+        russianRoulette={russianRouletteEnabled}
+        onRussianRoulette={russianRoulette.setValue}
+        drunkMode={drunkModeEnabled}
+        onDrunkMode={drunkMode.setValue}
+        neonSign={neonSignEnabled}
+        onNeonSign={neonSign.setValue}
+        smokeEffect={smokeEffectEnabled}
+        onSmokeEffect={smokeEffect.setValue}
+        achievementsEnabled={achievementsEnabled}
+        onAchievementsEnabled={achievements.setValue}
+        onOpenAchievements={() => setAchievementsOpen(true)}
+      />
+
+      <AchievementsModal
+        open={achievementsOpen}
+        onClose={() => setAchievementsOpen(false)}
+        unlocked={unlockedAchievements}
+        onReset={() => {
+          saveUnlocked(new Set());
+          setUnlockedAchievements(new Set());
+        }}
+      />
+
+      <AchievementToast
+        achievement={toastAchievement}
+        onClose={() => setToastAchievement(null)}
       />
 
       <MovieModal movie={openMovie} onClose={() => changeOpenMovie(null)} />
@@ -551,5 +747,6 @@ export function SinApp() {
         onClearHistory={() => history.setValue([])}
       />
     </div>
-  );
+  </>
+);
 }

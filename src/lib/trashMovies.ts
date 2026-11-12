@@ -1,0 +1,128 @@
+import type { Movie } from "./movies";
+
+/** Треш-фильмы для режима «Русская рулетка» — 1 из 6 будет трешак */
+export const TRASH_MOVIES: Movie[] = [
+  {
+    id: "trash-cats-2019",
+    title: "Кошки",
+    originalTitle: "Cats",
+    year: 2019,
+    director: "Том Хупер",
+    actors: ["Дженнифер Хадсон", "Джуди Денч", "Иэн Маккеллен", "Тейлор Свифт", "Джеймс Корден"],
+    genres: ["Мюзикл", "Фэнтези", "Треш"],
+    overview: "Племя котов-избранников решает, кто из них вознесётся на небеса. Человечество решает, зачем это было снято.",
+    tagline: "Зачем",
+    runtime: 110,
+    rating: 2.8,
+    posterPath: "/wrFpXMNBRj2PBiN4Z5FSfbZkAU1.jpg",
+  },
+  {
+    id: "trash-emoji-movie",
+    title: "Эмоджи фильм",
+    originalTitle: "The Emoji Movie",
+    year: 2017,
+    director: "Тони Леондис",
+    actors: ["Ти Джей Миллер", "Джеймс Корден", "Анна Фэрис", "Майя Рудольф", "Стивен Райт"],
+    genres: ["Анимация", "Комедия", "Треш"],
+    overview: "Эмоджи по имени Джин не может контролировать свои выражения. Зрители не могут контролировать свои рвотные позывы.",
+    tagline: "Позвони маме и скажи что любишь, пока не поздно",
+    runtime: 86,
+    rating: 3.4,
+    posterPath: "/f93mFlmB6iYJlmMPk0EpIwQPnAz.jpg",
+  },
+  {
+    id: "trash-dragonball-evolution",
+    title: "Драконий жемчуг: Эволюция",
+    originalTitle: "Dragonball Evolution",
+    year: 2009,
+    director: "Джеймс Вонг",
+    actors: ["Джастин Чатвин", "Эмми Россам", "Чоу Юнь-Фат", "Джеймс Мастерс", "Джейми Чунг"],
+    genres: ["Боевик", "Фантастика", "Треш"],
+    overview: "Экранизация, после которой создатель оригинала публично извинился. Перед аниме. За Голливуд.",
+    tagline: "Они испортили всё",
+    runtime: 85,
+    rating: 2.6,
+    posterPath: "/dPSfLyIShFNdLmK8CwRlaj0UHKH.jpg",
+  },
+  {
+    id: "trash-the-room",
+    title: "Комната",
+    originalTitle: "The Room",
+    year: 2003,
+    director: "Томми Вайсо",
+    actors: ["Томми Вайсо", "Грег Систеро", "Джульетт Дэниелс", "Филип Хэлдимэн", "Кэролин Миннотт"],
+    genres: ["Драма", "Треш"],
+    overview: "Лучший худший фильм в истории. 'Oh hi Mark' стал мемом. Томми Вайсо стал легендой. Ты — жертвой.",
+    tagline: "Oh hi Mark",
+    runtime: 99,
+    rating: 3.6,
+    posterPath: "/gbLhJBsAkBMJp1PZ7adcFmQj6zt.jpg",
+  },
+  {
+    id: "trash-birdemic",
+    title: "Птицекалипсис: Шок и трепет",
+    originalTitle: "Birdemic: Shock and Terror",
+    year: 2010,
+    director: "Джеймс Нгуен",
+    actors: ["Алан Баг", "Уитни Мур"],
+    genres: ["Ужасы", "Фантастика", "Треш"],
+    overview: "Птицы атакуют! Но бюджет на спецэффекты — 10 долларов и Paint. Зато от души.",
+    tagline: "Орнитологический апокалипсис на минималках",
+    runtime: 93,
+    rating: 1.8,
+    posterPath: "/iORaiRg3kYMDy0vGSXzhkWspB7G.jpg",
+  },
+  {
+    id: "trash-disaster-movie",
+    title: "Нереальный блокбастер",
+    originalTitle: "Disaster Movie",
+    year: 2008,
+    director: "Джейсон Фридберг",
+    actors: ["Мэтт Лантер", "Ванесса Миннилло", "Ким Кардашьян"],
+    genres: ["Комедия", "Треш"],
+    overview: "Пародия на фильмы-катастрофы, которая сама стала катастрофой. 1% на Rotten Tomatoes — заслуженно.",
+    tagline: "Катастрофа, да",
+    runtime: 87,
+    rating: 2.1,
+    posterPath: "/tZPpKqrnB3I3sE7VFe3hE4DkgDl.jpg",
+  },
+  {
+    id: "trash-sharknado",
+    title: "Акулий торнадо",
+    originalTitle: "Sharknado",
+    year: 2013,
+    director: "Энтони К. Ферранте",
+    actors: ["Иэн Зиринг", "Тара Рид", "Джон Хёрд"],
+    genres: ["Боевик", "Фантастика", "Треш"],
+    overview: "Торнадо из акул. Да. Из акул. Торнадо. Ты прочитал правильно.",
+    tagline: "Достаточно акул",
+    runtime: 86,
+    rating: 3.3,
+    posterPath: "/2gfexMOMJtpPESunOOvMIyRDIuW.jpg",
+  },
+  {
+    id: "trash-human-centipede",
+    title: "Человеческая многоножка",
+    originalTitle: "The Human Centipede",
+    year: 2009,
+    director: "Том Сикс",
+    actors: ["Дитер Лазер", "Эшли К. Уильямс", "Эшлинн Йенни"],
+    genres: ["Ужасы", "Треш"],
+    overview: "Безумный хирург. Три туриста. Одна идея, которую невозможно развидеть. Приятного аппетита.",
+    tagline: "Кто это вообще придумал",
+    runtime: 92,
+    rating: 4.4,
+    posterPath: "/7hJV4lFSEJwIxRBfLCDBJKqh8R5.jpg",
+  },
+];
+
+/** Вероятность, что слот будет трешовым: 1/6 */
+export const TRASH_CHANCE = 1 / 6;
+
+export function shouldInsertTrash(): boolean {
+  return Math.random() < TRASH_CHANCE;
+}
+
+export function pickTrashMovie(): Movie {
+  return TRASH_MOVIES[Math.floor(Math.random() * TRASH_MOVIES.length)];
+}

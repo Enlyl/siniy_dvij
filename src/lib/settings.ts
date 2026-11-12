@@ -81,6 +81,11 @@ export const STORAGE_KEYS = {
   sound: "dm.sound",
   noRepeat: "dm.noRepeat",
   autoOpenModal: "dm.autoOpenModal",
+  russianRoulette: "dm.russianRoulette",
+  drunkMode: "dm.drunkMode",
+  neonSign: "dm.neonSign",
+  smokeEffect: "dm.smokeEffect",
+  achievements: "dm.achievements",
 } as const;
 
 export function isThemeId(value: unknown): value is ThemeId {
