@@ -9,30 +9,29 @@ export function NeonSign({
   enabled?: boolean;
   title?: string;
 }) {
-  const [flicker, setFlicker] = useState(false);
+  const [surge, setSurge] = useState(false);
 
+  // Редкий общий сбой питания всей вывески (раз в 9–15 сек)
   useEffect(() => {
     if (!enabled) return;
 
     let timeoutId: NodeJS.Timeout;
     let cancel = false;
 
-    const scheduleNextFlicker = () => {
-      // Рандомный интервал между мерцаниями (от 2.5 до 6 секунд)
-      const nextDelay = 2500 + Math.random() * 3500;
+    const scheduleNextSurge = () => {
+      const nextDelay = 8000 + Math.random() * 7000;
       timeoutId = setTimeout(() => {
         if (cancel) return;
-        setFlicker(true);
-        const flickerDuration = 500 + Math.random() * 400;
+        setSurge(true);
         timeoutId = setTimeout(() => {
           if (cancel) return;
-          setFlicker(false);
-          scheduleNextFlicker();
-        }, flickerDuration);
+          setSurge(false);
+          scheduleNextSurge();
+        }, 750);
       }, nextDelay);
     };
 
-    scheduleNextFlicker();
+    scheduleNextSurge();
 
     return () => {
       cancel = true;
@@ -42,8 +41,8 @@ export function NeonSign({
 
   const handleClick = () => {
     if (!enabled) return;
-    setFlicker(true);
-    setTimeout(() => setFlicker(false), 900);
+    setSurge(true);
+    setTimeout(() => setSurge(false), 800);
   };
 
   if (!enabled) {
@@ -54,15 +53,38 @@ export function NeonSign({
     );
   }
 
+  // Индексы для несинхронно мигающих букв другим цветом:
+  // "Список фильмов под синьку" -> "ф" (индекс 7 - розовый), "к" (индекс 23 - оранжево-янтарный)
+  const letters = title.split("");
+  const pinkIndex = letters.findIndex((ch) => ch.toLowerCase() === "ф");
+  const amberIndex = letters.findLastIndex((ch) => ch.toLowerCase() === "к");
+
   return (
     <h1
       onClick={handleClick}
-      title="Нажми, чтобы помигать вывеской"
+      title="Нажми, чтобы ударить по вывеске"
       className={`font-display truncate text-lg leading-tight font-extrabold cursor-pointer select-none transition-all sm:text-2xl ${
-        flicker ? "neon-sign-flicker" : "neon-sign"
+        surge ? "neon-sign-surge" : ""
       }`}
     >
-      <span className="neon-text">{title}</span>
+      {letters.map((char, idx) => {
+        if (char === " ") {
+          return <span key={idx}> </span>;
+        }
+
+        let letterClass = "neon-letter neon-letter-pulse";
+        if (idx === pinkIndex) {
+          letterClass = "neon-broken-pink";
+        } else if (idx === amberIndex) {
+          letterClass = "neon-broken-amber";
+        }
+
+        return (
+          <span key={idx} className={letterClass}>
+            {char}
+          </span>
+        );
+      })}
       <span className="ml-2 inline-block text-xs font-normal opacity-85 sm:text-sm">
         🍻
       </span>
