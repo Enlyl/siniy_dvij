@@ -11,7 +11,7 @@ export function NeonSign({
 }) {
   const [surge, setSurge] = useState(false);
 
-  // Редкий общий сбой питания всей вывески (раз в 9–15 сек)
+  // Редкий общий сбой питания всей вывески при перегрузке
   useEffect(() => {
     if (!enabled) return;
 
@@ -19,7 +19,7 @@ export function NeonSign({
     let cancel = false;
 
     const scheduleNextSurge = () => {
-      const nextDelay = 8000 + Math.random() * 7000;
+      const nextDelay = 7000 + Math.random() * 6000;
       timeoutId = setTimeout(() => {
         if (cancel) return;
         setSurge(true);
@@ -27,7 +27,7 @@ export function NeonSign({
           if (cancel) return;
           setSurge(false);
           scheduleNextSurge();
-        }, 750);
+        }, 600);
       }, nextDelay);
     };
 
@@ -42,28 +42,43 @@ export function NeonSign({
   const handleClick = () => {
     if (!enabled) return;
     setSurge(true);
-    setTimeout(() => setSurge(false), 800);
+    setTimeout(() => setSurge(false), 700);
   };
 
   if (!enabled) {
     return (
-      <h1 className="font-display truncate text-lg leading-tight font-extrabold sm:text-2xl">
+      <h1 className="font-display text-lg leading-tight font-extrabold sm:text-2xl">
         {title}
       </h1>
     );
   }
 
-  // Индексы для несинхронно мигающих букв другим цветом:
-  // "Список фильмов под синьку" -> "ф" (индекс 7 - розовый), "к" (индекс 23 - оранжево-янтарный)
   const letters = title.split("");
-  const pinkIndex = letters.findIndex((ch) => ch.toLowerCase() === "ф");
-  const amberIndex = letters.findLastIndex((ch) => ch.toLowerCase() === "к");
+
+  // Находим две буквы для выделения другим цветом и рассинхроном:
+  // Буква 1: 'ф' (в "фильмов") -> розовый неон
+  // Буква 2: 'к' (в "синьку") -> янтарно-оранжевый неон
+  let pinkIndex = -1;
+  let amberIndex = -1;
+
+  for (let i = 0; i < letters.length; i++) {
+    if (letters[i].toLowerCase() === "ф" && pinkIndex === -1) {
+      pinkIndex = i;
+    }
+    if (letters[i].toLowerCase() === "к") {
+      amberIndex = i;
+    }
+  }
+
+  // Запасные индексы, если таких букв нет в переданной строке
+  if (pinkIndex === -1) pinkIndex = Math.min(3, letters.length - 1);
+  if (amberIndex === -1) amberIndex = Math.max(0, letters.length - 2);
 
   return (
     <h1
       onClick={handleClick}
       title="Нажми, чтобы ударить по вывеске"
-      className={`font-display truncate text-lg leading-tight font-extrabold cursor-pointer select-none transition-all sm:text-2xl ${
+      className={`font-display text-lg leading-tight font-extrabold cursor-pointer select-none transition-all sm:text-2xl ${
         surge ? "neon-sign-surge" : ""
       }`}
     >
@@ -72,20 +87,22 @@ export function NeonSign({
           return <span key={idx}> </span>;
         }
 
-        let letterClass = "neon-letter neon-letter-pulse";
+        let cls = "neon-main-1";
         if (idx === pinkIndex) {
-          letterClass = "neon-broken-pink";
+          cls = "neon-special-pink";
         } else if (idx === amberIndex) {
-          letterClass = "neon-broken-amber";
+          cls = "neon-special-amber";
+        } else if (idx % 2 === 0) {
+          cls = "neon-main-2";
         }
 
         return (
-          <span key={idx} className={letterClass}>
+          <span key={idx} className={cls}>
             {char}
           </span>
         );
       })}
-      <span className="ml-2 inline-block text-xs font-normal opacity-85 sm:text-sm">
+      <span className="ml-2 inline-block text-xs font-normal opacity-90 sm:text-sm">
         🍻
       </span>
     </h1>
