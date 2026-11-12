@@ -765,6 +765,7 @@ export function SinApp() {
         open={achievementsOpen}
         onClose={() => setAchievementsOpen(false)}
         unlocked={unlockedAchievements}
+        soundEnabled={soundEnabled}
         onReset={() => {
           resetAchievements();
           setUnlockedAchievements(new Set());

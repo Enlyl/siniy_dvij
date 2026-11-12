@@ -148,3 +148,52 @@ export function playAchievementSound(enabled: boolean = true) {
     // Игнорируем
   }
 }
+
+/** Приглушенный тактильный звук клика по полученному достижению */
+export function playMuffledAchievementSound(enabled: boolean = true) {
+  if (!enabled) return;
+  const ctx = getAudioContext();
+  if (!ctx) return;
+
+  try {
+    const now = ctx.currentTime;
+    const filter = ctx.createBiquadFilter();
+    filter.type = "lowpass";
+    filter.frequency.setValueAtTime(340, now);
+    filter.frequency.exponentialRampToValueAtTime(110, now + 0.22);
+    filter.Q.setValueAtTime(1.5, now);
+
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+
+    osc.type = "sine";
+    osc.frequency.setValueAtTime(130, now);
+    osc.frequency.exponentialRampToValueAtTime(42, now + 0.14);
+
+    gain.gain.setValueAtTime(0.24, now);
+    gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.22);
+
+    osc.connect(filter);
+    filter.connect(gain);
+    gain.connect(ctx.destination);
+
+    osc.start(now);
+    osc.stop(now + 0.24);
+
+    // Мягкий глухой отзвук
+    const chime = ctx.createOscillator();
+    const chimeGain = ctx.createGain();
+    chime.type = "sine";
+    chime.frequency.setValueAtTime(520, now + 0.03);
+    chime.frequency.exponentialRampToValueAtTime(390, now + 0.12);
+
+    chimeGain.gain.setValueAtTime(0.05, now + 0.03);
+    chimeGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.18);
+
+    chime.connect(filter);
+    chime.start(now + 0.03);
+    chime.stop(now + 0.2);
+  } catch {
+    // Игнорируем
+  }
+}

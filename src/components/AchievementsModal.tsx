@@ -6,6 +6,7 @@ import {
   type Achievement,
   type AchievementId,
 } from "@/lib/achievements";
+import { playMuffledAchievementSound } from "@/lib/sound";
 
 function getAssetPath(path: string): string {
   if (typeof window === "undefined") return path;
@@ -20,11 +21,13 @@ export function AchievementsModal({
   onClose,
   unlocked,
   onReset,
+  soundEnabled = true,
 }: {
   open: boolean;
   onClose: () => void;
   unlocked: Set<AchievementId>;
   onReset: () => void;
+  soundEnabled?: boolean;
 }) {
   useEffect(() => {
     if (!open) return;
@@ -41,6 +44,14 @@ export function AchievementsModal({
   const count = unlocked.size;
   const percent = Math.round((count / total) * 100);
 
+  const handleCardClick = (el: HTMLElement) => {
+    playMuffledAchievementSound(soundEnabled);
+    el.classList.remove("achievement-shake");
+    // force reflow
+    void el.offsetWidth;
+    el.classList.add("achievement-shake");
+  };
+
   return (
     <div
       className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4 backdrop-blur-sm"
@@ -54,6 +65,20 @@ export function AchievementsModal({
         aria-label="Достижения"
         className="pop flex max-h-[85vh] w-full max-w-xl flex-col rounded-3xl border border-line bg-surface p-5 shadow-2xl sm:p-6"
       >
+        <style>{`
+          @keyframes achievementShake {
+            0% { transform: scale(1) translate(0, 0) rotate(0deg); }
+            15% { transform: scale(1.03) translate(-4px, -1px) rotate(-2deg); }
+            30% { transform: scale(1.03) translate(4px, 1px) rotate(2deg); }
+            45% { transform: scale(1.02) translate(-3px, 1px) rotate(-1deg); }
+            60% { transform: scale(1.01) translate(2px, -1px) rotate(1deg); }
+            75% { transform: scale(1.005) translate(-1px, 0px) rotate(-0.5deg); }
+            100% { transform: scale(1) translate(0, 0) rotate(0deg); }
+          }
+          .achievement-shake {
+            animation: achievementShake 0.42s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+          }
+        `}</style>
         <div className="flex items-center justify-between pb-3">
           <div className="flex items-center gap-2">
             <span className="text-2xl">🏆</span>
@@ -103,7 +128,18 @@ export function AchievementsModal({
               return (
                 <div
                   key={item.id}
-                  className={`flex items-start gap-3 rounded-2xl border p-3 transition-all ${cardStyle}`}
+                  onClick={(e) => {
+                    if (!isUnlocked) return;
+                    handleCardClick(e.currentTarget);
+                  }}
+                  onAnimationEnd={(e) => {
+                    e.currentTarget.classList.remove("achievement-shake");
+                  }}
+                  className={`flex items-start gap-3 rounded-2xl border p-3 transition-all ${cardStyle} ${
+                    isUnlocked
+                      ? "cursor-pointer active:scale-[0.97] hover:border-accent select-none"
+                      : ""
+                  }`}
                 >
                   {item.image && isUnlocked ? (
                     // eslint-disable-next-line @next/next/no-img-element
