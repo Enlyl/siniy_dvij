@@ -86,6 +86,7 @@ export const STORAGE_KEYS = {
   neonSign: "dm.neonSign",
   smokeEffect: "dm.smokeEffect",
   achievements: "dm.achievements",
+  minimalMode: "dm.minimalMode",
 } as const;
 
 export function isThemeId(value: unknown): value is ThemeId {

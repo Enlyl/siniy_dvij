@@ -136,6 +136,13 @@ export function SinApp() {
   );
   const achievementsEnabled = achievements.value ?? true;
 
+  const minimalMode = useStoredJson<boolean>(
+    STORAGE_KEYS.minimalMode,
+    false,
+    (v): v is boolean => typeof v === "boolean",
+  );
+  const minimalModeEnabled = minimalMode.value ?? false;
+
   const [settingsOpen, setSettingsOpen] = useState(false);
   const [historyOpen, setHistoryOpen] = useState(false);
   const [achievementsOpen, setAchievementsOpen] = useState(false);
@@ -471,53 +478,67 @@ export function SinApp() {
             : drunkLevel === 2
             ? "drunk-level-2"
             : ""
-        }`}
+        } ${minimalModeEnabled ? "justify-center" : ""}`}
       >
-        <header className="flex items-center justify-between gap-3">
-          <div className="min-w-0">
-            <NeonSign enabled={neonSignEnabled} />
-          </div>
-          <div className="flex items-center gap-2">
-            {achievementsEnabled && (
-              <button
-                type="button"
-                onClick={() => setAchievementsOpen(true)}
-                aria-label="Достижения"
-                title={`Достижения (${unlockedAchievements.size} из ${ACHIEVEMENTS.length})`}
-                className="btn btn-ghost h-11 w-11 shrink-0 p-0 text-base relative"
-              >
-                <span>🏆</span>
-                {unlockedAchievements.size > 0 && (
-                  <span className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-accent text-[0.625rem] font-bold text-accent-fg">
-                    {unlockedAchievements.size}
-                  </span>
-                )}
-              </button>
-            )}
-            <button
-              type="button"
-              onClick={() => sound.setValue(!soundEnabled)}
-              aria-label={soundEnabled ? "Выключить звук" : "Включить звук"}
-              title={
-                soundEnabled
-                  ? "Звук включен (нажми, чтобы выключить)"
-                  : "Звук выключен (нажми, чтобы включить)"
-              }
-              className="btn btn-ghost h-11 w-11 shrink-0 p-0 text-base"
-            >
-              {soundEnabled ? "🔊" : "🔇"}
-            </button>
+        {minimalModeEnabled ? (
+          <header className="flex items-center justify-end">
             <button
               type="button"
               onClick={() => setSettingsOpen(true)}
-              className="btn btn-ghost h-11 shrink-0 px-4 text-sm"
+              aria-label="Настройки"
+              title="Настройки"
+              className="btn btn-ghost h-10 w-10 p-0 text-base rounded-full border border-line bg-surface-2/80 backdrop-blur-sm transition-all hover:border-accent"
             >
               <span aria-hidden>⚙️</span>
-              <span className="hidden sm:inline">Настройки</span>
-              <span className="sm:hidden">Настройки</span>
             </button>
-          </div>
-        </header>
+          </header>
+        ) : (
+          <header className="flex items-center justify-between gap-3">
+            <div className="min-w-0">
+              <NeonSign enabled={neonSignEnabled} />
+            </div>
+            <div className="flex items-center gap-2">
+              {achievementsEnabled && (
+                <button
+                  type="button"
+                  onClick={() => setAchievementsOpen(true)}
+                  aria-label="Достижения"
+                  title={`Достижения (${unlockedAchievements.size} из ${ACHIEVEMENTS.length})`}
+                  className="btn btn-ghost h-11 w-11 shrink-0 p-0 text-base relative"
+                >
+                  <span>🏆</span>
+                  {unlockedAchievements.size > 0 && (
+                    <span className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-accent text-[0.625rem] font-bold text-accent-fg">
+                      {unlockedAchievements.size}
+                    </span>
+                  )}
+                </button>
+              )}
+              <button
+                type="button"
+                onClick={() => sound.setValue(!soundEnabled)}
+                aria-label={soundEnabled ? "Выключить звук" : "Включить звук"}
+                title={
+                  soundEnabled
+                    ? "Звук включен (нажми, чтобы выключить)"
+                    : "Звук выключен (нажми, чтобы включить)"
+                }
+                className="btn btn-ghost h-11 w-11 shrink-0 p-0 text-base"
+              >
+                {soundEnabled ? "🔊" : "🔇"}
+              </button>
+              <button
+                type="button"
+                onClick={() => setSettingsOpen(true)}
+                className="btn btn-ghost h-11 shrink-0 px-4 text-sm"
+              >
+                <span aria-hidden>⚙️</span>
+                <span className="hidden sm:inline">Настройки</span>
+                <span className="sm:hidden">Настройки</span>
+              </button>
+            </div>
+          </header>
+        )}
 
       <section className="panel relative overflow-hidden p-4 sm:p-6">
         <div
@@ -579,165 +600,174 @@ export function SinApp() {
               {spinning ? "Крутится…" : "Крутить"}
             </button>
 
-            {/* Пьяная фраза или подсказка */}
-            {drunkModeEnabled && drunkLevel > 0 && drunkQuote && (
-              <p className="animate-pulse text-center text-xs font-medium text-accent/90 italic">
-                🥴 {drunkQuote}
-              </p>
-            )}
+            {/* Дополнительные контролы скрыты в минимальном режиме */}
+            {!minimalModeEnabled && (
+              <>
+                {/* Пьяная фраза или подсказка */}
+                {drunkModeEnabled && drunkLevel > 0 && drunkQuote && (
+                  <p className="animate-pulse text-center text-xs font-medium text-accent/90 italic">
+                    🥴 {drunkQuote}
+                  </p>
+                )}
 
-            {/* Бейджик Русской рулетки */}
-            {russianRouletteEnabled && (
-              <span className="text-[0.6875rem] font-medium text-rose-400/80">
-                🎯 Русская рулетка включена (1 из 6 треш)
-              </span>
-            )}
+                {/* Бейджик Русской рулетки */}
+                {russianRouletteEnabled && (
+                  <span className="text-[0.6875rem] font-medium text-rose-400/80">
+                    🎯 Русская рулетка включена (1 из 6 треш)
+                  </span>
+                )}
 
-            {/* Быстрый тумблер «Без повторов» */}
-            <button
-              type="button"
-              onClick={() => noRepeat.setValue(!noRepeatEnabled)}
-              aria-pressed={noRepeatEnabled}
-              title={
-                noRepeatEnabled
-                  ? "Режим «Без повторов» включён: уже выпавшие фильмы исключены из рулетки"
-                  : "Нажми, чтобы не повторять фильмы из истории"
-              }
-              className={`chip text-xs transition-colors ${
-                noRepeatEnabled
-                  ? "border-accent bg-accent/15 text-accent font-semibold"
-                  : "text-muted hover:text-fg"
-              }`}
-            >
-              <span aria-hidden>{noRepeatEnabled ? "🔄" : "🔁"}</span>
-              <span>Без повторов</span>
-              <span className="opacity-80">
-                · {noRepeatEnabled ? `${pool.length} ост.` : "выкл"}
-              </span>
-            </button>
-            {previousMovie && previousEntry ? (
-              <button
-                type="button"
-                onClick={() => setHistoryOpen(true)}
-                title="Нажми, чтобы открыть полную историю"
-                className="group flex flex-wrap items-center justify-center gap-1.5 text-xs text-muted underline decoration-dotted underline-offset-4 transition-colors hover:text-fg"
-              >
-                <span>
-                  Предыдущий выпавший:{" "}
-                  <strong className="font-semibold text-fg/90">
-                    {previousMovie.title}
-                  </strong>
-                </span>
-                <span className="rounded-md bg-surface-2 px-1.5 py-0.5 text-[0.6875rem] font-bold text-accent transition-colors group-hover:bg-accent group-hover:text-accent-fg">
-                  История ({historyList.length})
-                </span>
-              </button>
-            ) : currentOrLastMovie && historyList[0] ? (
-              <button
-                type="button"
-                onClick={() => setHistoryOpen(true)}
-                title="Нажми, чтобы открыть полную историю"
-                className="group flex flex-wrap items-center justify-center gap-1.5 text-xs text-muted underline decoration-dotted underline-offset-4 transition-colors hover:text-fg"
-              >
-                <span>
-                  Выпал фильм:{" "}
-                  <strong className="font-semibold text-fg/90">
-                    {currentOrLastMovie.title}
-                  </strong>
-                </span>
-                <span className="rounded-md bg-surface-2 px-1.5 py-0.5 text-[0.6875rem] font-bold text-accent transition-colors group-hover:bg-accent group-hover:text-accent-fg">
-                  История ({historyList.length})
-                </span>
-              </button>
-            ) : (
-              <p className="text-xs text-muted">Пока ничего не выпадало.</p>
-            )}
-          </div>
-        </div>
-      </section>
-
-      <Filters
-        value={filters}
-        onChange={setFilters}
-        resultCount={pool.length}
-      />
-
-      <section className="space-y-4">
-        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-          <h2 className="font-display text-sm font-bold">
-            Список целиком ({displayedCatalog.length})
-          </h2>
-          <div className="relative w-full sm:w-72">
-            <input
-              type="text"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Поиск по названию или режиссёру…"
-              className="w-full rounded-xl border border-line bg-surface px-3 py-2 pl-9 text-sm text-fg placeholder:text-muted transition-colors focus:border-accent focus:outline-none"
-            />
-            <span
-              aria-hidden
-              className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-xs text-muted"
-            >
-              🔍
-            </span>
-            {searchQuery ? (
-              <button
-                type="button"
-                onClick={() => setSearchQuery("")}
-                aria-label="Очистить поиск"
-                className="absolute right-2.5 top-1/2 -translate-y-1/2 rounded-md p-1 text-xs text-muted transition-colors hover:text-fg"
-              >
-                ✕
-              </button>
-            ) : null}
-          </div>
-        </div>
-
-        {displayedCatalog.length > 0 ? (
-          <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-            {displayedCatalog.map((movie) => {
-              const rating = formatRating(movie.rating);
-              return (
-                <li key={movie.id} className="rise">
+                {/* Быстрый тумблер «Без повторов» */}
+                <button
+                  type="button"
+                  onClick={() => noRepeat.setValue(!noRepeatEnabled)}
+                  aria-pressed={noRepeatEnabled}
+                  title={
+                    noRepeatEnabled
+                      ? "Режим «Без повторов» включён: уже выпавшие фильмы исключены из рулетки"
+                      : "Нажми, чтобы не повторять фильмы из истории"
+                  }
+                  className={`chip text-xs transition-colors ${
+                    noRepeatEnabled
+                      ? "border-accent bg-accent/15 text-accent font-semibold"
+                      : "text-muted hover:text-fg"
+                  }`}
+                >
+                  <span aria-hidden>{noRepeatEnabled ? "🔄" : "🔁"}</span>
+                  <span>Без повторов</span>
+                  <span className="opacity-80">
+                    · {noRepeatEnabled ? `${pool.length} ост.` : "выкл"}
+                  </span>
+                </button>
+                {previousMovie && previousEntry ? (
                   <button
                     type="button"
-                    onClick={() => {
-                      consecutiveSpinsRef.current = 0;
-                      try {
-                        sessionStorage.setItem("sin_spin_streak", "0");
-                      } catch {}
-                      changeOpenMovie(movie);
-                    }}
-                    className="group block w-full text-left"
+                    onClick={() => setHistoryOpen(true)}
+                    title="Нажми, чтобы открыть полную историю"
+                    className="group flex flex-wrap items-center justify-center gap-1.5 text-xs text-muted underline decoration-dotted underline-offset-4 transition-colors hover:text-fg"
                   >
-                    <Poster
-                      movie={movie}
-                      className="aspect-[2/3] rounded-2xl border border-line transition-transform duration-200 group-hover:-translate-y-1 group-hover:border-accent/50"
-                    />
-                    <p className="mt-2 line-clamp-2 text-[0.8125rem] leading-snug font-semibold">
-                      {movie.title}
-                    </p>
-                    <p className="mt-0.5 text-xs text-muted">
-                      {movie.year}
-                      {rating ? ` · ★ ${rating.split(" / ")[0]}` : ""}
-                    </p>
+                    <span>
+                      Предыдущий выпавший:{" "}
+                      <strong className="font-semibold text-fg/90">
+                        {previousMovie.title}
+                      </strong>
+                    </span>
+                    <span className="rounded-md bg-surface-2 px-1.5 py-0.5 text-[0.6875rem] font-bold text-accent transition-colors group-hover:bg-accent group-hover:text-accent-fg">
+                      История ({historyList.length})
+                    </span>
                   </button>
-                </li>
-              );
-            })}
-          </ul>
-        ) : (
-          <div className="rounded-2xl border border-dashed border-line px-4 py-8 text-center text-sm text-muted">
-            Ничего не найдено по запросу «{searchQuery}».
+                ) : currentOrLastMovie && historyList[0] ? (
+                  <button
+                    type="button"
+                    onClick={() => setHistoryOpen(true)}
+                    title="Нажми, чтобы открыть полную историю"
+                    className="group flex flex-wrap items-center justify-center gap-1.5 text-xs text-muted underline decoration-dotted underline-offset-4 transition-colors hover:text-fg"
+                  >
+                    <span>
+                      Выпал фильм:{" "}
+                      <strong className="font-semibold text-fg/90">
+                        {currentOrLastMovie.title}
+                      </strong>
+                    </span>
+                    <span className="rounded-md bg-surface-2 px-1.5 py-0.5 text-[0.6875rem] font-bold text-accent transition-colors group-hover:bg-accent group-hover:text-accent-fg">
+                      История ({historyList.length})
+                    </span>
+                  </button>
+                ) : (
+                  <p className="text-xs text-muted">Пока ничего не выпадало.</p>
+                )}
+              </>
+            )}
           </div>
-        )}
+        </div>
       </section>
 
-      <footer className="mt-6 text-center text-xs text-muted">
-        Данные о фильмах — из открытых источников (TMDB), постеры и описания принадлежат
-        правообладателям. Пейте ответственно.
-      </footer>
+      {!minimalModeEnabled && (
+        <>
+          <Filters
+            value={filters}
+            onChange={setFilters}
+            resultCount={pool.length}
+          />
+
+          <section className="space-y-4">
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+              <h2 className="font-display text-sm font-bold">
+                Список целиком ({displayedCatalog.length})
+              </h2>
+              <div className="relative w-full sm:w-72">
+                <input
+                  type="text"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  placeholder="Поиск по названию или режиссёру…"
+                  className="w-full rounded-xl border border-line bg-surface px-3 py-2 pl-9 text-sm text-fg placeholder:text-muted transition-colors focus:border-accent focus:outline-none"
+                />
+                <span
+                  aria-hidden
+                  className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-xs text-muted"
+                >
+                  🔍
+                </span>
+                {searchQuery ? (
+                  <button
+                    type="button"
+                    onClick={() => setSearchQuery("")}
+                    aria-label="Очистить поиск"
+                    className="absolute right-2.5 top-1/2 -translate-y-1/2 rounded-md p-1 text-xs text-muted transition-colors hover:text-fg"
+                  >
+                    ✕
+                  </button>
+                ) : null}
+              </div>
+            </div>
+
+            {displayedCatalog.length > 0 ? (
+              <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+                {displayedCatalog.map((movie) => {
+                  const rating = formatRating(movie.rating);
+                  return (
+                    <li key={movie.id} className="rise">
+                      <button
+                        type="button"
+                        onClick={() => {
+                          consecutiveSpinsRef.current = 0;
+                          try {
+                            sessionStorage.setItem("sin_spin_streak", "0");
+                          } catch {}
+                          changeOpenMovie(movie);
+                        }}
+                        className="group block w-full text-left"
+                      >
+                        <Poster
+                          movie={movie}
+                          className="aspect-[2/3] rounded-2xl border border-line transition-transform duration-200 group-hover:-translate-y-1 group-hover:border-accent/50"
+                        />
+                        <p className="mt-2 line-clamp-2 text-[0.8125rem] leading-snug font-semibold">
+                          {movie.title}
+                        </p>
+                        <p className="mt-0.5 text-xs text-muted">
+                          {movie.year}
+                          {rating ? ` · ★ ${rating.split(" / ")[0]}` : ""}
+                        </p>
+                      </button>
+                    </li>
+                  );
+                })}
+              </ul>
+            ) : (
+              <div className="rounded-2xl border border-dashed border-line px-4 py-8 text-center text-sm text-muted">
+                Ничего не найдено по запросу «{searchQuery}».
+              </div>
+            )}
+          </section>
+
+          <footer className="mt-6 text-center text-xs text-muted">
+            Данные о фильмах — из открытых источников (TMDB), постеры и описания принадлежат
+            правообладателям. Пейте ответственно.
+          </footer>
+        </>
+      )}
 
       <SettingsPanel
         open={settingsOpen}
@@ -750,6 +780,8 @@ export function SinApp() {
         onAutoOpenModal={autoOpenModal.setValue}
         russianRoulette={russianRouletteEnabled}
         onRussianRoulette={russianRoulette.setValue}
+        minimalMode={minimalModeEnabled}
+        onMinimalMode={minimalMode.setValue}
         drunkMode={drunkModeEnabled}
         onDrunkMode={drunkMode.setValue}
         neonSign={neonSignEnabled}

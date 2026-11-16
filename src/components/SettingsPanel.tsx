@@ -23,6 +23,8 @@ export function SettingsPanel({
   achievementsEnabled = true,
   onAchievementsEnabled,
   onOpenAchievements,
+  minimalMode = false,
+  onMinimalMode,
 }: {
   open: boolean;
   onClose: () => void;
@@ -43,6 +45,8 @@ export function SettingsPanel({
   achievementsEnabled?: boolean;
   onAchievementsEnabled?: (enabled: boolean) => void;
   onOpenAchievements?: () => void;
+  minimalMode?: boolean;
+  onMinimalMode?: (enabled: boolean) => void;
 }) {
   useEffect(() => {
     if (!open) return;
@@ -187,6 +191,37 @@ export function SettingsPanel({
             Веселье и атмосфера
           </h3>
           <div className="mt-3 grid gap-2">
+            {/* Минимальный режим */}
+            <button
+              type="button"
+              onClick={() => onMinimalMode?.(!minimalMode)}
+              aria-pressed={minimalMode}
+              className="flex w-full items-center justify-between rounded-2xl border border-line bg-surface-2 p-3 text-left transition-colors hover:border-accent/60"
+            >
+              <div className="flex items-center gap-3">
+                <span className="text-xl">⚡</span>
+                <div>
+                  <span className="block text-sm font-semibold">
+                    Минимальный режим
+                  </span>
+                  <span className="block text-xs text-muted">
+                    Только лента и кнопка крутить, ничего лишнего
+                  </span>
+                </div>
+              </div>
+              <div
+                className={`relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out ${
+                  minimalMode ? "bg-accent" : "bg-line"
+                }`}
+              >
+                <span
+                  className={`pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out ${
+                    minimalMode ? "translate-x-5" : "translate-x-0"
+                  }`}
+                />
+              </div>
+            </button>
+
             {/* Русская рулетка */}
             <button
               type="button"
