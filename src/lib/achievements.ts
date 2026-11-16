@@ -69,7 +69,7 @@ export const ACHIEVEMENTS: Achievement[] = [
     id: "streak-17",
     icon: "🪞",
     title: "Зеркало души",
-    description: "17 круток подряд. Рулетка показала тебе тебя.",
+    description: "Слишком много круток подряд. Рулетка показала тебе тебя.",
     secret: true,
   },
   {
