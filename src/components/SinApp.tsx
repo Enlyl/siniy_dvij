@@ -613,7 +613,7 @@ export function SinApp() {
                 {/* Бейджик Русской рулетки */}
                 {russianRouletteEnabled && (
                   <span className="text-[0.6875rem] font-medium text-rose-400/80">
-                    🎯 Русская рулетка включена (1 из 6 треш)
+                    🎯 Русская рулетка включена
                   </span>
                 )}
 
